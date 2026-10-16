@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../tokens/anjiz_elevation.dart';
 import '../../tokens/anjiz_motion.dart';
-import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
+import 'anjiz_fab_action_pill.dart';
+import 'anjiz_fab_primary_pill.dart';
+import 'anjiz_fab_toggle_button.dart';
 
 /// A secondary action revealed by the expanding [AnjizFabMenu].
 typedef AnjizFabAction = ({
@@ -97,7 +98,7 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
                   for (final action in widget.actions)
                     Padding(
                       padding: const EdgeInsets.only(bottom: AnjizSpacing.sm),
-                      child: _ActionPill(
+                      child: AnjizFabActionPill(
                         action: action,
                         onPressed: () {
                           _toggle();
@@ -112,7 +113,7 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _PrimaryPill(
+            AnjizFabPrimaryPill(
               label: widget.label,
               icon: widget.icon,
               onPressed: widget.onPressed,
@@ -120,7 +121,7 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
             ),
             if (widget.actions.isNotEmpty) ...[
               const SizedBox(width: AnjizSpacing.sm),
-              _ToggleButton(
+              AnjizFabToggleButton(
                 expanded: _expanded,
                 rotation: _expansion,
                 onPressed: _toggle,
@@ -130,138 +131,6 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
               ),
             ],
           ],
-        ),
-      ],
-    );
-  }
-}
-
-class _PrimaryPill extends StatelessWidget {
-  const _PrimaryPill({
-    required this.label,
-    required this.icon,
-    required this.onPressed,
-    required this.scheme,
-  });
-
-  final String label;
-  final IconData icon;
-  final VoidCallback onPressed;
-  final ColorScheme scheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 56,
-      decoration: BoxDecoration(
-        color: scheme.primaryContainer,
-        borderRadius: AnjizShapes.card,
-        boxShadow: AnjizElevation.floating(scheme.primary),
-      ),
-      child: Material(
-        type: MaterialType.transparency,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: AnjizShapes.card,
-          child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AnjizSpacing.md20,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(icon, color: scheme.onPrimaryContainer),
-                const SizedBox(width: AnjizSpacing.sm),
-                Text(
-                  label,
-                  style: Theme.of(context).textTheme.labelLarge
-                      ?.copyWith(color: scheme.onPrimaryContainer),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ToggleButton extends StatelessWidget {
-  const _ToggleButton({
-    required this.expanded,
-    required this.rotation,
-    required this.onPressed,
-    this.tooltip,
-  });
-
-  final bool expanded;
-  final Animation<double> rotation;
-  final VoidCallback onPressed;
-  final String? tooltip;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      width: 48,
-      height: 56,
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerHigh,
-        borderRadius: AnjizShapes.card,
-      ),
-      child: IconButton(
-        onPressed: onPressed,
-        tooltip: tooltip,
-        icon: AnimatedRotation(
-          turns: expanded ? 0.125 : 0,
-          duration: AnjizMotion.fast,
-          child: Icon(Icons.add_rounded, color: scheme.onSurface),
-        ),
-      ),
-    );
-  }
-}
-
-class _ActionPill extends StatelessWidget {
-  const _ActionPill({required this.action, required this.onPressed});
-
-  final AnjizFabAction action;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: const EdgeInsetsDirectional.symmetric(
-            horizontal: AnjizSpacing.md,
-            vertical: AnjizSpacing.sm,
-          ),
-          decoration: BoxDecoration(
-            color: scheme.surfaceContainerHigh,
-            borderRadius: AnjizShapes.pill,
-            boxShadow: AnjizElevation.floating(scheme.onSurface),
-          ),
-          child: Text(
-            action.label,
-            style: textTheme.labelLarge?.copyWith(color: scheme.onSurface),
-          ),
-        ),
-        const SizedBox(width: AnjizSpacing.sm),
-        Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: scheme.surfaceContainerHighest,
-            shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            onPressed: onPressed,
-            icon: Icon(action.icon, color: scheme.onSurface),
-          ),
         ),
       ],
     );
