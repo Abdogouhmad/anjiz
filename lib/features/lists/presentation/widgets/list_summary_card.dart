@@ -56,10 +56,17 @@ class ListSummaryCard extends StatelessWidget {
                 size: 40,
                 iconSize: 20,
               ),
-              const Spacer(),
-              AnjizTagPill(
-                label: l10n.tasksRemaining(summary.remaining),
-                tone: AnjizTone.neutral,
+              const SizedBox(width: AnjizSpacing.sm),
+              // Keep the badge right-aligned while letting the pill ellipsize
+              // instead of overflowing narrow grid columns.
+              Expanded(
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: AnjizTagPill(
+                    label: l10n.tasksRemaining(summary.remaining),
+                    tone: AnjizTone.neutral,
+                  ),
+                ),
               ),
             ],
           ),
@@ -76,13 +83,20 @@ class ListSummaryCard extends StatelessWidget {
           const SizedBox(height: AnjizSpacing.md),
           Row(
             children: [
-              Text(
-                l10n.labelProgress,
-                style: textTheme.labelLarge?.copyWith(color: muted),
+              // The label ellipsizes so the row never overflows when the text
+              // scale is turned up.
+              Expanded(
+                child: Text(
+                  l10n.labelProgress,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.labelLarge?.copyWith(color: muted),
+                ),
               ),
-              const Spacer(),
+              const SizedBox(width: AnjizSpacing.sm),
               Text(
                 l10n.labelPercent(percent),
+                maxLines: 1,
                 style: textTheme.labelLarge?.copyWith(color: foreground),
               ),
             ],

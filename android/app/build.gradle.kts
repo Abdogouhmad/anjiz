@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Compose compiler powers the Jetpack Glance widgets.
@@ -6,29 +9,66 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Release signing: `android/key.properties` is gitignored and written by
+// `build.sh` from the ANJIZ_* secrets (locally it may point at any keystore).
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
+// Versioning: the versionCode is derived deterministically from the SemVer
+// `versionName` in pubspec.yaml (`major*10000 + minor*100 + patch`) so a tag, its
+// APK and the OTA manifest always agree on one number. `build.sh` derives the
+// exact same number with the exact same formula.
+val pubspecVersionName = flutter.versionName ?: "0.0.0"
+val versionParts = pubspecVersionName.split('.').map { it.toIntOrNull() ?: 0 }
+val derivedVersionCode =
+    versionParts.getOrElse(0) { 0 } * 10000 +
+    versionParts.getOrElse(1) { 0 } * 100 +
+    versionParts.getOrElse(2) { 0 }
+
 android {
-    namespace = "com.anjiz"
+    namespace = "com.freesoftware.anjiz"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        // flutter_local_notifications and ota_update require core library desugaring
+        // to use Java 8+ APIs (java.time, etc.) on Android <26.
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
     defaultConfig {
-        applicationId = "com.anjiz"
+        applicationId = "com.freesoftware.anjiz"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         // Jetpack Glance requires API 23; Flutter's default floor (24) is higher.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
-        // is added automatically by Flutter. (https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions)
-        // You can force using the value of versionCode by specifying the `-P force-version-code-ignoring-abi=true`
-        // flag during build.
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        // Derived from pubspec.yaml, not from the `+<build-number>` metadata.
+        // Builds pass `-P force-version-code-ignoring-abi=true` so the split APKs
+        // keep this same versionCode (Flutter would otherwise add 1000 * ABI).
+        versionCode = derivedVersionCode
+        versionName = pubspecVersionName
+    }
+
+    // Stable release keystore. Every release APK must be signed with the SAME
+    // key forever: Android refuses a signature change outright, so an OTA
+    // update would fail to install. Only created when key.properties actually
+    // names a storeFile, so a half-configured keystore can't yield a broken
+    // signing config.
+    signingConfigs {
+        if (keystoreProperties.getProperty("storeFile") != null) {
+            create("release") {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+            }
+        }
     }
 
     buildFeatures {
@@ -38,9 +78,14 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            // Signed with the stable release keystore when provisioned (CI and
+            // `./build.sh`), otherwise with the debug key so
+            // `flutter run --release` still works on a fresh clone. The release
+            // pipeline requires the real keystore, so a published APK is never
+            // debug-signed.
+            signingConfig =
+                signingConfigs.findByName("release")
+                    ?: signingConfigs.getByName("debug")
         }
     }
 }
@@ -55,7 +100,24 @@ flutter {
     source = "../.."
 }
 
+// home_widget declares glance-appwidget with a "1.+" wildcard which can resolve to
+// alpha/beta releases requiring compileSdk 37 (beyond AGP 9.1's recommended max of 36).
+// Force the entire glance group to the stable 1.1.1 release.
+configurations.configureEach {
+    resolutionStrategy {
+        force(
+            "androidx.glance:glance:1.1.1",
+            "androidx.glance:glance-appwidget:1.1.1",
+            "androidx.glance:glance-material:1.1.1",
+            "androidx.glance:glance-material3:1.1.1",
+            "androidx.glance:glance-template:1.1.1",
+        )
+    }
+}
 dependencies {
+    // Core library desugaring: required by flutter_local_notifications and ota_update
+    // to backport Java 8+ API (java.time, etc.) to Android <26.
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
     // Jetpack Glance powers the Material You home-screen widgets.
     implementation("androidx.glance:glance-appwidget:1.1.1")
 }

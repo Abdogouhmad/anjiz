@@ -11,7 +11,8 @@ part of 'widget_launch.dart';
 /// Streams the deep links emitted when a home-screen widget is tapped,
 /// including the link the app was cold-started with.
 ///
-/// The shell listens to this to open the quick-add composer.
+/// The shell listens to this to open the quick-add composer. Empty on platforms
+/// without home-screen widgets.
 
 @ProviderFor(widgetLaunches)
 final widgetLaunchesProvider = WidgetLaunchesProvider._();
@@ -19,7 +20,8 @@ final widgetLaunchesProvider = WidgetLaunchesProvider._();
 /// Streams the deep links emitted when a home-screen widget is tapped,
 /// including the link the app was cold-started with.
 ///
-/// The shell listens to this to open the quick-add composer.
+/// The shell listens to this to open the quick-add composer. Empty on platforms
+/// without home-screen widgets.
 
 final class WidgetLaunchesProvider
     extends $FunctionalProvider<AsyncValue<Uri?>, Uri?, Stream<Uri?>>
@@ -27,7 +29,8 @@ final class WidgetLaunchesProvider
   /// Streams the deep links emitted when a home-screen widget is tapped,
   /// including the link the app was cold-started with.
   ///
-  /// The shell listens to this to open the quick-add composer.
+  /// The shell listens to this to open the quick-add composer. Empty on platforms
+  /// without home-screen widgets.
   WidgetLaunchesProvider._()
     : super(
         from: null,
@@ -53,4 +56,4 @@ final class WidgetLaunchesProvider
   }
 }
 
-String _$widgetLaunchesHash() => r'70de8c8928d8888a86fccd8c0ae805574813ad79';
+String _$widgetLaunchesHash() => r'da4713bb0628a307530a2b126ee1ffd21aceb58b';

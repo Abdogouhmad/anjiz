@@ -56,7 +56,7 @@ class AnjizSectionHeader extends StatelessWidget {
             const SizedBox(width: AnjizSpacing.sm),
             AnjizCountBadge(label: count!),
           ],
-          const Spacer(),
+          const SizedBox(width: AnjizSpacing.md),
           if (trailing != null) trailing!,
         ],
       ),

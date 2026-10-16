@@ -59,14 +59,17 @@ export 'src/components/sheets/anjiz_drag_handle.dart';
 
 // Navigation
 export 'src/components/navigation/anjiz_destination.dart';
+export 'src/components/navigation/anjiz_floating_nav_bar.dart';
 export 'src/components/navigation/anjiz_floating_toolbar.dart';
 export 'src/components/navigation/anjiz_large_app_bar.dart';
-export 'src/components/navigation/anjiz_nav_bar.dart';
+export 'src/components/navigation/anjiz_nav_destination_tile.dart';
 export 'src/components/navigation/anjiz_nav_rail.dart';
 
 // Settings
 export 'src/components/settings/anjiz_color_swatches.dart';
 export 'src/components/settings/anjiz_settings_card.dart';
+export 'src/components/settings/anjiz_settings_nav_entry.dart';
+export 'src/components/settings/anjiz_settings_nav_group.dart';
 export 'src/components/settings/anjiz_settings_nav_tile.dart';
 export 'src/components/settings/anjiz_slider_tile.dart';
 export 'src/components/settings/anjiz_switch_tile.dart';

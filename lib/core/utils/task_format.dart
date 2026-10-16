@@ -32,32 +32,34 @@ abstract final class TaskFormat {
     return fullDay(value);
   }
 
-  /// A compact countdown such as "in 2h", "in 15m" or "now".
+  /// A compact duration such as "2h", "15m" or "3d".
+  ///
+  /// The sign is ignored — pass the two instants in either order — and the
+  /// result carries no preposition so it can be composed into labels such as
+  /// "Due in {time}" or "Overdue by {time}".
   static String countdown(BuildContext context, DateTime target, DateTime now) {
     final l10n = AppLocalizations.of(context);
-    final diff = target.difference(now);
-    if (diff.isNegative) return l10n.timeNow;
+    final diff = target.difference(now).abs();
     if (diff.inMinutes < 60) {
-      return l10n.timeInMinutes(diff.inMinutes.clamp(1, 59));
+      return l10n.durationMinutes(diff.inMinutes.clamp(1, 59));
     }
-    if (diff.inHours < 24) return l10n.timeInHours(diff.inHours);
-    return l10n.timeInDays(diff.inDays);
+    if (diff.inHours < 24) return l10n.durationHours(diff.inHours);
+    return l10n.durationDays(diff.inDays);
   }
 
-  /// Formats a task's due state as a human label.
+  /// Formats a task's due date and time as a human label, e.g.
+  /// "Today • 11:30 AM", or just "Today" when the task carries no time.
+  ///
+  /// The relative state ("Due in 2h" / "Overdue by 8h") is a separate label
+  /// composed from [countdown] so the row always keeps showing the real date.
   static String dueLabel(
     BuildContext context,
     DateTime due,
     DateTime now, {
     bool hasTime = true,
   }) {
-    final l10n = AppLocalizations.of(context);
-    final prefix = hasTime
-        ? '${dayHeading(context, due, now)} • ${time(context, due)}'
-        : dayHeading(context, due, now);
-    if (due.isBefore(now)) {
-      return l10n.labelOverdueBy(countdown(context, now, due));
-    }
-    return prefix;
+    final heading = dayHeading(context, due, now);
+    if (!hasTime) return heading;
+    return '$heading • ${time(context, due)}';
   }
 }

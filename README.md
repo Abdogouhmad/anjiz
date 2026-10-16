@@ -21,10 +21,17 @@ layouts (phone → tablet) come from the shared `anjiz_ui` design system.
 - **Reminders** — local notifications scheduled ahead of a task's due time,
   rebuilt after reboot.
 - **Search** — full-screen search across titles and notes.
-- **Settings** — theme mode, dynamic colour, accent tone, motion/haptics,
-  daily briefing, widget configuration, data.
+- **Settings** — a nested hub: General (theme mode, dynamic colour, accent tone,
+  pure black (OLED), motion/haptics), Notifications & Widgets (daily briefing,
+  widget configuration), Data & Backup and About. Every row names its current
+  value, and each section opens its own screen without leaving the tab.
 - **Home-screen widgets** — tasks overview (4×4 / compact 4×2), progress
   (2×2) and quick add (4×1), with tap-to-complete and Material You colours.
+- **Floating glass navigation bar** — the bottom bar hovers over the content on
+  a backdrop-blurred pill (`AnjizFloatingNavBar`).
+- **Over-the-air updates** — the app checks the release manifest on launch, and
+  Settings → App update downloads the new APK and hands it to Android's
+  installer, with the release notes rendered in-app.
 - **RTL-aware** and light/dark, with an accessible design system.
 
 ## Requirements
@@ -33,6 +40,7 @@ layouts (phone → tablet) come from the shared `anjiz_ui` design system.
 - Android toolchain for building: JDK 17, Android SDK (compile SDK from Flutter).
 - Optional dev tooling: [`just`](https://github.com/casey/just),
   `python3` + `rsvg-convert` (only for regenerating the icon).
+  Release builds additionally use `keytool` (JDK) and the SDK's `apksigner`.
 
 ## Getting started
 
@@ -51,8 +59,11 @@ flutter run
 | `just analyze` | `flutter analyze` (must be clean) |
 | `just test-all` | App + `anjiz_ui` test suites |
 | `just format` | `dart format .` |
-| `just icons` | Rasterise icons + regenerate launcher resources |
+| `just icons` | Rasterise icons, check the safe zone + regenerate launcher resources |
+| `just icon-check` | Verify the launcher layers survive every Android mask |
 | `just apk` / `just appbundle` | Build Android artefacts |
+| `just release` | Build, sign and stage the release APKs under `dist/` |
+| `just version` | Print the tag/version/versionCode derived from `pubspec.yaml` |
 | `just run-linux` / `just run-android` | Run on the Linux desktop / an Android device |
 | `just check` | Format, analyse and test — the pre-PR gate |
 
@@ -99,6 +110,8 @@ lib/
 packages/anjiz_ui # shared Material 3 Expressive design system
 android/          # app + native Jetpack Glance widgets (Kotlin)
 linux/            # desktop target for local UI development (not a ship target)
+tool/             # icon pipeline + safe-zone checker
+.github/          # CI gate + signed release workflow
 ```
 
 Key rules (see [AGENTS.md](AGENTS.md) for the full contract):
@@ -119,7 +132,7 @@ Drift (single source of truth).
 
 Native Android widgets are written with **Jetpack Glance** and fed a JSON
 snapshot by `WidgetSyncService` — the only component allowed to push widget
-data. Widgets in `com.anjiz.widget`:
+data. Widgets in `com.freesoftware.anjiz.widget`:
 
 | Widget | Size | Contents |
 | --- | --- | --- |
@@ -141,6 +154,68 @@ reach Flutter's ARB localisations.
 Configure a widget via the in-app **Widget configuration** screen (list,
 completed visibility, opacity).
 
+## Releases & OTA updates
+
+Anjiz updates itself: installed builds check a manifest, download the release
+APK and hand it to Android's package installer (`ota_update`, via
+`UpdateService`). The pieces:
+
+| Piece | Where |
+| --- | --- |
+| Version (single source of truth) | `version:` in `pubspec.yaml` |
+| Android `versionCode` | `major*10000 + minor*100 + patch` — `android/app/build.gradle.kts` |
+| Same formula in Dart | `AppInfo.versionCodeOf` (`lib/core/services/app_info.dart`) |
+| Same formula in the build | `build.sh --detect-version` |
+| Published manifest | `update_manifest.json` (read from `raw.githubusercontent.com`) |
+| Build/sign/stage | `build.sh` → `dist/*.apk` + `checksums.txt` |
+| CI | `.github/workflows/ci.yml` (PR gate), `release.yml` (signed release) |
+| In-app updater | `lib/core/services/update_service.dart`, Settings → App update |
+
+`build.sh` derives the tag, version and versionCode from `pubspec.yaml`, builds
+one APK per supported ABI plus a **universal** APK (the one the in-app updater
+always downloads), signs everything with the stable release keystore and
+verifies each signature with `apksigner` before staging it under `dist/`
+(gitignored).
+
+### Releasing
+
+1. Bump `version:` in `pubspec.yaml`.
+2. Add a `## [<version>]` section to `CHANGELOG.md` (the workflow fails without
+   it: released notes are never guessed).
+3. Merge to `main`. `.github/workflows/release.yml` then builds, signs, uploads
+   the APKs to a `v<version>` GitHub release, rewrites `update_manifest.json`
+   with the universal APK's URL + sha256, verifies the uploaded bytes match the
+   manifest, and commits the manifest back to `main`. That commit is what makes
+   the release visible to installed apps.
+
+### Repository secrets
+
+Release builds must be signed with the **same keystore forever** — Android
+refuses to update an app whose signature changed. Configure these before the
+first merge to `main` (the workflow fails rather than ship an unsigned APK):
+
+| Secret | Value |
+| --- | --- |
+| `ANJIZ_KEYSTORE_BASE64` | `base64 -w0 anjiz-release.jks` |
+| `ANJIZ_KEYSTORE_PASSWORD` | keystore password |
+| `ANJIZ_KEY_ALIAS` | signing key alias |
+| `ANJIZ_KEY_PASSWORD` | signing key password |
+
+Locally, `just release` uses `android/key.properties` when present (gitignored)
+and otherwise falls back to Android's debug key — enough to smoke-test a release
+build, never to publish.
+
+### How the update is offered
+
+- On launch the app checks the manifest at most once every six hours, silently:
+  an offline check is never an error the user sees.
+- A newer `latestVersionCode` posts a one-off notification and lights up the
+  Settings → **App update** row ("Version 1.0.1 is ready").
+- The update screen shows the installed version, the release notes from
+  `CHANGELOG.md`, download progress and the install action. Android asks once to
+  allow Anjiz to install unknown apps; the permission failure is explained
+  in-app instead of being a dead end.
+
 ## Icons
 
 Vector sources live in `assets/icons/`; the PNG layers consumed by
@@ -151,7 +226,9 @@ just icons     # tool/render_icons.sh + dart run flutter_launcher_icons
 ```
 
 See [`assets/icons/README.md`](assets/icons/README.md) for details. The adaptive
-icon includes a `<monochrome>` layer for Android 13+ themed icons.
+icon includes a `<monochrome>` layer for Android 13+ themed icons, and
+`tool/check_icon_safe_zone.py` (`just icon-check`) fails when a layer drifts
+outside the 66dp safe zone every launcher mask guarantees.
 
 ## Testing
 
@@ -159,8 +236,11 @@ icon includes a `<monochrome>` layer for Android 13+ themed icons.
 just test-all   # flutter test  +  cd packages/anjiz_ui && flutter test
 ```
 
-Unit tests cover the domain use cases, mappers and the design-system widgets.
-Run `just analyze` — the project is kept at **zero** analyzer issues.
+Unit tests cover the domain use cases, mappers, formatting helpers and the
+design-system widgets, plus regression tests for the layouts that used to
+overflow (the tasks-overview app bar, the Lists stat strip and the list-summary
+card) — one of them is the reason the Lists screen no longer crashes inside a
+sliver. Run `just analyze` — the project is kept at **zero** analyzer issues.
 
 Because the Android-only plugins degrade to no-ops on desktop, widget tests can
 run under `flutter test` without platform channels, and `just run-linux` is the

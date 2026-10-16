@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
-import '../lists/anjiz_list_tile.dart';
 
 /// A tappable settings row with a leading icon, title, subtitle and a trailing
 /// chevron, resting on the lower tonal step.
+///
+/// Title and subtitle are single-line and ellipsize, so a group of rows keeps a
+/// uniform height whether the supporting copy names a value or describes a
+/// screen.
 class AnjizSettingsNavTile extends StatelessWidget {
   /// Creates a settings navigation row.
   const AnjizSettingsNavTile({
@@ -35,23 +38,59 @@ class AnjizSettingsNavTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Container(
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(AnjizShapes.large),
-      ),
-      padding: const EdgeInsetsDirectional.symmetric(
-        horizontal: AnjizSpacing.md12,
-        vertical: AnjizSpacing.sm,
-      ),
-      child: AnjizListTile(
-        leading: leading,
-        title: Text(title),
-        subtitle: subtitle == null ? null : Text(subtitle!),
+    final textTheme = Theme.of(context).textTheme;
+    return Material(
+      color: scheme.surfaceContainerLow,
+      borderRadius: anjizSettingsTileRadius,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
         onTap: onTap,
-        trailing:
-            trailing ??
-            Icon(Icons.chevron_right_rounded, color: scheme.onSurfaceVariant),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: AnjizSpacing.md12,
+            vertical: AnjizSpacing.md12,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (leading != null) ...[
+                leading!,
+                const SizedBox(width: AnjizSpacing.md12),
+              ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: textTheme.titleMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    if (subtitle != null) ...[
+                      const SizedBox(height: AnjizSpacing.xs),
+                      Text(
+                        subtitle!,
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              const SizedBox(width: AnjizSpacing.md12),
+              trailing ??
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    color: scheme.onSurfaceVariant,
+                  ),
+            ],
+          ),
+        ),
       ),
     );
   }

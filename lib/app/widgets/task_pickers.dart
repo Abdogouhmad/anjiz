@@ -18,7 +18,7 @@ Future<String?> showListPicker(BuildContext context, WidgetRef ref) {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (final list in lists)
+          for (var i = 0; i < lists.length; i++) ...[
             AnjizListTile(
               leading: const AnjizIconBadge(
                 icon: Icons.folder_outlined,
@@ -26,9 +26,11 @@ Future<String?> showListPicker(BuildContext context, WidgetRef ref) {
                 size: 36,
                 iconSize: 18,
               ),
-              title: Text(list.name),
-              onTap: () => Navigator.of(context).pop(list.id),
+              title: Text(lists[i].name),
+              onTap: () => Navigator.of(context).pop(lists[i].id),
             ),
+            if (i < lists.length - 1) const SizedBox(height: AnjizSpacing.sm),
+          ],
         ],
       ),
     ),
@@ -42,6 +44,7 @@ Future<Priority?> showPriorityPicker(
   Priority current,
 ) {
   final l10n = AppLocalizations.of(context);
+  final priorities = Priority.values;
   return AnjizBottomSheet.show<Priority>(
     context,
     child: AnjizSheetContent(
@@ -49,22 +52,25 @@ Future<Priority?> showPriorityPicker(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (final priority in Priority.values)
+          for (var i = 0; i < priorities.length; i++) ...[
             AnjizListTile(
               leading: AnjizIconBadge(
                 icon: Icons.star_outline_rounded,
-                tone: priority == Priority.none
+                tone: priorities[i] == Priority.none
                     ? AnjizTone.neutral
                     : AnjizTone.tertiary,
                 size: 36,
                 iconSize: 18,
               ),
-              title: Text(priorityLabel(l10n, priority)),
-              trailing: priority == current
+              title: Text(priorityLabel(l10n, priorities[i])),
+              trailing: priorities[i] == current
                   ? const Icon(Icons.check_rounded)
                   : null,
-              onTap: () => Navigator.of(context).pop(priority),
+              onTap: () => Navigator.of(context).pop(priorities[i]),
             ),
+            if (i < priorities.length - 1)
+              const SizedBox(height: AnjizSpacing.md),
+          ],
         ],
       ),
     ),

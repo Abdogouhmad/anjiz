@@ -44,6 +44,22 @@ abstract final class AnjizColorSchemes {
     );
   }
 
+  /// Re-maps [base]'s surfaces onto true black for OLED-friendly dark themes.
+  ///
+  /// Only meaningful for a dark [base]; light schemes are returned unchanged.
+  static ColorScheme pureBlack(ColorScheme base) {
+    if (base.brightness == Brightness.light) return base;
+    return base.copyWith(
+      surface: const Color(0xFF000000),
+      surfaceContainerLowest: const Color(0xFF050505),
+      surfaceContainerLow: const Color(0xFF0C0C0C),
+      surfaceContainer: const Color(0xFF121212),
+      surfaceContainerHigh: const Color(0xFF1A1A1A),
+      surfaceContainerHighest: const Color(0xFF232323),
+      outlineVariant: const Color(0xFF2A2A2A),
+    );
+  }
+
   /// Dark scheme matching the Anjiz design tokens.
   static ColorScheme dark() {
     return ColorScheme.fromSeed(

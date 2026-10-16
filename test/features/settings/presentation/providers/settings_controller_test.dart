@@ -47,6 +47,7 @@ void main() {
     await controller.setHapticLevel(0);
     await controller.setDailyBriefing(enabled: true);
     await controller.completeOnboarding();
+    await controller.setPureBlack(enabled: true);
 
     expect(
       setup.prefs.getInt(AppConstants.prefThemeMode),
@@ -58,11 +59,13 @@ void main() {
     expect(setup.prefs.getInt(AppConstants.prefHapticLevel), 0);
     expect(setup.prefs.getBool(AppConstants.prefDailyBriefing), isTrue);
     expect(setup.prefs.getBool(AppConstants.prefOnboardingDone), isTrue);
+    expect(setup.prefs.getBool(AppConstants.prefPureBlack), isTrue);
 
     final settings = setup.container.read(settingsControllerProvider);
     expect(settings.themeMode, ThemeMode.light);
     expect(settings.accentIndex, 2);
     expect(settings.hapticLevel, 0);
+    expect(settings.usePureBlack, isTrue);
   });
 
   test('resolves the accent seed for an index', () {

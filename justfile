@@ -48,18 +48,35 @@ format:
 format-check:
     dart format --output none --set-exit-if-changed .
 
-# Rasterise the icon layers and regenerate Android launcher resources.
+# Rasterise the icon layers, check the safe zone, and regenerate Android resources.
 icons:
     tool/render_icons.sh
+    tool/check_icon_safe_zone.py assets/icon/ic_foreground.png assets/icon/ic_monochrome.png
     dart run flutter_launcher_icons
+
+# Verify the launcher layers still survive every Android mask (no writes).
+icon-check:
+    tool/check_icon_safe_zone.py assets/icon/ic_foreground.png assets/icon/ic_monochrome.png
 
 # Build a debug APK.
 apk:
-    flutter build apk --debug
+    flutter build apk --release --split-per-abi
 
 # Build a release app bundle.
 appbundle:
     flutter build appbundle --release
+
+# Print the release tag/version/versionCode derived from pubspec.yaml.
+version:
+    ./build.sh --detect-version
+
+# Extract this version's CHANGELOG section into dist/notes.md.
+release-notes:
+    ./build.sh --release-notes
+
+# Build, sign and stage the release APKs (universal + split) under dist/.
+release:
+    ./build.sh
 
 # Run on the connected device/emulator.
 run:

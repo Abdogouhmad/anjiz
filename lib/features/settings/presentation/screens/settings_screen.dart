@@ -5,22 +5,26 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/app_routes.dart';
 import '../../../../app/widgets/profile_avatar.dart';
-import '../../../../core/constants/app_constants.dart';
+import '../../../../core/services/app_info.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../widgets/appearance_card.dart';
-import '../widgets/data_card.dart';
-import '../widgets/motion_card.dart';
-import '../widgets/notifications_card.dart';
+import '../providers/settings_controller.dart';
+import '../providers/update_controller.dart';
+import '../settings_summaries.dart';
 import '../widgets/profile_card.dart';
 
-/// The Settings tab: profile, appearance, motion, notifications and data.
+/// The Settings hub: a profile header, then one section per area of the app.
+///
+/// Every row's subtitle names its current value, so the hub answers "is my app
+/// still set up the way I left it?" without opening anything.
 class SettingsScreen extends ConsumerWidget {
-  /// Creates the settings screen.
+  /// Creates the settings hub.
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final settings = ref.watch(settingsControllerProvider);
+    final update = ref.watch(updateControllerProvider);
     final margin = AnjizBreakpoints.margin(AnjizBreakpoints.of(context));
     return Scaffold(
       body: SafeArea(
@@ -47,67 +51,80 @@ class SettingsScreen extends ConsumerWidget {
                 margin,
                 AnjizSpacing.sm,
                 margin,
-                AnjizSpacing.xxl,
+                // Clear the floating glass navigation bar.
+                AnjizSpacing.xxl + AnjizFloatingNavBar.contentBottomInset,
               ),
               sliver: SliverList.list(
                 children: [
-                  ProfileCard(onManagePlan: () => _soon(context, l10n)),
-                  const SizedBox(height: AnjizSpacing.md),
-                  const AppearanceCard(),
-                  const SizedBox(height: AnjizSpacing.md),
-                  const MotionCard(),
-                  const SizedBox(height: AnjizSpacing.md),
-                  NotificationsCard(
-                    onOpenWidgetConfig: () =>
-                        context.push(AppRoutes.widgetConfig),
+                  ProfileCard(
+                    onManagePlan: () =>
+                        AnjizSnackBar.show(context, message: l10n.comingSoon),
                   ),
                   const SizedBox(height: AnjizSpacing.md),
-                  DataCard(
-                    onCalendarOptions: () => _soon(context, l10n),
-                    onExport: (format) => AnjizSnackBar.show(
-                      context,
-                      message: l10n.exportStarted,
-                    ),
+                  AnjizSectionHeader(title: l10n.settingsPreferences),
+                  AnjizSettingsNavGroup(
+                    entries: [
+                      AnjizSettingsNavEntry(
+                        icon: Icons.tune_rounded,
+                        title: l10n.settingsGeneralTitle,
+                        subtitle: themeSummary(l10n, settings),
+                        onTap: () => context.go(AppRoutes.settingsGeneral),
+                      ),
+                      AnjizSettingsNavEntry(
+                        icon: Icons.notifications_none_rounded,
+                        tone: AnjizTone.tertiary,
+                        title: l10n.notificationsTitle,
+                        subtitle: settings.dailyBriefing
+                            ? l10n.settingsNotificationsOn
+                            : l10n.settingsNotificationsOff,
+                        onTap: () =>
+                            context.go(AppRoutes.settingsNotifications),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: AnjizSpacing.lg),
-                  const _Footer(version: AppConstants.version),
+                  const SizedBox(height: AnjizSpacing.md),
+                  AnjizSectionHeader(title: l10n.settingsData),
+                  AnjizSettingsNavGroup(
+                    entries: [
+                      AnjizSettingsNavEntry(
+                        icon: Icons.cloud_sync_outlined,
+                        tone: AnjizTone.secondary,
+                        title: l10n.dataTitle,
+                        subtitle: l10n.settingsDataSubtitle,
+                        onTap: () => context.go(AppRoutes.settingsData),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AnjizSpacing.md),
+                  AnjizSectionHeader(title: l10n.settingsOther),
+                  AnjizSettingsNavGroup(
+                    entries: [
+                      AnjizSettingsNavEntry(
+                        icon: update.hasUpdate
+                            ? Icons.system_update_alt_rounded
+                            : Icons.system_update_rounded,
+                        tone: update.hasUpdate
+                            ? AnjizTone.primary
+                            : AnjizTone.neutral,
+                        title: l10n.updateTitle,
+                        subtitle: updateSummary(l10n, update),
+                        onTap: () => context.go(AppRoutes.settingsUpdate),
+                      ),
+                      AnjizSettingsNavEntry(
+                        icon: Icons.info_outline_rounded,
+                        tone: AnjizTone.neutral,
+                        title: l10n.settingsAboutTitle,
+                        subtitle: l10n.settingsAboutSummary(AppInfo.version),
+                        onTap: () => context.go(AppRoutes.settingsAbout),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  void _soon(BuildContext context, AppLocalizations l10n) =>
-      AnjizSnackBar.show(context, message: l10n.comingSoon);
-}
-
-class _Footer extends StatelessWidget {
-  const _Footer({required this.version});
-
-  final String version;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final textTheme = Theme.of(context).textTheme;
-    final color = Theme.of(context).colorScheme.onSurfaceVariant;
-    return Column(
-      children: [
-        Text(
-          l10n.footerVersion(version),
-          textAlign: TextAlign.center,
-          style: textTheme.labelSmall?.copyWith(color: color),
-        ),
-        const SizedBox(height: AnjizSpacing.xs),
-        Text(
-          l10n.footerTagline,
-          textAlign: TextAlign.center,
-          style: textTheme.labelSmall?.copyWith(color: color),
-        ),
-      ],
     );
   }
 }

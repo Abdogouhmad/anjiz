@@ -18,6 +18,9 @@ abstract final class AppConstants {
   /// Shared-preferences key for the accent-tone index.
   static const String prefAccentIndex = 'settings.accentIndex';
 
+  /// Shared-preferences key for the pure-black (OLED) dark theme.
+  static const String prefPureBlack = 'settings.pureBlack';
+
   /// Shared-preferences key for the celebration-animation setting.
   static const String prefBurstAnimations = 'settings.burstAnimations';
 
@@ -45,8 +48,25 @@ abstract final class AppConstants {
   /// Android notification channel id for the daily briefing.
   static const String briefingChannelId = 'anjiz.briefing';
 
+  /// Android notification channel id for "a new version is available".
+  static const String updatesChannelId = 'anjiz.updates';
+
+  /// Notification id used for the update announcement (never reused).
+  static const int updateNotificationId = 99;
+
+  /// Notification id used for the manual notification test.
+  static const int testNotificationId = 98;
+
+  /// Shared-preferences key for the last update check (epoch milliseconds).
+  static const String prefUpdateLastCheck = 'update.lastCheckAt';
+
+  /// Shared-preferences key for the last version code announced (so one release
+  /// is never announced twice).
+  static const String prefUpdateAnnouncedVersion =
+      'update.announcedVersionCode';
+
   /// Android package holding the Glance widget providers.
-  static const String androidWidgetPackage = 'com.anjiz.widget';
+  static const String androidWidgetPackage = 'com.freesoftware.anjiz.widget';
 
   /// Widget provider class for the 4x4 tasks-overview widget.
   static const String widgetTasksOverview = 'TasksOverviewWidgetProvider';

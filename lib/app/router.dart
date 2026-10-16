@@ -38,10 +38,6 @@ GoRouter router(Ref ref) {
         builder: (context, state) => const SearchScreen(),
       ),
       GoRoute(
-        path: AppRoutes.widgetConfig,
-        builder: (context, state) => const WidgetConfigScreen(),
-      ),
-      GoRoute(
         path: AppRoutes.taskPattern,
         builder: (context, state) =>
             TaskDetailScreen(taskId: state.pathParameters['taskId']!),
@@ -84,6 +80,7 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: AppRoutes.settings,
                 builder: (context, state) => const SettingsScreen(),
+                routes: settingsRoutes(),
               ),
             ],
           ),

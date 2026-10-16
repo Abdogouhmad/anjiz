@@ -8,6 +8,7 @@ import '../../../../app/widgets/task_pickers.dart';
 import '../../../../domain/entities/task_list.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../providers/widget_settings_controller.dart';
+import '../widgets/widget_catalogue.dart';
 
 /// Configures which data the Android home-screen widgets surface.
 class WidgetConfigScreen extends ConsumerWidget {
@@ -35,11 +36,12 @@ class WidgetConfigScreen extends ConsumerWidget {
               margin,
               AnjizSpacing.sm,
               margin,
-              AnjizSpacing.xxl,
+              // Clear the floating glass navigation bar.
+              AnjizSpacing.xxl + AnjizFloatingNavBar.contentBottomInset,
             ),
             sliver: SliverList.list(
               children: [
-                const _WidgetCatalogue(),
+                const WidgetCatalogue(),
                 const SizedBox(height: AnjizSpacing.md),
                 AnjizSettingsCard(
                   icon: Icons.tune_rounded,
@@ -59,7 +61,6 @@ class WidgetConfigScreen extends ConsumerWidget {
                         if (id != null) await controller.setListId(id);
                       },
                     ),
-                    const SizedBox(height: AnjizSpacing.md),
                     AnjizSwitchTile(
                       title: l10n.widgetConfigShowCompleted,
                       value: settings.showCompleted,
@@ -67,7 +68,6 @@ class WidgetConfigScreen extends ConsumerWidget {
                       onChanged: (value) =>
                           controller.setShowCompleted(enabled: value),
                     ),
-                    const SizedBox(height: AnjizSpacing.md),
                     AnjizSliderTile(
                       title: l10n.widgetConfigOpacity,
                       value: settings.opacity,
@@ -95,57 +95,5 @@ class WidgetConfigScreen extends ConsumerWidget {
       if (list.id == id) return list.name;
     }
     return null;
-  }
-}
-
-class _WidgetCatalogue extends StatelessWidget {
-  const _WidgetCatalogue();
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final entries = <({IconData icon, String title, String subtitle})>[
-      (
-        icon: Icons.checklist_rtl_rounded,
-        title: l10n.widgetOverviewTitle,
-        subtitle: l10n.widgetOverviewSubtitle,
-      ),
-      (
-        icon: Icons.view_agenda_outlined,
-        title: l10n.widgetCompactTitle,
-        subtitle: l10n.widgetCompactSubtitle,
-      ),
-      (
-        icon: Icons.donut_large_rounded,
-        title: l10n.widgetProgressTitle,
-        subtitle: l10n.widgetProgressSubtitle,
-      ),
-      (
-        icon: Icons.bolt_rounded,
-        title: l10n.widgetQuickAddTitle,
-        subtitle: l10n.widgetQuickAddSubtitle,
-      ),
-    ];
-    return AnjizCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (var i = 0; i < entries.length; i++) ...[
-            if (i > 0) const SizedBox(height: AnjizSpacing.md12),
-            AnjizListTile(
-              leading: AnjizIconBadge(
-                icon: entries[i].icon,
-                tone: AnjizTone.secondary,
-                size: 36,
-                iconSize: 18,
-              ),
-              title: Text(entries[i].title),
-              subtitle: Text(entries[i].subtitle),
-              trailing: AnjizTagPill(label: l10n.previewLabel),
-            ),
-          ],
-        ],
-      ),
-    );
   }
 }

@@ -11,6 +11,7 @@ abstract class AppSettings with _$AppSettings {
     @Default(ThemeMode.system) ThemeMode themeMode,
     @Default(true) bool useDynamicColor,
     @Default(0) int accentIndex,
+    @Default(false) bool usePureBlack,
     @Default(true) bool burstAnimations,
     @Default(2) int hapticLevel,
     @Default(false) bool dailyBriefing,

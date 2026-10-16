@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/navigation/anjiz_destination.dart';
-import '../components/navigation/anjiz_nav_bar.dart';
+import '../components/navigation/anjiz_floating_nav_bar.dart';
 import '../components/navigation/anjiz_nav_rail.dart';
 import 'anjiz_breakpoints.dart';
 
@@ -42,9 +42,11 @@ class AnjizAdaptiveScaffold extends StatelessWidget {
     final size = AnjizBreakpoints.of(context);
     if (size == AnjizWindowSize.compact) {
       return Scaffold(
+        // Let content scroll behind the translucent glass bar.
+        extendBody: true,
         body: body,
         floatingActionButton: floatingActionButton,
-        bottomNavigationBar: AnjizNavBar(
+        bottomNavigationBar: AnjizFloatingNavBar(
           destinations: destinations,
           currentIndex: currentIndex,
           onDestinationSelected: onDestinationSelected,

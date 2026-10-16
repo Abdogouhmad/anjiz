@@ -54,7 +54,8 @@ class TodayScreen extends ConsumerWidget {
                 AnjizBreakpoints.margin(AnjizBreakpoints.of(context)),
                 AnjizSpacing.sm,
                 AnjizBreakpoints.margin(AnjizBreakpoints.of(context)),
-                AnjizSpacing.xxl,
+                // Clear the floating glass navigation bar.
+                AnjizSpacing.xxl + AnjizFloatingNavBar.contentBottomInset,
               ),
               sliver: SliverList.list(
                 children: [

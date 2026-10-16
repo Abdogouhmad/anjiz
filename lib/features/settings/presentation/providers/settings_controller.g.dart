@@ -48,7 +48,7 @@ final class SettingsControllerProvider
 }
 
 String _$settingsControllerHash() =>
-    r'432985ddcef21511b7295364ee9ebdb584722845';
+    r'49aafb1b2c100e86c3fedd19c438045823709479';
 
 /// Owns the persisted [AppSettings], reading them synchronously from
 /// [sharedPreferencesProvider].

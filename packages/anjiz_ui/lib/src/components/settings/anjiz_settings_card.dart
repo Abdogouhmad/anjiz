@@ -5,27 +5,30 @@ import '../common/anjiz_tone.dart';
 import '../lists/anjiz_card.dart';
 import '../lists/anjiz_icon_badge.dart';
 
-/// A grouped settings card with a leading icon badge, a title and a vertical
-/// stack of children (switch tiles, nav tiles, sliders…).
+/// A grouped settings card with a vertical stack of children (switch tiles,
+/// nav tiles, sliders…) and an optional icon-badge header.
+///
+/// Omit [icon] and [title] to render a header-less group — the shape used on
+/// screens where an [AnjizSectionHeader] above the card already names it.
 class AnjizSettingsCard extends StatelessWidget {
   /// Creates a settings card.
   const AnjizSettingsCard({
-    required this.icon,
-    required this.title,
     required this.children,
+    this.icon,
+    this.title,
     this.trailing,
     this.headerTone = AnjizTone.secondary,
     super.key,
   });
 
-  /// Header icon.
-  final IconData icon;
-
-  /// Header title.
-  final String title;
-
   /// Card body.
   final List<Widget> children;
+
+  /// Header icon. Set together with [title].
+  final IconData? icon;
+
+  /// Header title. Set together with [icon].
+  final String? title;
 
   /// Optional header trailing widget (e.g. a tag pill).
   final Widget? trailing;
@@ -36,25 +39,30 @@ class AnjizSettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final icon = this.icon;
+    final title = this.title;
+    final hasHeader = icon != null && title != null;
     return AnjizCard(
       padding: const EdgeInsets.all(AnjizSpacing.md20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              AnjizIconBadge(
-                icon: icon,
-                tone: headerTone,
-                size: 36,
-                iconSize: 18,
-              ),
-              const SizedBox(width: AnjizSpacing.md12),
-              Expanded(child: Text(title, style: textTheme.titleMedium)),
-              if (trailing != null) trailing!,
-            ],
-          ),
-          const SizedBox(height: AnjizSpacing.lg),
+          if (hasHeader) ...[
+            Row(
+              children: [
+                AnjizIconBadge(
+                  icon: icon,
+                  tone: headerTone,
+                  size: 36,
+                  iconSize: 18,
+                ),
+                const SizedBox(width: AnjizSpacing.md12),
+                Expanded(child: Text(title, style: textTheme.titleMedium)),
+                if (trailing != null) trailing!,
+              ],
+            ),
+            const SizedBox(height: AnjizSpacing.lg),
+          ],
           for (var i = 0; i < children.length; i++) ...[
             if (i != 0) const SizedBox(height: AnjizSpacing.lg),
             children[i],

@@ -19,6 +19,7 @@ Read this file fully before touching code. Follow it strictly.
 - Notifications/reminders: `flutter_local_notifications` + `timezone`
 - Home widget: `home_widget` + native Android widget (Kotlin, Jetpack Glance with Material 3 dynamic color; fall back to RemoteViews only if Glance blocks a requirement)
 - Background refresh: `workmanager` (widget refresh, reminder rescheduling after reboot)
+- OTA updates: `ota_update` (download, sha256 verify, hand to Android's installer), `http` (release manifest), `package_info_plus` (installed version/versionCode)
 - Theming: `dynamic_color`; for expressive shapes/morphing check pub.dev for a maintained M3 shapes package (e.g. `material_new_shapes`) and Flutter stable's built-in expressive components before writing custom ones. Verify versions on pub.dev; do not guess APIs.
 - Tests: `flutter_test`, `mocktail`
 
@@ -29,6 +30,10 @@ anjiz/
 ├── AGENTS.md
 ├── pubspec.yaml                  # workspace root (Dart workspaces)
 ├── analysis_options.yaml
+├── build.sh                      # signed release build → dist/
+├── update_manifest.json          # the OTA feed the app reads (CI-owned)
+├── .github/workflows/            # ci.yml (PR gate) · release.yml (signed release)
+├── tool/                         # icon pipeline + safe-zone checker
 ├── assets/icon/                  # adaptive icon layers
 ├── android/                      # app + native widget (Kotlin)
 │   └── app/src/main/kotlin/.../widget/
@@ -136,7 +141,7 @@ flutter_launcher_icons:
   adaptive_icon_foreground: assets/icon/ic_foreground.png
   adaptive_icon_monochrome: assets/icon/ic_monochrome.png
 ```
-Verify generated `mipmap-anydpi-v26/ic_launcher.xml` contains `<monochrome>` (Android 13+ themed icon). Keep `minSdk` per Flutter default; legacy PNG mipmaps are generated for older versions.
+Verify generated `mipmap-anydpi-v26/ic_launcher.xml` contains `<monochrome>` (Android 13+ themed icon) and that every layer survives the launcher masks: `tool/check_icon_safe_zone.py assets/icon/ic_foreground.png assets/icon/ic_monochrome.png` must report both inside the 33dp safe-zone radius. Keep `minSdk` per Flutter default; legacy PNG mipmaps are generated for older versions.
 
 ## 8. Implementation order
 1. Workspace + `anjiz_ui` skeleton: tokens, theme (dynamic color), adaptive scaffold.
@@ -155,3 +160,10 @@ Google Stitch export is in `docs/design/` (screens + `design.md`). Match it; map
 - No file >250 lines; no UI primitive created outside `anjiz_ui`.
 - No hard-coded colors/strings; light, dark, RTL checked.
 - `flutter analyze` clean, tests pass, new logic covered.
+
+## 11. Releases & OTA updates
+- `version:` in `pubspec.yaml` is the single source of truth. The `versionCode` is `major*10000 + minor*100 + patch` and is implemented in **three** places that must stay in sync: `android/app/build.gradle.kts`, `AppInfo.versionCodeOf` (`lib/core/services/app_info.dart`) and `build.sh`.
+- Every release APK is signed with the same stable keystore, provisioned from the `ANJIZ_*` secrets. Never ship an unsigned or debug-signed release: Android will not install it, and a changed signature can never update an installed app.
+- `update_manifest.json` (repo root) is the feed the app reads at runtime. `release.yml` rewrites and commits it — never commit it by hand, and never point it at an APK that was not built by `build.sh`.
+- To release: bump `version:`, add a matching `## [<version>]` section to `CHANGELOG.md`, merge to `main`. `./build.sh --detect-version` must report that version, and `./build.sh --release-notes` must extract the section (it fails loudly when it is missing).
+- Background update checks stay silent and rate-limited (`UpdateController.checkInterval`); the user only sees an update through the Settings → App update row, the screen, or a single notification per release.

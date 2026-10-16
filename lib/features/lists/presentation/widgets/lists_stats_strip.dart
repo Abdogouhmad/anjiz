@@ -26,36 +26,42 @@ class ListsStatsStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: _StatPill(
-            icon: Icons.folder_outlined,
-            value: '$projects',
-            label: l10n.labelProjects,
-            tone: AnjizTone.primary,
+    // The strip lives inside a sliver, so its height is unbounded; the pills
+    // must share the tallest one's height explicitly, otherwise
+    // `CrossAxisAlignment.stretch` has nothing to stretch against and the
+    // render tree fails to lay out.
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: _StatPill(
+              icon: Icons.folder_outlined,
+              value: '$projects',
+              label: l10n.labelProjects,
+              tone: AnjizTone.primary,
+            ),
           ),
-        ),
-        const SizedBox(width: AnjizSpacing.sm),
-        Expanded(
-          child: _StatPill(
-            icon: Icons.check_circle_outline,
-            value: '$activeTasks',
-            label: l10n.labelActiveTasks,
-            tone: AnjizTone.secondary,
+          const SizedBox(width: AnjizSpacing.sm),
+          Expanded(
+            child: _StatPill(
+              icon: Icons.check_circle_outline,
+              value: '$activeTasks',
+              label: l10n.labelActiveTasks,
+              tone: AnjizTone.secondary,
+            ),
           ),
-        ),
-        const SizedBox(width: AnjizSpacing.sm),
-        Expanded(
-          child: _StatPill(
-            icon: Icons.bolt_rounded,
-            value: l10n.labelPercent((weeklyVelocity * 100).round()),
-            label: l10n.labelWeeklyVelocity,
-            tone: AnjizTone.tertiary,
+          const SizedBox(width: AnjizSpacing.sm),
+          Expanded(
+            child: _StatPill(
+              icon: Icons.bolt_rounded,
+              value: l10n.labelPercent((weeklyVelocity * 100).round()),
+              label: l10n.labelWeeklyVelocity,
+              tone: AnjizTone.tertiary,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

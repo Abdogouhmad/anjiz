@@ -49,11 +49,18 @@ class AnjizTagPill extends StatelessWidget {
             Icon(icon, size: 14, color: colors.onContainer),
             const SizedBox(width: AnjizSpacing.xs),
           ],
-          Text(
-            label,
-            style: textTheme.labelMedium?.copyWith(
-              color: colors.onContainer,
-              height: 1,
+          // The label stays on one line and ellipsizes when the pill is given a
+          // narrow slot, so callers can place pills inside flexible rows.
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 1,
+              softWrap: false,
+              overflow: TextOverflow.ellipsis,
+              style: textTheme.labelMedium?.copyWith(
+                color: colors.onContainer,
+                height: 1,
+              ),
             ),
           ),
         ],

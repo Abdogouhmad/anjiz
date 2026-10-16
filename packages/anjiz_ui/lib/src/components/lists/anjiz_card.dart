@@ -44,22 +44,25 @@ class AnjizCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final radius = borderRadius ?? AnjizShapes.card;
-    final decorated = Container(
-      margin: margin,
-      decoration: BoxDecoration(
-        color: color ?? scheme.surfaceContainerLowest,
-        borderRadius: radius,
-        boxShadow: elevated ? AnjizElevation.ambient(scheme.onSurface) : null,
-      ),
-      child: Material(
-        type: MaterialType.transparency,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: radius,
-          child: Padding(padding: padding, child: child),
-        ),
+    Widget card = Material(
+      color: color ?? scheme.surfaceContainerLowest,
+      borderRadius: radius,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(padding: padding, child: child),
       ),
     );
-    return decorated;
+    if (elevated || margin != null) {
+      card = Container(
+        margin: margin,
+        decoration: BoxDecoration(
+          borderRadius: radius,
+          boxShadow: elevated ? AnjizElevation.ambient(scheme.onSurface) : null,
+        ),
+        child: card,
+      );
+    }
+    return card;
   }
 }

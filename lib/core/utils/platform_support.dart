@@ -18,6 +18,10 @@ abstract final class PlatformSupport {
   /// Whether background work can be scheduled through WorkManager.
   static bool get backgroundWork => _isMobile;
 
+  /// Whether an APK can be downloaded and handed to the package installer.
+  static bool get otaUpdates =>
+      !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
+
   static bool get _isMobile =>
       !kIsWeb &&
       (defaultTargetPlatform == TargetPlatform.android ||

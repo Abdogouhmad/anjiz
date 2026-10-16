@@ -19,6 +19,7 @@ class AnjizApp extends ConsumerWidget {
     return AnjizDynamicTheme(
       useDynamicColor: settings.useDynamicColor,
       seedColor: useSeed ? accentSeedFor(settings.accentIndex) : null,
+      pureBlackDark: settings.usePureBlack,
       builder: (context, lightTheme, darkTheme) => MaterialApp.router(
         onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
         debugShowCheckedModeBanner: false,

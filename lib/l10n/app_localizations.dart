@@ -913,8 +913,158 @@ abstract class AppLocalizations {
   /// No description provided for @settingsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'إنجاز اليوم'**
+  /// **'Your daily achievement'**
   String get settingsSubtitle;
+
+  /// No description provided for @settingsGeneralTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGeneralTitle;
+
+  /// No description provided for @settingsGeneralSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, motion and haptics'**
+  String get settingsGeneralSubtitle;
+
+  /// No description provided for @settingsNotificationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily briefing and home-screen widgets'**
+  String get settingsNotificationsSubtitle;
+
+  /// No description provided for @settingsDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Google Calendar, exports and history'**
+  String get settingsDataSubtitle;
+
+  /// No description provided for @settingsAboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAboutTitle;
+
+  /// No description provided for @settingsAboutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Version, licences and credits'**
+  String get settingsAboutSubtitle;
+
+  /// No description provided for @settingsAboutSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Anjiz v{version}'**
+  String settingsAboutSummary(String version);
+
+  /// No description provided for @settingsPreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get settingsPreferences;
+
+  /// No description provided for @settingsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get settingsData;
+
+  /// No description provided for @settingsOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get settingsOther;
+
+  /// No description provided for @settingsBrightness.
+  ///
+  /// In en, this message translates to:
+  /// **'Brightness'**
+  String get settingsBrightness;
+
+  /// No description provided for @settingsColour.
+  ///
+  /// In en, this message translates to:
+  /// **'Colour'**
+  String get settingsColour;
+
+  /// No description provided for @settingsMotion.
+  ///
+  /// In en, this message translates to:
+  /// **'Motion'**
+  String get settingsMotion;
+
+  /// No description provided for @settingsCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get settingsCalendar;
+
+  /// No description provided for @settingsExport.
+  ///
+  /// In en, this message translates to:
+  /// **'Export'**
+  String get settingsExport;
+
+  /// No description provided for @settingsLegal.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get settingsLegal;
+
+  /// No description provided for @settingsNotificationsOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily briefing on'**
+  String get settingsNotificationsOn;
+
+  /// No description provided for @settingsNotificationsOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily briefing off'**
+  String get settingsNotificationsOff;
+
+  /// No description provided for @settingsPureBlackUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available in dark mode'**
+  String get settingsPureBlackUnavailable;
+
+  /// No description provided for @aboutLicences.
+  ///
+  /// In en, this message translates to:
+  /// **'Open-source licences'**
+  String get aboutLicences;
+
+  /// No description provided for @aboutLicencesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Flutter, Drift and other dependencies'**
+  String get aboutLicencesSubtitle;
+
+  /// No description provided for @themeSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get themeSettingsTitle;
+
+  /// No description provided for @themeSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mode, accent tone and dynamic colour'**
+  String get themeSettingsSubtitle;
+
+  /// No description provided for @motionSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Motion & haptics'**
+  String get motionSettingsTitle;
+
+  /// No description provided for @motionSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Spring animations and tactile feedback'**
+  String get motionSettingsSubtitle;
 
   /// No description provided for @profileName.
   ///
@@ -988,6 +1138,18 @@ abstract class AppLocalizations {
   /// **'Dark'**
   String get themeDark;
 
+  /// No description provided for @labelPureBlack.
+  ///
+  /// In en, this message translates to:
+  /// **'Pure black (OLED)'**
+  String get labelPureBlack;
+
+  /// No description provided for @pureBlackSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use true black surfaces in dark mode'**
+  String get pureBlackSubtitle;
+
   /// No description provided for @labelAccentTone.
   ///
   /// In en, this message translates to:
@@ -1006,11 +1168,41 @@ abstract class AppLocalizations {
   /// **'Ocean'**
   String get accentOcean;
 
+  /// No description provided for @accentIndigo.
+  ///
+  /// In en, this message translates to:
+  /// **'Indigo'**
+  String get accentIndigo;
+
+  /// No description provided for @accentViolet.
+  ///
+  /// In en, this message translates to:
+  /// **'Violet'**
+  String get accentViolet;
+
+  /// No description provided for @accentRose.
+  ///
+  /// In en, this message translates to:
+  /// **'Rose'**
+  String get accentRose;
+
   /// No description provided for @accentTerracotta.
   ///
   /// In en, this message translates to:
   /// **'Terracotta'**
   String get accentTerracotta;
+
+  /// No description provided for @accentAmber.
+  ///
+  /// In en, this message translates to:
+  /// **'Amber'**
+  String get accentAmber;
+
+  /// No description provided for @accentTeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Teal'**
+  String get accentTeal;
 
   /// No description provided for @accentLavender.
   ///
@@ -1081,8 +1273,14 @@ abstract class AppLocalizations {
   /// No description provided for @notificationsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Notifications & Widgets'**
+  /// **'Notifications'**
   String get notificationsTitle;
+
+  /// No description provided for @notificationsAndWidgetsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications & Widgets'**
+  String get notificationsAndWidgetsTitle;
 
   /// No description provided for @labelDailyBriefing.
   ///
@@ -1105,7 +1303,7 @@ abstract class AppLocalizations {
   /// No description provided for @widgetConfigSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'HomeScreen glances, Quick-add pill, lock-screen ticker'**
+  /// **'List, completed tasks and opacity'**
   String get widgetConfigSubtitle;
 
   /// No description provided for @dataTitle.
@@ -1119,12 +1317,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Google Calendar'**
   String get labelGoogleCalendar;
-
-  /// No description provided for @calendarConnectedAs.
-  ///
-  /// In en, this message translates to:
-  /// **'Connected as {email}'**
-  String calendarConnectedAs(String email);
 
   /// No description provided for @labelExportTasks.
   ///
@@ -1342,6 +1534,216 @@ abstract class AppLocalizations {
   /// **'Coming soon'**
   String get comingSoon;
 
+  /// No description provided for @updateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'App update'**
+  String get updateTitle;
+
+  /// No description provided for @updateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Newer releases install right over this one'**
+  String get updateSubtitle;
+
+  /// No description provided for @updateInstalledVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed v{version}'**
+  String updateInstalledVersion(String version);
+
+  /// No description provided for @updateLatestVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest v{version}'**
+  String updateLatestVersion(String version);
+
+  /// No description provided for @updateCurrentSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Anjiz v{version} · Up to date'**
+  String updateCurrentSummary(String version);
+
+  /// No description provided for @updateAvailableSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} is ready'**
+  String updateAvailableSummary(String version);
+
+  /// No description provided for @updateDownloading.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading…'**
+  String get updateDownloading;
+
+  /// No description provided for @updateInstalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Installing…'**
+  String get updateInstalling;
+
+  /// No description provided for @updateChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking…'**
+  String get updateChecking;
+
+  /// No description provided for @updateCheckingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Looking for a newer release.'**
+  String get updateCheckingBody;
+
+  /// No description provided for @updateCheckFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t check for updates'**
+  String get updateCheckFailed;
+
+  /// No description provided for @updateCurrentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re up to date'**
+  String get updateCurrentTitle;
+
+  /// No description provided for @updateCurrentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the newest release of Anjiz.'**
+  String get updateCurrentBody;
+
+  /// No description provided for @updateAvailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} is available'**
+  String updateAvailableTitle(String version);
+
+  /// No description provided for @updateAvailableBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The update downloads in the app and installs over this one.'**
+  String get updateAvailableBody;
+
+  /// No description provided for @updateWhatsNew.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s new'**
+  String get updateWhatsNew;
+
+  /// No description provided for @updateCheckAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for updates'**
+  String get updateCheckAction;
+
+  /// No description provided for @updateCheckAgainAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Check again'**
+  String get updateCheckAgainAction;
+
+  /// No description provided for @updateInstallAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Download and install'**
+  String get updateInstallAction;
+
+  /// No description provided for @updateRetryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get updateRetryAction;
+
+  /// No description provided for @updateDownloadingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading… {percent}%'**
+  String updateDownloadingLabel(int percent);
+
+  /// No description provided for @updateInstallingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Finishing in Android'**
+  String get updateInstallingTitle;
+
+  /// No description provided for @updateInstallingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow the installer on screen to complete the update.'**
+  String get updateInstallingBody;
+
+  /// No description provided for @updateInstallHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Android asks once to allow Anjiz to install apps.'**
+  String get updateInstallHint;
+
+  /// No description provided for @updateErrorNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the release server. Check your connection and try again.'**
+  String get updateErrorNetwork;
+
+  /// No description provided for @updateErrorMalformed.
+  ///
+  /// In en, this message translates to:
+  /// **'The release information couldn\'t be read. Try again later.'**
+  String get updateErrorMalformed;
+
+  /// No description provided for @updateErrorUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app updates are available on Android.'**
+  String get updateErrorUnsupported;
+
+  /// No description provided for @updateErrorPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Anjiz to install unknown apps in Android settings, then try again.'**
+  String get updateErrorPermission;
+
+  /// No description provided for @updateErrorChecksum.
+  ///
+  /// In en, this message translates to:
+  /// **'The download didn\'t match the published file, so it was discarded.'**
+  String get updateErrorChecksum;
+
+  /// No description provided for @updateErrorDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'The download failed. Try again.'**
+  String get updateErrorDownload;
+
+  /// No description provided for @updateErrorInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Android refused the update. Try again.'**
+  String get updateErrorInstall;
+
+  /// No description provided for @updateErrorCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'The download was cancelled.'**
+  String get updateErrorCancelled;
+
+  /// No description provided for @updateErrorUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Try again in a moment.'**
+  String get updateErrorUnknown;
+
+  /// No description provided for @updateNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Anjiz update available'**
+  String get updateNotificationTitle;
+
+  /// No description provided for @updateNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} is ready to download.'**
+  String updateNotificationBody(String version);
+
   /// No description provided for @errorTitle.
   ///
   /// In en, this message translates to:
@@ -1396,29 +1798,275 @@ abstract class AppLocalizations {
   /// **'day'**
   String get labelDays;
 
-  /// No description provided for @timeNow.
+  /// No description provided for @durationMinutes.
   ///
   /// In en, this message translates to:
-  /// **'now'**
-  String get timeNow;
+  /// **'{minutes}m'**
+  String durationMinutes(int minutes);
 
-  /// No description provided for @timeInMinutes.
+  /// No description provided for @durationHours.
   ///
   /// In en, this message translates to:
-  /// **'in {minutes}m'**
-  String timeInMinutes(int minutes);
+  /// **'{hours}h'**
+  String durationHours(int hours);
 
-  /// No description provided for @timeInHours.
+  /// No description provided for @durationDays.
   ///
   /// In en, this message translates to:
-  /// **'in {hours}h'**
-  String timeInHours(int hours);
+  /// **'{days}d'**
+  String durationDays(int days);
 
-  /// No description provided for @timeInDays.
+  /// No description provided for @themePreviewTitle.
   ///
   /// In en, this message translates to:
-  /// **'in {days}d'**
-  String timeInDays(int days);
+  /// **'Button & Component Preview'**
+  String get themePreviewTitle;
+
+  /// No description provided for @themePreviewSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Live preview of buttons and controls in this palette'**
+  String get themePreviewSubtitle;
+
+  /// No description provided for @themeButtonPrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Action'**
+  String get themeButtonPrimary;
+
+  /// No description provided for @themeButtonTonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Tonal Button'**
+  String get themeButtonTonal;
+
+  /// No description provided for @themeButtonOutlined.
+  ///
+  /// In en, this message translates to:
+  /// **'Outlined'**
+  String get themeButtonOutlined;
+
+  /// No description provided for @themeChipTask.
+  ///
+  /// In en, this message translates to:
+  /// **'High Priority'**
+  String get themeChipTask;
+
+  /// No description provided for @notificationsTestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Notification Delivery'**
+  String get notificationsTestTitle;
+
+  /// No description provided for @notificationsTestSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send an instant test notification to check channel, vibration, and banner'**
+  String get notificationsTestSubtitle;
+
+  /// No description provided for @notificationsSendTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Send test notification'**
+  String get notificationsSendTest;
+
+  /// No description provided for @notificationsTestSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Test notification delivered! Check your shade.'**
+  String get notificationsTestSent;
+
+  /// No description provided for @notificationsPermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Permission'**
+  String get notificationsPermissionTitle;
+
+  /// No description provided for @notificationsPermissionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Required for task reminders and daily briefings'**
+  String get notificationsPermissionSubtitle;
+
+  /// No description provided for @notificationsPermissionGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission granted'**
+  String get notificationsPermissionGranted;
+
+  /// No description provided for @notificationsPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission not granted'**
+  String get notificationsPermissionDenied;
+
+  /// No description provided for @notificationsGrantAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant permission'**
+  String get notificationsGrantAction;
+
+  /// No description provided for @notificationsChannelActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Android notification channels verified active'**
+  String get notificationsChannelActive;
+
+  /// No description provided for @motionPlaygroundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Interactive Motion Playground'**
+  String get motionPlaygroundTitle;
+
+  /// No description provided for @motionPlaygroundSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the checkbox below to test the spring morphing, bursts and tactile haptics live'**
+  String get motionPlaygroundSubtitle;
+
+  /// No description provided for @motionDemoTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Review priority tasks for today'**
+  String get motionDemoTask;
+
+  /// No description provided for @motionDemoSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the scalloped cookie checkbox to feel and see the motion'**
+  String get motionDemoSubtitle;
+
+  /// No description provided for @motionTestHaptics.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to test current haptic strength'**
+  String get motionTestHaptics;
+
+  /// No description provided for @aboutAppDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'An offline-first, Material 3 Expressive task manager built for intentional daily achievement, spring physics, and Android home-screen widgets.'**
+  String get aboutAppDescription;
+
+  /// No description provided for @aboutSourceCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Source Code'**
+  String get aboutSourceCode;
+
+  /// No description provided for @aboutAuthor.
+  ///
+  /// In en, this message translates to:
+  /// **'Crafted with passion by Abdo Gouhmad'**
+  String get aboutAuthor;
+
+  /// No description provided for @aboutHighlightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Architecture Highlights'**
+  String get aboutHighlightsTitle;
+
+  /// No description provided for @aboutHighlightOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline-first with SQLite (Drift) single source of truth'**
+  String get aboutHighlightOffline;
+
+  /// No description provided for @aboutHighlightExpressive.
+  ///
+  /// In en, this message translates to:
+  /// **'Material 3 Expressive spring physics & custom shapes'**
+  String get aboutHighlightExpressive;
+
+  /// No description provided for @aboutHighlightWidgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Native Android Glance home-screen widgets'**
+  String get aboutHighlightWidgets;
+
+  /// No description provided for @updateUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'You are up to date'**
+  String get updateUpToDate;
+
+  /// No description provided for @updateAvailableBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'New update available'**
+  String get updateAvailableBadge;
+
+  /// No description provided for @updateDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Version details'**
+  String get updateDetailsTitle;
+
+  /// No description provided for @updateCurrentVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current version'**
+  String get updateCurrentVersionLabel;
+
+  /// No description provided for @updateLatestVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest version'**
+  String get updateLatestVersionLabel;
+
+  /// No description provided for @updateInstallType.
+  ///
+  /// In en, this message translates to:
+  /// **'Install type'**
+  String get updateInstallType;
+
+  /// No description provided for @updateInstallTypeValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Universal APK'**
+  String get updateInstallTypeValue;
+
+  /// No description provided for @updateLastChecked.
+  ///
+  /// In en, this message translates to:
+  /// **'Last checked'**
+  String get updateLastChecked;
+
+  /// No description provided for @updateLastResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Last result'**
+  String get updateLastResult;
+
+  /// No description provided for @updateJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get updateJustNow;
+
+  /// No description provided for @updateMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min ago'**
+  String updateMinutesAgo(int minutes);
+
+  /// No description provided for @updateHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} h ago'**
+  String updateHoursAgo(int hours);
+
+  /// No description provided for @updateNever.
+  ///
+  /// In en, this message translates to:
+  /// **'Never'**
+  String get updateNever;
+
+  /// No description provided for @updateReadyInstallTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update verified & ready to install'**
+  String get updateReadyInstallTitle;
 }
 
 class _AppLocalizationsDelegate

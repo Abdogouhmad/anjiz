@@ -18,8 +18,15 @@ abstract final class AnjizTheme {
 
   /// The dark theme, optionally overriding the [ColorScheme] with a dynamic
   /// (Material You) palette supplied by the platform.
-  static ThemeData dark({ColorScheme? colorScheme}) =>
-      _build(colorScheme ?? AnjizColorSchemes.dark(), Brightness.dark);
+  ///
+  /// Set [pureBlack] to collapse the surfaces onto true black for OLED screens.
+  static ThemeData dark({ColorScheme? colorScheme, bool pureBlack = false}) {
+    final scheme = colorScheme ?? AnjizColorSchemes.dark();
+    return _build(
+      pureBlack ? AnjizColorSchemes.pureBlack(scheme) : scheme,
+      Brightness.dark,
+    );
+  }
 
   static ThemeData _build(ColorScheme scheme, Brightness brightness) {
     final textTheme = AnjizTypography.textTheme();

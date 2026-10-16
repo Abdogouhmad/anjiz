@@ -515,7 +515,85 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsTitle => 'Settings';
 
   @override
-  String get settingsSubtitle => 'إنجاز اليوم';
+  String get settingsSubtitle => 'Your daily achievement';
+
+  @override
+  String get settingsGeneralTitle => 'General';
+
+  @override
+  String get settingsGeneralSubtitle => 'Theme, motion and haptics';
+
+  @override
+  String get settingsNotificationsSubtitle =>
+      'Daily briefing and home-screen widgets';
+
+  @override
+  String get settingsDataSubtitle => 'Google Calendar, exports and history';
+
+  @override
+  String get settingsAboutTitle => 'About';
+
+  @override
+  String get settingsAboutSubtitle => 'Version, licences and credits';
+
+  @override
+  String settingsAboutSummary(String version) {
+    return 'Anjiz v$version';
+  }
+
+  @override
+  String get settingsPreferences => 'Preferences';
+
+  @override
+  String get settingsData => 'Data';
+
+  @override
+  String get settingsOther => 'Other';
+
+  @override
+  String get settingsBrightness => 'Brightness';
+
+  @override
+  String get settingsColour => 'Colour';
+
+  @override
+  String get settingsMotion => 'Motion';
+
+  @override
+  String get settingsCalendar => 'Calendar';
+
+  @override
+  String get settingsExport => 'Export';
+
+  @override
+  String get settingsLegal => 'Legal';
+
+  @override
+  String get settingsNotificationsOn => 'Daily briefing on';
+
+  @override
+  String get settingsNotificationsOff => 'Daily briefing off';
+
+  @override
+  String get settingsPureBlackUnavailable => 'Available in dark mode';
+
+  @override
+  String get aboutLicences => 'Open-source licences';
+
+  @override
+  String get aboutLicencesSubtitle => 'Flutter, Drift and other dependencies';
+
+  @override
+  String get themeSettingsTitle => 'Theme';
+
+  @override
+  String get themeSettingsSubtitle => 'Mode, accent tone and dynamic colour';
+
+  @override
+  String get motionSettingsTitle => 'Motion & haptics';
+
+  @override
+  String get motionSettingsSubtitle => 'Spring animations and tactile feedback';
 
   @override
   String get profileName => 'Sarah Al-Mansoor';
@@ -557,6 +635,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeDark => 'Dark';
 
   @override
+  String get labelPureBlack => 'Pure black (OLED)';
+
+  @override
+  String get pureBlackSubtitle => 'Use true black surfaces in dark mode';
+
+  @override
   String get labelAccentTone => 'Accent tone';
 
   @override
@@ -566,7 +650,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accentOcean => 'Ocean';
 
   @override
+  String get accentIndigo => 'Indigo';
+
+  @override
+  String get accentViolet => 'Violet';
+
+  @override
+  String get accentRose => 'Rose';
+
+  @override
   String get accentTerracotta => 'Terracotta';
+
+  @override
+  String get accentAmber => 'Amber';
+
+  @override
+  String get accentTeal => 'Teal';
 
   @override
   String get accentLavender => 'Lavender';
@@ -603,7 +702,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hapticExpressive => 'Expressive';
 
   @override
-  String get notificationsTitle => 'Notifications & Widgets';
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsAndWidgetsTitle => 'Notifications & Widgets';
 
   @override
   String get labelDailyBriefing => 'Daily Briefing';
@@ -616,19 +718,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get labelWidgetConfig => 'Widget Configuration & Previews';
 
   @override
-  String get widgetConfigSubtitle =>
-      'HomeScreen glances, Quick-add pill, lock-screen ticker';
+  String get widgetConfigSubtitle => 'List, completed tasks and opacity';
 
   @override
   String get dataTitle => 'Data & Backup';
 
   @override
   String get labelGoogleCalendar => 'Google Calendar';
-
-  @override
-  String calendarConnectedAs(String email) {
-    return 'Connected as $email';
-  }
 
   @override
   String get labelExportTasks => 'Export Tasks & History';
@@ -746,6 +842,134 @@ class AppLocalizationsEn extends AppLocalizations {
   String get comingSoon => 'Coming soon';
 
   @override
+  String get updateTitle => 'App update';
+
+  @override
+  String get updateSubtitle => 'Newer releases install right over this one';
+
+  @override
+  String updateInstalledVersion(String version) {
+    return 'Installed v$version';
+  }
+
+  @override
+  String updateLatestVersion(String version) {
+    return 'Latest v$version';
+  }
+
+  @override
+  String updateCurrentSummary(String version) {
+    return 'Anjiz v$version · Up to date';
+  }
+
+  @override
+  String updateAvailableSummary(String version) {
+    return 'Version $version is ready';
+  }
+
+  @override
+  String get updateDownloading => 'Downloading…';
+
+  @override
+  String get updateInstalling => 'Installing…';
+
+  @override
+  String get updateChecking => 'Checking…';
+
+  @override
+  String get updateCheckingBody => 'Looking for a newer release.';
+
+  @override
+  String get updateCheckFailed => 'Couldn\'t check for updates';
+
+  @override
+  String get updateCurrentTitle => 'You\'re up to date';
+
+  @override
+  String get updateCurrentBody => 'This is the newest release of Anjiz.';
+
+  @override
+  String updateAvailableTitle(String version) {
+    return 'Version $version is available';
+  }
+
+  @override
+  String get updateAvailableBody =>
+      'The update downloads in the app and installs over this one.';
+
+  @override
+  String get updateWhatsNew => 'What\'s new';
+
+  @override
+  String get updateCheckAction => 'Check for updates';
+
+  @override
+  String get updateCheckAgainAction => 'Check again';
+
+  @override
+  String get updateInstallAction => 'Download and install';
+
+  @override
+  String get updateRetryAction => 'Try again';
+
+  @override
+  String updateDownloadingLabel(int percent) {
+    return 'Downloading… $percent%';
+  }
+
+  @override
+  String get updateInstallingTitle => 'Finishing in Android';
+
+  @override
+  String get updateInstallingBody =>
+      'Follow the installer on screen to complete the update.';
+
+  @override
+  String get updateInstallHint =>
+      'Android asks once to allow Anjiz to install apps.';
+
+  @override
+  String get updateErrorNetwork =>
+      'Couldn\'t reach the release server. Check your connection and try again.';
+
+  @override
+  String get updateErrorMalformed =>
+      'The release information couldn\'t be read. Try again later.';
+
+  @override
+  String get updateErrorUnsupported =>
+      'In-app updates are available on Android.';
+
+  @override
+  String get updateErrorPermission =>
+      'Allow Anjiz to install unknown apps in Android settings, then try again.';
+
+  @override
+  String get updateErrorChecksum =>
+      'The download didn\'t match the published file, so it was discarded.';
+
+  @override
+  String get updateErrorDownload => 'The download failed. Try again.';
+
+  @override
+  String get updateErrorInstall => 'Android refused the update. Try again.';
+
+  @override
+  String get updateErrorCancelled => 'The download was cancelled.';
+
+  @override
+  String get updateErrorUnknown =>
+      'Something went wrong. Try again in a moment.';
+
+  @override
+  String get updateNotificationTitle => 'Anjiz update available';
+
+  @override
+  String updateNotificationBody(String version) {
+    return 'Version $version is ready to download.';
+  }
+
+  @override
   String get errorTitle => 'Something went wrong';
 
   @override
@@ -774,20 +998,158 @@ class AppLocalizationsEn extends AppLocalizations {
   String get labelDays => 'day';
 
   @override
-  String get timeNow => 'now';
-
-  @override
-  String timeInMinutes(int minutes) {
-    return 'in ${minutes}m';
+  String durationMinutes(int minutes) {
+    return '${minutes}m';
   }
 
   @override
-  String timeInHours(int hours) {
-    return 'in ${hours}h';
+  String durationHours(int hours) {
+    return '${hours}h';
   }
 
   @override
-  String timeInDays(int days) {
-    return 'in ${days}d';
+  String durationDays(int days) {
+    return '${days}d';
   }
+
+  @override
+  String get themePreviewTitle => 'Button & Component Preview';
+
+  @override
+  String get themePreviewSubtitle =>
+      'Live preview of buttons and controls in this palette';
+
+  @override
+  String get themeButtonPrimary => 'Primary Action';
+
+  @override
+  String get themeButtonTonal => 'Tonal Button';
+
+  @override
+  String get themeButtonOutlined => 'Outlined';
+
+  @override
+  String get themeChipTask => 'High Priority';
+
+  @override
+  String get notificationsTestTitle => 'Test Notification Delivery';
+
+  @override
+  String get notificationsTestSubtitle =>
+      'Send an instant test notification to check channel, vibration, and banner';
+
+  @override
+  String get notificationsSendTest => 'Send test notification';
+
+  @override
+  String get notificationsTestSent =>
+      'Test notification delivered! Check your shade.';
+
+  @override
+  String get notificationsPermissionTitle => 'Notification Permission';
+
+  @override
+  String get notificationsPermissionSubtitle =>
+      'Required for task reminders and daily briefings';
+
+  @override
+  String get notificationsPermissionGranted => 'Permission granted';
+
+  @override
+  String get notificationsPermissionDenied => 'Permission not granted';
+
+  @override
+  String get notificationsGrantAction => 'Grant permission';
+
+  @override
+  String get notificationsChannelActive =>
+      'Android notification channels verified active';
+
+  @override
+  String get motionPlaygroundTitle => 'Interactive Motion Playground';
+
+  @override
+  String get motionPlaygroundSubtitle =>
+      'Tap the checkbox below to test the spring morphing, bursts and tactile haptics live';
+
+  @override
+  String get motionDemoTask => 'Review priority tasks for today';
+
+  @override
+  String get motionDemoSubtitle =>
+      'Tap the scalloped cookie checkbox to feel and see the motion';
+
+  @override
+  String get motionTestHaptics => 'Tap to test current haptic strength';
+
+  @override
+  String get aboutAppDescription =>
+      'An offline-first, Material 3 Expressive task manager built for intentional daily achievement, spring physics, and Android home-screen widgets.';
+
+  @override
+  String get aboutSourceCode => 'Source Code';
+
+  @override
+  String get aboutAuthor => 'Crafted with passion by Abdo Gouhmad';
+
+  @override
+  String get aboutHighlightsTitle => 'Architecture Highlights';
+
+  @override
+  String get aboutHighlightOffline =>
+      'Offline-first with SQLite (Drift) single source of truth';
+
+  @override
+  String get aboutHighlightExpressive =>
+      'Material 3 Expressive spring physics & custom shapes';
+
+  @override
+  String get aboutHighlightWidgets =>
+      'Native Android Glance home-screen widgets';
+
+  @override
+  String get updateUpToDate => 'You are up to date';
+
+  @override
+  String get updateAvailableBadge => 'New update available';
+
+  @override
+  String get updateDetailsTitle => 'Version details';
+
+  @override
+  String get updateCurrentVersionLabel => 'Current version';
+
+  @override
+  String get updateLatestVersionLabel => 'Latest version';
+
+  @override
+  String get updateInstallType => 'Install type';
+
+  @override
+  String get updateInstallTypeValue => 'Universal APK';
+
+  @override
+  String get updateLastChecked => 'Last checked';
+
+  @override
+  String get updateLastResult => 'Last result';
+
+  @override
+  String get updateJustNow => 'Just now';
+
+  @override
+  String updateMinutesAgo(int minutes) {
+    return '$minutes min ago';
+  }
+
+  @override
+  String updateHoursAgo(int hours) {
+    return '$hours h ago';
+  }
+
+  @override
+  String get updateNever => 'Never';
+
+  @override
+  String get updateReadyInstallTitle => 'Update verified & ready to install';
 }

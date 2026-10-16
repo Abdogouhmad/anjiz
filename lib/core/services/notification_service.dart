@@ -63,18 +63,95 @@ class NotificationService implements ReminderScheduler {
         importance: Importance.defaultImportance,
       ),
     );
+    await android?.createNotificationChannel(
+      const AndroidNotificationChannel(
+        AppConstants.updatesChannelId,
+        'App updates',
+        description: 'Tells you when a newer version of Anjiz is available.',
+        importance: Importance.low,
+      ),
+    );
+  }
+
+  /// Shows the "a newer version is available" notification.
+  ///
+  /// Silently does nothing without notification permission: the settings screen
+  /// still reports the available update, so nothing is lost.
+  Future<void> showUpdateAvailable({
+    required String title,
+    required String body,
+  }) async {
+    if (!PlatformSupport.notifications) return;
+    await _plugin.show(
+      AppConstants.updateNotificationId,
+      title,
+      body,
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          AppConstants.updatesChannelId,
+          'App updates',
+          importance: Importance.low,
+          priority: Priority.low,
+        ),
+      ),
+    );
+  }
+
+  /// Checks whether notifications are enabled for the app.
+  Future<bool> areNotificationsEnabled() async {
+    if (!PlatformSupport.notifications) return false;
+    try {
+      final android = _plugin
+          .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin
+          >();
+      final enabled = await android?.areNotificationsEnabled();
+      return enabled ?? false;
+    } on Object {
+      return false;
+    }
   }
 
   /// Requests notification permission, returning whether it was granted.
   @override
   Future<bool> requestPermission() async {
     if (!PlatformSupport.notifications) return false;
-    final android = _plugin
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >();
-    final granted = await android?.requestNotificationsPermission();
-    return granted ?? false;
+    try {
+      final android = _plugin
+          .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin
+          >();
+      final granted = await android?.requestNotificationsPermission();
+      return granted ?? false;
+    } on Object {
+      return false;
+    }
+  }
+
+  /// Shows an immediate test notification to verify delivery and sound/vibration.
+  Future<void> showTestNotification({
+    required String title,
+    required String body,
+  }) async {
+    if (!PlatformSupport.notifications) return;
+    try {
+      await _plugin.show(
+        AppConstants.testNotificationId,
+        title,
+        body,
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            AppConstants.reminderChannelId,
+            'Task reminders',
+            channelDescription: 'Reminders for tasks with a due time.',
+            importance: Importance.high,
+            priority: Priority.high,
+          ),
+        ),
+      );
+    } on Object {
+      // Ignored in tests / when unsupported.
+    }
   }
 
   /// Schedules a one-off notification at [at].

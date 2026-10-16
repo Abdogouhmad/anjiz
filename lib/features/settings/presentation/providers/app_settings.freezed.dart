@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettings {
 
- ThemeMode get themeMode; bool get useDynamicColor; int get accentIndex; bool get burstAnimations; int get hapticLevel; bool get dailyBriefing; bool get onboardingComplete;
+ ThemeMode get themeMode; bool get useDynamicColor; int get accentIndex; bool get usePureBlack; bool get burstAnimations; int get hapticLevel; bool get dailyBriefing; bool get onboardingComplete;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AppSettingsCopyWith<AppSettings> get copyWith => _$AppSettingsCopyWithImpl<AppS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.usePureBlack, usePureBlack) || other.usePureBlack == usePureBlack)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,usePureBlack,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, usePureBlack: $usePureBlack, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AppSettingsCopyWith<$Res>  {
   factory $AppSettingsCopyWith(AppSettings value, $Res Function(AppSettings) _then) = _$AppSettingsCopyWithImpl;
 @useResult
 $Res call({
- ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete
+ ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool usePureBlack, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete
 });
 
 
@@ -62,12 +62,13 @@ class _$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? usePureBlack = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,}) {
   return _then(_self.copyWith(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as ThemeMode,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
 as bool,accentIndex: null == accentIndex ? _self.accentIndex : accentIndex // ignore: cast_nullable_to_non_nullable
-as int,burstAnimations: null == burstAnimations ? _self.burstAnimations : burstAnimations // ignore: cast_nullable_to_non_nullable
+as int,usePureBlack: null == usePureBlack ? _self.usePureBlack : usePureBlack // ignore: cast_nullable_to_non_nullable
+as bool,burstAnimations: null == burstAnimations ? _self.burstAnimations : burstAnimations // ignore: cast_nullable_to_non_nullable
 as bool,hapticLevel: null == hapticLevel ? _self.hapticLevel : hapticLevel // ignore: cast_nullable_to_non_nullable
 as int,dailyBriefing: null == dailyBriefing ? _self.dailyBriefing : dailyBriefing // ignore: cast_nullable_to_non_nullable
 as bool,onboardingComplete: null == onboardingComplete ? _self.onboardingComplete : onboardingComplete // ignore: cast_nullable_to_non_nullable
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.bu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings():
-return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.bu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
   return null;
 
 }
@@ -212,12 +213,13 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.bu
 
 
 class _AppSettings implements AppSettings {
-  const _AppSettings({this.themeMode = ThemeMode.system, this.useDynamicColor = true, this.accentIndex = 0, this.burstAnimations = true, this.hapticLevel = 2, this.dailyBriefing = false, this.onboardingComplete = false});
+  const _AppSettings({this.themeMode = ThemeMode.system, this.useDynamicColor = true, this.accentIndex = 0, this.usePureBlack = false, this.burstAnimations = true, this.hapticLevel = 2, this.dailyBriefing = false, this.onboardingComplete = false});
   
 
 @override@JsonKey() final  ThemeMode themeMode;
 @override@JsonKey() final  bool useDynamicColor;
 @override@JsonKey() final  int accentIndex;
+@override@JsonKey() final  bool usePureBlack;
 @override@JsonKey() final  bool burstAnimations;
 @override@JsonKey() final  int hapticLevel;
 @override@JsonKey() final  bool dailyBriefing;
@@ -233,16 +235,16 @@ _$AppSettingsCopyWith<_AppSettings> get copyWith => __$AppSettingsCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.usePureBlack, usePureBlack) || other.usePureBlack == usePureBlack)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,usePureBlack,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, usePureBlack: $usePureBlack, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$AppSettingsCopyWith<$Res> implements $AppSettingsCopyWith
   factory _$AppSettingsCopyWith(_AppSettings value, $Res Function(_AppSettings) _then) = __$AppSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete
+ ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool usePureBlack, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete
 });
 
 
@@ -270,12 +272,13 @@ class __$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? usePureBlack = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,}) {
   return _then(_AppSettings(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as ThemeMode,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
 as bool,accentIndex: null == accentIndex ? _self.accentIndex : accentIndex // ignore: cast_nullable_to_non_nullable
-as int,burstAnimations: null == burstAnimations ? _self.burstAnimations : burstAnimations // ignore: cast_nullable_to_non_nullable
+as int,usePureBlack: null == usePureBlack ? _self.usePureBlack : usePureBlack // ignore: cast_nullable_to_non_nullable
+as bool,burstAnimations: null == burstAnimations ? _self.burstAnimations : burstAnimations // ignore: cast_nullable_to_non_nullable
 as bool,hapticLevel: null == hapticLevel ? _self.hapticLevel : hapticLevel // ignore: cast_nullable_to_non_nullable
 as int,dailyBriefing: null == dailyBriefing ? _self.dailyBriefing : dailyBriefing // ignore: cast_nullable_to_non_nullable
 as bool,onboardingComplete: null == onboardingComplete ? _self.onboardingComplete : onboardingComplete // ignore: cast_nullable_to_non_nullable

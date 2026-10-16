@@ -61,6 +61,52 @@ final class NotificationServiceProvider
 String _$notificationServiceHash() =>
     r'585c1e42ea844e71a2b76b80b165adfe2c5c8529';
 
+/// Provides the over-the-air update service singleton.
+
+@ProviderFor(updateService)
+final updateServiceProvider = UpdateServiceProvider._();
+
+/// Provides the over-the-air update service singleton.
+
+final class UpdateServiceProvider
+    extends $FunctionalProvider<UpdateService, UpdateService, UpdateService>
+    with $Provider<UpdateService> {
+  /// Provides the over-the-air update service singleton.
+  UpdateServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'updateServiceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$updateServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<UpdateService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  UpdateService create(Ref ref) {
+    return updateService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UpdateService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UpdateService>(value),
+    );
+  }
+}
+
+String _$updateServiceHash() => r'6b39bbb2f2ccd5487d6b01b7b94a0cdce3a3aed4';
+
 /// Provides the home-widget sync service singleton.
 
 @ProviderFor(widgetSyncService)

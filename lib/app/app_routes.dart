@@ -12,11 +12,32 @@ abstract final class AppRoutes {
   /// The full-screen search route.
   static const String search = '/search';
 
-  /// The settings route.
+  /// The settings tab (also a nested settings hub).
   static const String settings = '/settings';
 
-  /// The home-screen widget configuration route.
-  static const String widgetConfig = '/widget-config';
+  /// The nested settings screens.
+  static const String settingsGeneral = '/settings/general';
+
+  /// Theme controls, nested under General.
+  static const String settingsTheme = '/settings/general/theme';
+
+  /// Motion and haptics controls, nested under General.
+  static const String settingsMotion = '/settings/general/motion';
+
+  /// Notification and widget settings.
+  static const String settingsNotifications = '/settings/notifications';
+
+  /// The home-screen widget configuration screen.
+  static const String settingsWidgets = '/settings/widgets';
+
+  /// Data, calendar and export settings.
+  static const String settingsData = '/settings/data';
+
+  /// Version, licences and credits.
+  static const String settingsAbout = '/settings/about';
+
+  /// The over-the-air app update screen.
+  static const String settingsUpdate = '/settings/update';
 
   /// The onboarding route.
   static const String onboarding = '/onboarding';

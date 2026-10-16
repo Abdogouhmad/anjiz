@@ -1,0 +1,67 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
+
+rootProject.layout.buildDirectory.value(newBuildDir)
+
+subprojects {
+    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
+    project.layout.buildDirectory.value(newSubprojectBuildDir)
+}
+
+subprojects { project.evaluationDependsOn(":app") }
+
+// Force every plugin subproject (home_widget, workmanager, flutter_timezone, …)
+// to compile against JVM 17 so their bytecode matches our app module.
+//
+// Strategy:
+//   • KotlinCompile: register configureEach from the root subprojects block — KGP applies
+//     its kotlinOptions during build-script evaluation, so our lazy task action wins when
+//     the task is realized (it's registered later, in task-graph resolution order).
+//   • JavaCompile: AGP reads compileOptions and applies them to JavaCompile tasks lazily;
+//     but home_widget hardcodes VERSION_1_8 in its own build.gradle AFTER our root-level
+//     configureEach is registered, so AGP wins. We work around this by registering our
+//     JavaCompile action inside plugins.withId + afterEvaluate, which fires AFTER the
+//     subproject's build script (and AGP's compileOptions) have been fully processed.
+subprojects {
+    // Kotlin: task-level configureEach beats KGP's kotlinOptions convention.
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17) }
+    }
+
+    // Java: register our override after AGP has finished applying compileOptions.
+    plugins.withId("com.android.library") {
+        afterEvaluate {
+            tasks.withType<JavaCompile>().configureEach {
+                sourceCompatibility = JavaVersion.VERSION_17.toString()
+                targetCompatibility = JavaVersion.VERSION_17.toString()
+            }
+        }
+    }
+}
+
+tasks.register<Delete>("clean") { delete(rootProject.layout.buildDirectory) }
+
+subprojects {
+    configurations.configureEach {
+        resolutionStrategy {
+            force(
+                    "androidx.glance:glance:1.1.1",
+                    "androidx.glance:glance-appwidget:1.1.1",
+                    "androidx.glance:glance-material:1.1.1",
+                    "androidx.glance:glance-material3:1.1.1",
+                    "androidx.glance:glance-template:1.1.1",
+            )
+        }
+    }
+}
+                "androidx.glance:glance-template:1.1.1",
+            )
+        }
+    }
+}

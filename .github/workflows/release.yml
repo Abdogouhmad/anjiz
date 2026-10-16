@@ -1,0 +1,240 @@
+name: release
+
+# Builds and publishes the Android release on every push/merge to `main`
+# (plus manual runs via workflow_dispatch). The git tag `v<version>` is created
+# automatically from `version:` in pubspec.yaml — there is no tag trigger to
+# maintain, and CHANGELOG.md stays the single source of truth for the release
+# notes that end up on GitHub *and* in the app's "What's new" pane.
+#
+#   Signing: Android refuses to install an UNSIGNED release APK
+#   (`INSTALL_FAILED_INVALID_APK`) and refuses to update an app whose signature
+#   changed, so every APK here is signed with the SAME stable keystore
+#   provisioned from the ANJIZ_* secrets, the build FAILS when those secrets are
+#   missing, and build.sh verifies each APK with apksigner before publish.
+#
+#   Builds 3 APKs from a single trigger:
+#     - split-per-abi arm64-v8a + armeabi-v7a (the supported ABIs)
+#     - a universal APK — the in-app OTA updater ALWAYS downloads this one, and
+#       its asset name + sha256 land in update_manifest.json
+#
+# To release a new version:
+#   1. Bump `version:` in pubspec.yaml.
+#   2. Add a `## [<version>]` section to CHANGELOG.md.
+#   3. Merge onto main — the tag + GitHub release + OTA manifest follow.
+#
+# Secrets to configure in the repo:
+#   ANJIZ_KEYSTORE_BASE64   = base64 of the anjiz-release.jks keystore
+#   ANJIZ_KEYSTORE_PASSWORD = keystore password
+#   ANJIZ_KEY_ALIAS         = signing key alias
+#   ANJIZ_KEY_PASSWORD      = signing key password
+
+on:
+  push:
+    branches:
+      - main
+    # A workflow-only edit can't change the shipped APKs, so it must not spin up
+    # a full signed release. Code, `pubspec.yaml` and `CHANGELOG.md` still do.
+    paths-ignore:
+      - '.github/**'
+  workflow_dispatch:
+
+# Two merges in a row must not race each other onto the same APK assets.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build, sign and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Cache pub dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            .dart_tool
+            .flutter-plugins-dependencies
+          key: pub-${{ runner.os }}-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            pub-${{ runner.os }}-
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ${{ github.workspace }}/.gradle
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/gradle/wrapper/gradle-wrapper.properties', 'android/**/*.gradle*') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+
+      # Provisions the stable keystore from secrets (fails the build when the
+      # secrets are missing), builds the split-per-abi + universal APKs, stages
+      # versioned copies under dist/, writes checksums.txt and verifies every
+      # APK's signature with apksigner.
+      - name: Build, sign and stage APKs
+        env:
+          CI: "true"
+          ANJIZ_KEYSTORE_BASE64: ${{ secrets.ANJIZ_KEYSTORE_BASE64 }}
+          ANJIZ_KEYSTORE_PASSWORD: ${{ secrets.ANJIZ_KEYSTORE_PASSWORD }}
+          ANJIZ_KEY_ALIAS: ${{ secrets.ANJIZ_KEY_ALIAS }}
+          ANJIZ_KEY_PASSWORD: ${{ secrets.ANJIZ_KEY_PASSWORD }}
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
+
+      - name: Determine version
+        id: version
+        run: ./build.sh --detect-version >> "$GITHUB_OUTPUT"
+
+      # Extract ONLY this release's `## [<version>]` section from CHANGELOG.md
+      # (fails when it's missing so an unreleased change never ships silently).
+      - name: Extract release notes from CHANGELOG
+        run: ./build.sh --release-notes
+
+      # Collision-safe: a re-merge into main of the SAME version re-releases it
+      # at the new commit (delete the old release + tag, then recreate).
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          # Drop the LOCAL tag before asking gh to clean up the remote one —
+          # otherwise the push below races the deletion and the run dies.
+          git tag -d "$TAG" >/dev/null 2>&1 || true
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release delete "$TAG" --yes --cleanup-tag
+          fi
+
+          shopt -s nullglob
+          artifacts=(dist/*.apk dist/checksums.txt)
+          if (( ${#artifacts[@]} == 0 )); then
+            echo "::error::No APK artifacts found under dist/"; exit 1
+          fi
+
+          git tag "$TAG"
+          git push origin "$TAG"
+          gh release create "$TAG" \
+            --title "anjiz ${{ steps.version.outputs.version }}" \
+            --notes-file dist/notes.md \
+            "${artifacts[@]}"
+
+      # Rewrite the OTA manifest: version, universal-APK URL + its fresh sha256,
+      # and this release's notes (read from CHANGELOG.md, never duplicated).
+      - name: Update update_manifest.json
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          VERSION_CODE: ${{ steps.version.outputs.versionCode }}
+          TAG: ${{ steps.version.outputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, glob, hashlib, datetime
+
+          version = os.environ["VERSION"]
+          version_code = int(os.environ["VERSION_CODE"])
+          tag = os.environ["TAG"]
+          repo = os.environ["REPO"]
+
+          with open("dist/notes.md") as fh:
+              release_notes = fh.read().strip()
+          with open("update_manifest.json") as fh:
+              manifest = json.load(fh)
+
+          # The universal APK is what the in-app updater always downloads.
+          manifest["latestVersionName"] = version
+          manifest["latestVersionCode"] = version_code
+          manifest["minSupportedVersionCode"] = int(
+              manifest.get("minSupportedVersionCode") or version_code
+          )
+          # Derived from the repository this run is actually in, so a fork or a
+          # rename can never publish a manifest pointing at someone else's APK.
+          manifest["apkUrl"] = (
+              f"https://github.com/{repo}/releases/download/"
+              f"{tag}/anjiz-v{version}-universal.apk"
+          )
+
+          # sha256 of the freshly built, staged universal APK.
+          built = glob.glob(f"dist/anjiz-v{version}-universal.apk")[0]
+          with open(built, "rb") as fh:
+              digest = hashlib.sha256(fh.read()).hexdigest()
+          manifest["sha256"] = digest
+
+          manifest["releaseNotes"] = release_notes
+          manifest["publishedAt"] = (
+              f"{datetime.datetime.now(datetime.timezone.utc).isoformat()}"
+          )
+
+          with open("update_manifest.json", "w") as fh:
+              json.dump(manifest, fh, indent=2, ensure_ascii=False)
+              fh.write("\n")
+
+          # Emit what we hashed so the verification step can prove the file we
+          # published is byte-for-byte the file the manifest points at.
+          print(digest)
+          PY
+
+      # The manifest's sha256 is only meaningful if it describes the APK that
+      # was actually published. A glob mismatch or a mangled upload would
+      # otherwise ship an update that fails verification on every device.
+      - name: Verify published APK matches the manifest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          local_sha="$(sha256sum "dist/anjiz-v${VERSION}-universal.apk" | cut -d' ' -f1)"
+          manifest_sha="$(python3 -c \
+            "import json;print(json.load(open('update_manifest.json'))['sha256'])")"
+          if [[ "$local_sha" != "$manifest_sha" ]]; then
+            echo "::error::Manifest sha256 ($manifest_sha) != built APK ($local_sha)"
+            exit 1
+          fi
+          if ! gh release download "${{ steps.version.outputs.tag }}" \
+              --pattern "anjiz-v${VERSION}-universal.apk" --dir /tmp/published-apk \
+              --clobber >/dev/null 2>&1; then
+            echo "::error::Published release is missing the universal APK"
+            exit 1
+          fi
+          published_sha="$(sha256sum "/tmp/published-apk/anjiz-v${VERSION}-universal.apk" | cut -d' ' -f1)"
+          if [[ "$published_sha" != "$manifest_sha" ]]; then
+            echo "::error::Published APK ($published_sha) != manifest sha256 ($manifest_sha)"
+            exit 1
+          fi
+          echo "Verified: published APK matches update_manifest.json ($published_sha)"
+
+      # The app checks the manifest straight off the default branch, so this
+      # commit is what makes the release visible to installed apps.
+      - name: Commit manifest back to main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet update_manifest.json; then
+            echo "No manifest changes."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add update_manifest.json
+            git commit -m "chore(release): update OTA manifest for v${{ steps.version.outputs.version }}"
+            git push origin HEAD:main
+          fi

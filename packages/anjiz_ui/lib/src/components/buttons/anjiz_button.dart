@@ -80,7 +80,15 @@ class AnjizButton extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final style = _style(scheme, textTheme);
     final effective = loading ? null : onPressed;
-    final foreground = style.foregroundColor?.resolve(const <WidgetState>{});
+    // Resolve the foreground for the *current* state so the label matches the
+    // icon. A bare `textTheme` style would carry the theme's default onSurface
+    // colour, which is unreadable on filled/tonal container backgrounds.
+    final foreground = style.foregroundColor?.resolve(
+      effective == null
+          ? const <WidgetState>{WidgetState.disabled}
+          : const <WidgetState>{},
+    );
+    final labelStyle = textTheme.labelLarge?.copyWith(color: foreground);
 
     final child = loading
         ? SizedBox(
@@ -100,7 +108,7 @@ class AnjizButton extends StatelessWidget {
                 child: Text(
                   label,
                   overflow: TextOverflow.ellipsis,
-                  style: textTheme.labelLarge,
+                  style: labelStyle,
                 ),
               ),
               if (trailingIcon != null) ...[

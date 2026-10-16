@@ -52,24 +52,38 @@ class AnjizLargeAppBar extends StatelessWidget {
           end: AnjizSpacing.md,
           bottom: AnjizSpacing.md,
         ),
-        title: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: textTheme.headlineMedium?.copyWith(
-                color: scheme.onSurface,
-              ),
-            ),
-            if (subtitle != null)
+        // The flexible space is only ~49dp tall once collapsed — less than the
+        // natural height of the title + subtitle stack (and much less at large
+        // text scales), so the whole stack scales down to fit rather than
+        // overflowing.
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: AlignmentDirectional.bottomStart,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                subtitle!,
-                style: textTheme.labelSmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
+                title,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                style: textTheme.headlineMedium?.copyWith(
+                  color: scheme.onSurface,
                 ),
               ),
-          ],
+              if (subtitle != null)
+                Text(
+                  subtitle!,
+                  maxLines: 1,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.labelSmall?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

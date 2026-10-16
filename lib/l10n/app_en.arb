@@ -212,7 +212,35 @@
   "labelNotes": "Notes",
 
   "settingsTitle": "Settings",
-  "settingsSubtitle": "إنجاز اليوم",
+  "settingsSubtitle": "Your daily achievement",
+  "settingsGeneralTitle": "General",
+  "settingsGeneralSubtitle": "Theme, motion and haptics",
+  "settingsNotificationsSubtitle": "Daily briefing and home-screen widgets",
+  "settingsDataSubtitle": "Google Calendar, exports and history",
+  "settingsAboutTitle": "About",
+  "settingsAboutSubtitle": "Version, licences and credits",
+  "settingsAboutSummary": "Anjiz v{version}",
+  "@settingsAboutSummary": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "settingsPreferences": "Preferences",
+  "settingsData": "Data",
+  "settingsOther": "Other",
+  "settingsBrightness": "Brightness",
+  "settingsColour": "Colour",
+  "settingsMotion": "Motion",
+  "settingsCalendar": "Calendar",
+  "settingsExport": "Export",
+  "settingsLegal": "Legal",
+  "settingsNotificationsOn": "Daily briefing on",
+  "settingsNotificationsOff": "Daily briefing off",
+  "settingsPureBlackUnavailable": "Available in dark mode",
+  "aboutLicences": "Open-source licences",
+  "aboutLicencesSubtitle": "Flutter, Drift and other dependencies",
+  "themeSettingsTitle": "Theme",
+  "themeSettingsSubtitle": "Mode, accent tone and dynamic colour",
+  "motionSettingsTitle": "Motion & haptics",
+  "motionSettingsSubtitle": "Spring animations and tactile feedback",
   "profileName": "Sarah Al-Mansoor",
   "profileEmail": "sarah.mansoor@example.com",
   "proSyncActive": "Pro Sync Active",
@@ -228,10 +256,17 @@
   "themeSystem": "System",
   "themeLight": "Light",
   "themeDark": "Dark",
+  "labelPureBlack": "Pure black (OLED)",
+  "pureBlackSubtitle": "Use true black surfaces in dark mode",
   "labelAccentTone": "Accent tone",
   "accentEmerald": "Emerald",
   "accentOcean": "Ocean",
+  "accentIndigo": "Indigo",
+  "accentViolet": "Violet",
+  "accentRose": "Rose",
   "accentTerracotta": "Terracotta",
+  "accentAmber": "Amber",
+  "accentTeal": "Teal",
   "accentLavender": "Lavender",
   "accentSand": "Sand",
   "shapeMotionTitle": "Shape & Expressive Motion",
@@ -243,17 +278,14 @@
   "hapticOff": "Off",
   "hapticSubtle": "Subtle",
   "hapticExpressive": "Expressive",
-  "notificationsTitle": "Notifications & Widgets",
+  "notificationsTitle": "Notifications",
+  "notificationsAndWidgetsTitle": "Notifications & Widgets",
   "labelDailyBriefing": "Daily Briefing",
   "dailyBriefingSubtitle": "Morning summary of prioritised tasks & milestones",
   "labelWidgetConfig": "Widget Configuration & Previews",
-  "widgetConfigSubtitle": "HomeScreen glances, Quick-add pill, lock-screen ticker",
+  "widgetConfigSubtitle": "List, completed tasks and opacity",
   "dataTitle": "Data & Backup",
   "labelGoogleCalendar": "Google Calendar",
-  "calendarConnectedAs": "Connected as {email}",
-  "@calendarConnectedAs": {
-    "placeholders": { "email": { "type": "String" } }
-  },
   "labelExportTasks": "Export Tasks & History",
   "exportJson": "JSON",
   "exportMarkdown": "MD",
@@ -297,6 +329,63 @@
   "widgetConfigSaved": "Widget settings saved",
   "comingSoon": "Coming soon",
 
+  "updateTitle": "App update",
+  "updateSubtitle": "Newer releases install right over this one",
+  "updateInstalledVersion": "Installed v{version}",
+  "@updateInstalledVersion": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateLatestVersion": "Latest v{version}",
+  "@updateLatestVersion": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateCurrentSummary": "Anjiz v{version} · Up to date",
+  "@updateCurrentSummary": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateAvailableSummary": "Version {version} is ready",
+  "@updateAvailableSummary": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateDownloading": "Downloading…",
+  "updateInstalling": "Installing…",
+  "updateChecking": "Checking…",
+  "updateCheckingBody": "Looking for a newer release.",
+  "updateCheckFailed": "Couldn't check for updates",
+  "updateCurrentTitle": "You're up to date",
+  "updateCurrentBody": "This is the newest release of Anjiz.",
+  "updateAvailableTitle": "Version {version} is available",
+  "@updateAvailableTitle": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateAvailableBody": "The update downloads in the app and installs over this one.",
+  "updateWhatsNew": "What's new",
+  "updateCheckAction": "Check for updates",
+  "updateCheckAgainAction": "Check again",
+  "updateInstallAction": "Download and install",
+  "updateRetryAction": "Try again",
+  "updateDownloadingLabel": "Downloading… {percent}%",
+  "@updateDownloadingLabel": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "updateInstallingTitle": "Finishing in Android",
+  "updateInstallingBody": "Follow the installer on screen to complete the update.",
+  "updateInstallHint": "Android asks once to allow Anjiz to install apps.",
+  "updateErrorNetwork": "Couldn't reach the release server. Check your connection and try again.",
+  "updateErrorMalformed": "The release information couldn't be read. Try again later.",
+  "updateErrorUnsupported": "In-app updates are available on Android.",
+  "updateErrorPermission": "Allow Anjiz to install unknown apps in Android settings, then try again.",
+  "updateErrorChecksum": "The download didn't match the published file, so it was discarded.",
+  "updateErrorDownload": "The download failed. Try again.",
+  "updateErrorInstall": "Android refused the update. Try again.",
+  "updateErrorCancelled": "The download was cancelled.",
+  "updateErrorUnknown": "Something went wrong. Try again in a moment.",
+  "updateNotificationTitle": "Anjiz update available",
+  "updateNotificationBody": "Version {version} is ready to download.",
+  "@updateNotificationBody": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+
   "errorTitle": "Something went wrong",
   "errorMessage": "Please try again in a moment.",
   "errorDatabaseMessage": "We couldn't read your tasks.",
@@ -307,17 +396,69 @@
   "defaultListName": "My Tasks",
   "myDay": "My day",
   "labelDays": "day",
-  "timeNow": "now",
-  "timeInMinutes": "in {minutes}m",
-  "@timeInMinutes": {
+  "durationMinutes": "{minutes}m",
+  "@durationMinutes": {
     "placeholders": { "minutes": { "type": "int" } }
   },
-  "timeInHours": "in {hours}h",
-  "@timeInHours": {
+  "durationHours": "{hours}h",
+  "@durationHours": {
     "placeholders": { "hours": { "type": "int" } }
   },
-  "timeInDays": "in {days}d",
-  "@timeInDays": {
+  "durationDays": "{days}d",
+  "@durationDays": {
     "placeholders": { "days": { "type": "int" } }
-  }
+  },
+
+  "themePreviewTitle": "Button & Component Preview",
+  "themePreviewSubtitle": "Live preview of buttons and controls in this palette",
+  "themeButtonPrimary": "Primary Action",
+  "themeButtonTonal": "Tonal Button",
+  "themeButtonOutlined": "Outlined",
+  "themeChipTask": "High Priority",
+
+  "notificationsTestTitle": "Test Notification Delivery",
+  "notificationsTestSubtitle": "Send an instant test notification to check channel, vibration, and banner",
+  "notificationsSendTest": "Send test notification",
+  "notificationsTestSent": "Test notification delivered! Check your shade.",
+  "notificationsPermissionTitle": "Notification Permission",
+  "notificationsPermissionSubtitle": "Required for task reminders and daily briefings",
+  "notificationsPermissionGranted": "Permission granted",
+  "notificationsPermissionDenied": "Permission not granted",
+  "notificationsGrantAction": "Grant permission",
+  "notificationsChannelActive": "Android notification channels verified active",
+
+  "motionPlaygroundTitle": "Interactive Motion Playground",
+  "motionPlaygroundSubtitle": "Tap the checkbox below to test the spring morphing, bursts and tactile haptics live",
+  "motionDemoTask": "Review priority tasks for today",
+  "motionDemoSubtitle": "Tap the scalloped cookie checkbox to feel and see the motion",
+  "motionTestHaptics": "Tap to test current haptic strength",
+
+  "aboutAppDescription": "An offline-first, Material 3 Expressive task manager built for intentional daily achievement, spring physics, and Android home-screen widgets.",
+  "aboutSourceCode": "Source Code",
+  "aboutAuthor": "Crafted with passion by Abdo Gouhmad",
+  "aboutHighlightsTitle": "Architecture Highlights",
+  "aboutHighlightOffline": "Offline-first with SQLite (Drift) single source of truth",
+  "aboutHighlightExpressive": "Material 3 Expressive spring physics & custom shapes",
+  "aboutHighlightWidgets": "Native Android Glance home-screen widgets",
+
+  "updateUpToDate": "You are up to date",
+  "updateAvailableBadge": "New update available",
+  "updateDetailsTitle": "Version details",
+  "updateCurrentVersionLabel": "Current version",
+  "updateLatestVersionLabel": "Latest version",
+  "updateInstallType": "Install type",
+  "updateInstallTypeValue": "Universal APK",
+  "updateLastChecked": "Last checked",
+  "updateLastResult": "Last result",
+  "updateJustNow": "Just now",
+  "updateMinutesAgo": "{minutes} min ago",
+  "@updateMinutesAgo": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "updateHoursAgo": "{hours} h ago",
+  "@updateHoursAgo": {
+    "placeholders": { "hours": { "type": "int" } }
+  },
+  "updateNever": "Never",
+  "updateReadyInstallTitle": "Update verified & ready to install"
 }

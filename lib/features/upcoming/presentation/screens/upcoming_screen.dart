@@ -67,7 +67,8 @@ class _UpcomingScreenState extends ConsumerState<UpcomingScreen> {
                 margin,
                 AnjizSpacing.sm,
                 margin,
-                AnjizSpacing.xxl,
+                // Clear the floating glass navigation bar.
+                AnjizSpacing.xxl + AnjizFloatingNavBar.contentBottomInset,
               ),
               sliver: SliverList.list(
                 children: [
