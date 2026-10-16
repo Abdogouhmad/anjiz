@@ -6,6 +6,7 @@ import 'package:workmanager/workmanager.dart';
 import '../../data/repositories/repository_providers.dart';
 import '../../domain/usecases/set_task_reminder.dart';
 import '../constants/app_constants.dart';
+import '../utils/platform_support.dart';
 import 'preferences_provider.dart';
 import 'service_providers.dart';
 import 'widget_sync_service.dart';
@@ -14,10 +15,12 @@ import 'widget_sync_service.dart';
 ///
 /// Runs on every launch; re-registering with `ExistingPeriodicWorkPolicy.keep`
 /// is idempotent, so the job survives even when the app is never opened again
-/// after a reboot (WorkManager restores it automatically).
+/// after a reboot (WorkManager restores it automatically). No-op on platforms
+/// without WorkManager support (e.g. desktop).
 class BackgroundRefreshScheduler {
   /// Initialises WorkManager and registers the recurring refresh job.
   Future<void> schedule() async {
+    if (!PlatformSupport.backgroundWork) return;
     await Workmanager().initialize(backgroundRefreshDispatcher);
     await Workmanager().registerPeriodicTask(
       AppConstants.workMidnightRefresh,

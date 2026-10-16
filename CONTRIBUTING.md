@@ -22,6 +22,10 @@ just gen        # l10n + generated code
 just check      # format, analyse and test
 ```
 
+To see the UI without an emulator, run the desktop target:
+`just run-linux` (Android-only plugins degrade to no-ops there — see
+[Platforms](#widgets-and-platforms)).
+
 ## Workflow
 
 1. Branch from `main` with a descriptive name, e.g. `feat/swipe-to-delete` or
@@ -116,6 +120,15 @@ change widget copy.
 - Tap actions run through the background isolate in
   `lib/app/widget_background.dart`.
 - `WidgetSyncService` must be called after every task mutation.
+- **Android-only plugins must stay behind `PlatformSupport`**
+  (`lib/core/utils/platform_support.dart`). `home_widget`, `workmanager` and
+  `flutter_local_notifications` have no desktop implementation, so their owning
+  services early-return when the capability is absent. Without this, the Linux
+  desktop build crashes at startup with a `MissingPluginException`. If you add a
+  platform plugin, guard it the same way and note it in the README.
+- The Linux desktop target exists purely for local UI iteration
+  (`just run-linux`); it is not a ship target, and widgets/reminders are inert
+  there.
 
 ## Pull request checklist
 

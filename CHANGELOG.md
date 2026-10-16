@@ -6,6 +6,24 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Linux desktop target for local UI development (`just run-linux`), with
+  `just run-android`, `just devices` and `just emulators` helpers.
+
+### Changed
+
+- Android-only services (`NotificationService`, `WidgetSyncService`,
+  `BackgroundRefreshScheduler`) now degrade to no-ops on unsupported platforms
+  via `PlatformSupport` (`lib/core/utils/platform_support.dart`), so the desktop
+  build no longer throws `MissingPluginException` at startup. Widgets and
+  reminders remain Android-only.
+
+### Fixed
+
+- Removed a stray empty `build-tools/36` directory that shadowed the real
+  `build-tools/36.0.0` and made `flutter doctor`/Android builds fail.
+
 ## [1.0.0] - 2026-10-16
 
 The first release: an offline-first Material 3 Expressive to-do app with Android

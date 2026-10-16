@@ -65,6 +65,23 @@ appbundle:
 run:
     flutter run
 
+# Run on the Linux desktop target (fast UI iteration; no widgets/reminders).
+run-linux:
+    flutter run -d linux
+
+# Run on a connected Android device/emulator.
+run-android:
+    flutter run -d android
+
+# List attached devices.
+devices:
+    flutter devices
+
+# List and launch available Android emulators.
+emulators:
+    flutter emulators
+    @echo "Launch one with: flutter emulators --launch <id>"
+
 # Full pre-PR check: formatting, codegen freshness, analysis and tests.
 check: format analyze test-all
 

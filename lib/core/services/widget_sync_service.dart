@@ -10,9 +10,12 @@ import '../../domain/repositories/task_repository.dart';
 import '../../domain/services/widget_syncer.dart';
 import '../constants/app_constants.dart';
 import '../extensions/datetime_extensions.dart';
+import '../utils/platform_support.dart';
 
 /// The single place that pushes a task snapshot to the Android home-screen
 /// widgets. Called from use cases after any task mutation.
+///
+/// A no-op on platforms without `home_widget` support (e.g. desktop).
 class WidgetSyncService implements WidgetSyncer {
   /// Creates a widget sync service reading from [tasks], [lists] and the
   /// persisted widget configuration in [preferences].
@@ -33,6 +36,7 @@ class WidgetSyncService implements WidgetSyncer {
   /// Widget failures must never break a task mutation, so errors are swallowed.
   @override
   Future<void> sync() async {
+    if (!PlatformSupport.homeWidgets) return;
     try {
       final tasks = await _tasks.watchAll().first;
       final lists = await _lists.watchAll().first;

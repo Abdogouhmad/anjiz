@@ -6,14 +6,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/constants/app_constants.dart';
 import '../core/services/preferences_provider.dart';
 import '../core/services/service_providers.dart';
+import '../core/utils/platform_support.dart';
 import '../data/repositories/repository_providers.dart';
 import 'providers/use_case_providers.dart';
 
 /// Registers the background entry point invoked by home-screen widget taps.
 ///
-/// Call once, before `runApp`.
-Future<void> registerWidgetBackgroundCallback() =>
-    HomeWidget.registerInteractivityCallback(anjizWidgetCallback);
+/// Call once, before `runApp`. No-op where home-screen widgets are unavailable.
+Future<void> registerWidgetBackgroundCallback() async {
+  if (!PlatformSupport.homeWidgets) return;
+  await HomeWidget.registerInteractivityCallback(anjizWidgetCallback);
+}
 
 /// Handles interactive widget taps in a lightweight background isolate.
 ///

@@ -5,9 +5,12 @@ import 'package:timezone/timezone.dart' as tz;
 
 import '../../domain/services/reminder_scheduler.dart';
 import '../constants/app_constants.dart';
+import '../utils/platform_support.dart';
 
 /// Thin wrapper over `flutter_local_notifications` that owns channel setup,
 /// permission requests and timezone-aware scheduling.
+///
+/// The plugin is Android/iOS-only; on other platforms every method is a no-op.
 class NotificationService implements ReminderScheduler {
   /// Creates a notification service.
   NotificationService({FlutterLocalNotificationsPlugin? plugin})
@@ -18,7 +21,7 @@ class NotificationService implements ReminderScheduler {
 
   /// Initialises timezones, the plugin and Android channels (idempotent).
   Future<void> init() async {
-    if (_initialized) return;
+    if (_initialized || !PlatformSupport.notifications) return;
     tz_data.initializeTimeZones();
     await _configureLocalTimezone();
     const settings = InitializationSettings(
@@ -65,6 +68,7 @@ class NotificationService implements ReminderScheduler {
   /// Requests notification permission, returning whether it was granted.
   @override
   Future<bool> requestPermission() async {
+    if (!PlatformSupport.notifications) return false;
     final android = _plugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
@@ -82,6 +86,7 @@ class NotificationService implements ReminderScheduler {
     required DateTime at,
     String channelId = AppConstants.reminderChannelId,
   }) async {
+    if (!PlatformSupport.notifications) return;
     final scheduled = tz.TZDateTime.from(at, tz.local);
     if (!scheduled.isAfter(tz.TZDateTime.now(tz.local))) return;
     await _plugin.zonedSchedule(
@@ -103,8 +108,14 @@ class NotificationService implements ReminderScheduler {
 
   /// Cancels a pending notification.
   @override
-  Future<void> cancel(int id) => _plugin.cancel(id);
+  Future<void> cancel(int id) async {
+    if (!PlatformSupport.notifications) return;
+    await _plugin.cancel(id);
+  }
 
   /// Cancels every pending notification.
-  Future<void> cancelAll() => _plugin.cancelAll();
+  Future<void> cancelAll() async {
+    if (!PlatformSupport.notifications) return;
+    await _plugin.cancelAll();
+  }
 }

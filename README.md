@@ -53,9 +53,29 @@ flutter run
 | `just format` | `dart format .` |
 | `just icons` | Rasterise icons + regenerate launcher resources |
 | `just apk` / `just appbundle` | Build Android artefacts |
+| `just run-linux` / `just run-android` | Run on the Linux desktop / an Android device |
 | `just check` | Format, analyse and test — the pre-PR gate |
 
 Run `just` on its own to list every recipe.
+
+### Running on Linux desktop
+
+The app also builds for Linux desktop, which is a fast way to iterate on the UI
+without an emulator:
+
+```sh
+just run-linux
+```
+
+This is a **development convenience only** — AGENTS.md targets Android first.
+Three plugins are Android/iOS-only and are compiled out on desktop:
+`flutter_local_notifications`, `home_widget` and `workmanager`. The services that
+own them (`NotificationService`, `WidgetSyncService`, `BackgroundRefreshScheduler`)
+check `PlatformSupport` (`lib/core/utils/platform_support.dart`) and become
+no-ops, so reminders and home-screen widgets do not work in the desktop build.
+Everything else — Drift storage, tasks, lists, search, settings, dynamic colour —
+runs normally.
+
 
 ## Architecture
 
@@ -78,6 +98,7 @@ lib/
 └── l10n/         # ARB files (English)
 packages/anjiz_ui # shared Material 3 Expressive design system
 android/          # app + native Jetpack Glance widgets (Kotlin)
+linux/            # desktop target for local UI development (not a ship target)
 ```
 
 Key rules (see [AGENTS.md](AGENTS.md) for the full contract):
@@ -140,6 +161,10 @@ just test-all   # flutter test  +  cd packages/anjiz_ui && flutter test
 
 Unit tests cover the domain use cases, mappers and the design-system widgets.
 Run `just analyze` — the project is kept at **zero** analyzer issues.
+
+Because the Android-only plugins degrade to no-ops on desktop, widget tests can
+run under `flutter test` without platform channels, and `just run-linux` is the
+quickest way to eyeball UI changes.
 
 ## Contributing
 
