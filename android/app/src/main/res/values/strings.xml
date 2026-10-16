@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name shown by the launcher and in system surfaces. -->
+    <string name="app_name">Anjiz</string>
+
+    <!-- Home-screen widget labels and descriptions (system widget picker). -->
+    <string name="widget_overview_name">Tasks Overview</string>
+    <string name="widget_overview_description">Your next tasks, with tap-to-complete.</string>
+    <string name="widget_progress_name">Progress</string>
+    <string name="widget_progress_description">How much of your day is done.</string>
+    <string name="widget_quick_add_name">Quick add</string>
+    <string name="widget_quick_add_description">Jump straight into a new task.</string>
+
+    <!-- Strings rendered inside the widgets themselves. -->
+    <string name="widget_all_tasks">All tasks</string>
+    <string name="widget_empty">Nothing scheduled</string>
+    <string name="widget_more">+%1$d more</string>
+    <string name="widget_progress_title">Completed</string>
+    <string name="widget_progress_value">%1$d/%2$d</string>
+    <string name="widget_quick_add_hint">Add a task</string>
+    <string name="widget_today">Today</string>
+    <string name="widget_tomorrow">Tomorrow</string>
+    <string name="widget_due_with_time">%1$s · %2$s</string>
+</resources>

@@ -1,6 +1,9 @@
 # Miscellaneous
 *.class
 *.lock
+# This is an app, so the resolved dependency graph is committed for
+# reproducible builds.
+!pubspec.lock
 *.log
 *.pyc
 *.swp

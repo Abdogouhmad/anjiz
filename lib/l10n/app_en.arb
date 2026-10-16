@@ -1,0 +1,323 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Anjiz",
+  "appTagline": "Achieve today",
+
+  "navToday": "Today",
+  "navUpcoming": "Upcoming",
+  "navLists": "Lists",
+  "navSettings": "Settings",
+
+  "actionNewTask": "New Task",
+  "actionAddTask": "Add Task",
+  "actionAddAnother": "Add Another",
+  "actionAddSubtask": "Add subtask",
+  "actionDelete": "Delete",
+  "actionCancel": "Cancel",
+  "actionSave": "Save",
+  "actionDone": "Done",
+  "actionUndo": "Undo",
+  "actionRetry": "Retry",
+  "actionChange": "Change",
+  "actionClear": "Clear",
+  "actionClose": "Close",
+  "actionSkip": "Skip",
+  "actionNext": "Next",
+  "actionGetStarted": "Get started",
+  "actionMarkComplete": "Mark Complete",
+  "actionShare": "Share",
+  "actionSnooze": "Snooze",
+  "actionAddVoiceNote": "Voice note",
+  "actionNewList": "New List",
+  "actionRescheduleAll": "Reschedule all",
+  "actionPlanTomorrow": "Plan Tomorrow",
+  "actionReviewCompleted": "Review Completed Tasks",
+  "actionFullCalendar": "Full Calendar",
+  "actionManagePlan": "Manage Plan",
+  "actionOptions": "Options",
+  "actionExpandMenu": "Show more actions",
+  "actionCollapseMenu": "Hide actions",
+  "actionStarTask": "Star task",
+  "actionUnstarTask": "Unstar task",
+  "actionCompleteTask": "Complete {title}",
+  "@actionCompleteTask": {
+    "placeholders": { "title": { "type": "String" } }
+  },
+
+  "searchHint": "Search tasks",
+  "searchTitle": "Search",
+  "searchEmptyTitle": "No matches",
+  "searchEmptyMessage": "Try a different word or check another list.",
+  "searchPromptTitle": "Find anything",
+  "searchPromptMessage": "Search across every task by title or note.",
+
+  "todaySubtitle": "Achieve today",
+  "greetingMorning": "Good morning!",
+  "greetingAfternoon": "Good afternoon!",
+  "greetingEvening": "Good evening!",
+  "todaySummary": "{count, plural, =0{Nothing left for a peaceful evening.} =1{1 task left for a peaceful evening.} other{{count} tasks left for a peaceful evening.}}",
+  "@todaySummary": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "sectionOverdue": "Overdue",
+  "sectionPlannedToday": "Planned Today",
+  "sectionLaterToday": "Later Today & Evening",
+  "sectionCompletedToday": "Completed",
+  "sortByPriority": "By priority",
+  "labelCompletedAt": "Completed {time}",
+  "@labelCompletedAt": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "hintSwipeToAct": "Swipe to act",
+  "emptyTodayTitle": "All clear for today!",
+  "emptyTodayMessage": "You completed {count} tasks. Time to unwind, breathe deeply, and enjoy your evening.",
+  "@emptyTodayMessage": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "statCompleted": "Completed",
+  "statDeepFocus": "Deep Focus",
+  "statStreak": "Streak",
+  "statStreakDays": "{count, plural, =1{1 Day} other{{count} Days}}",
+  "@statStreakDays": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "digitalTwilightTitle": "Digital Twilight",
+  "digitalTwilightMessage": "Notifications silenced until {time}",
+  "@digitalTwilightMessage": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+
+  "upcomingTitle": "Upcoming",
+  "upcomingSubtitle": "Plan ahead",
+  "momentumTitle": "Weekly Momentum",
+  "momentumScheduled": "{percent}% Scheduled",
+  "@momentumScheduled": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "labelTomorrow": "Tomorrow",
+  "labelToday": "Today",
+  "tasksCount": "{count, plural, =0{No tasks} =1{1 task} other{{count} tasks}}",
+  "@tasksCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "weekendLabel": "Weekend",
+  "emptyDayTitle": "No tasks scheduled — enjoy your day!",
+  "labelRecurringWeekly": "Recurring weekly",
+  "itemsInChecklist": "{count, plural, =1{1 item in checklist} other{{count} items in checklist}}",
+  "@itemsInChecklist": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "weekendMessage": "No tasks scheduled — enjoy your weekend!",
+
+  "listsTitle": "Lists",
+  "listsSubtitle": "Organise your sustained momentum and daily focus areas with clear intent.",
+  "projectsCount": "{count, plural, =1{1 Project} other{{count} Projects}}",
+  "@projectsCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "labelProjects": "Projects",
+  "labelActiveTasks": "Active Tasks",
+  "labelWeeklyVelocity": "Weekly Velocity",
+  "activeTasksCount": "{count, plural, =1{1 Active Task} other{{count} Active Tasks}}",
+  "@activeTasksCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "weeklyVelocity": "{percent}% Weekly Velocity",
+  "@weeklyVelocity": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "tasksRemaining": "{count, plural, =0{All done} =1{1 task remaining} other{{count} tasks remaining}}",
+  "@tasksRemaining": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "labelProgress": "Progress",
+  "labelPercent": "{percent}%",
+  "@labelPercent": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "labelAlmostThere": "Almost there",
+  "newProjectTitle": "New Project",
+  "newProjectSubtitle": "Create custom list",
+  "dailyMilestoneTitle": "Daily Milestone Momentum",
+  "dailyMilestoneSubtitle": "{count, plural, =1{1 task finished across all lists} other{{count} tasks finished across all lists}}",
+  "@dailyMilestoneSubtitle": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "labelXpEarned": "+{xp} XP",
+  "@labelXpEarned": {
+    "placeholders": { "xp": { "type": "int" } }
+  },
+  "tagHigh": "High",
+  "tagRoutine": "Routine",
+  "tagPriority": "Priority",
+  "emptyListTitle": "Nothing here yet",
+  "emptyListMessage": "Add your first task to start building momentum.",
+
+  "taskDetailTitle": "Task Details",
+  "labelTapToEdit": "Tap to edit",
+  "labelCreatedAt": "Created {time}",
+  "@labelCreatedAt": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "sectionNotes": "Notes & Brief",
+  "sectionSubtasks": "Subtasks",
+  "subtasksProgress": "{done} of {total} done",
+  "@subtasksProgress": {
+    "placeholders": {
+      "done": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "labelDueDateTime": "Due Date & Time",
+  "labelNoDueDate": "No due date",
+  "labelDueIn": "Due in {time}",
+  "@labelDueIn": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "labelOverdueBy": "Overdue by {time}",
+  "@labelOverdueBy": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "labelRecurrence": "Recurrence",
+  "recurrenceNone": "Does not repeat",
+  "repeatDaily": "Every day",
+  "repeatWeekly": "Every week",
+  "repeatMonthly": "Every month",
+  "labelProjectList": "Project List",
+  "labelTaskReminder": "Task Reminder",
+  "reminderOff": "Off",
+  "reminderAtDueTime": "At due time",
+  "reminderMinutesBefore": "{minutes} minutes before due",
+  "@reminderMinutesBefore": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "taskDeleted": "Task deleted",
+  "taskCompleted": "Task completed",
+  "taskMovedToTomorrow": "Moved to tomorrow",
+
+  "labelDueSchedule": "Due schedule",
+  "scheduleToday": "Today",
+  "scheduleTomorrow": "Tomorrow",
+  "scheduleNextWeek": "Next week",
+  "schedulePickDate": "Pick a date",
+  "labelTaskMetadata": "Task metadata",
+  "labelPriority": "Priority",
+  "priorityNone": "No priority",
+  "priorityLow": "Low",
+  "priorityMedium": "Medium",
+  "priorityHigh": "High",
+  "labelList": "List",
+  "addTaskHint": "What do you want to do?",
+  "labelNotes": "Notes",
+
+  "settingsTitle": "Settings",
+  "settingsSubtitle": "إنجاز اليوم",
+  "profileName": "Sarah Al-Mansoor",
+  "profileEmail": "sarah.mansoor@example.com",
+  "proSyncActive": "Pro Sync Active",
+  "labelLastSynced": "Last synced {time} ago",
+  "@labelLastSynced": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "appearanceTitle": "Appearance & Theme",
+  "tagMaterialYou": "Material You",
+  "labelDynamicColor": "Dynamic Color",
+  "dynamicColorSubtitle": "Harmonise UI colours with your wallpaper palette",
+  "labelThemeMode": "Theme mode",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "labelAccentTone": "Accent tone",
+  "accentEmerald": "Emerald",
+  "accentOcean": "Ocean",
+  "accentTerracotta": "Terracotta",
+  "accentLavender": "Lavender",
+  "accentSand": "Sand",
+  "shapeMotionTitle": "Shape & Expressive Motion",
+  "labelBurstAnimations": "Scalloped Burst Animations",
+  "burstAnimationsSubtitle": "Kinetic confetti & organic bursts upon task achievement",
+  "tagDelight": "Delight",
+  "labelSpringHaptics": "Spring Haptics",
+  "springHapticsSubtitle": "Biometric tactile feedback intensity",
+  "hapticOff": "Off",
+  "hapticSubtle": "Subtle",
+  "hapticExpressive": "Expressive",
+  "notificationsTitle": "Notifications & Widgets",
+  "labelDailyBriefing": "Daily Briefing",
+  "dailyBriefingSubtitle": "Morning summary of prioritised tasks & milestones",
+  "labelWidgetConfig": "Widget Configuration & Previews",
+  "widgetConfigSubtitle": "HomeScreen glances, Quick-add pill, lock-screen ticker",
+  "dataTitle": "Data & Backup",
+  "labelGoogleCalendar": "Google Calendar",
+  "calendarConnectedAs": "Connected as {email}",
+  "@calendarConnectedAs": {
+    "placeholders": { "email": { "type": "String" } }
+  },
+  "labelExportTasks": "Export Tasks & History",
+  "exportJson": "JSON",
+  "exportMarkdown": "MD",
+  "exportCsv": "CSV",
+  "exportStarted": "Export started",
+  "footerVersion": "Anjiz v{version} Expressive • Built with Material 3",
+  "@footerVersion": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "footerTagline": "Made with love to support daily achievement",
+
+  "widgetConfigTitle": "Widgets",
+  "widgetOverviewTitle": "Tasks Overview",
+  "widgetOverviewSubtitle": "List switcher, quick add and up to six tasks",
+  "widgetCompactTitle": "Compact",
+  "widgetCompactSubtitle": "Your next three tasks at a glance",
+  "widgetProgressTitle": "Progress",
+  "widgetProgressSubtitle": "A wavy ring of today's done/total",
+  "widgetQuickAddTitle": "Quick add",
+  "widgetQuickAddSubtitle": "Capture a task in one tap",
+  "widgetConfigListLabel": "Choose list",
+  "widgetConfigShowCompleted": "Show completed",
+  "widgetConfigOpacity": "Opacity",
+
+  "onboardingSkip": "Skip",
+  "onboardingTitle1": "Welcome to Anjiz",
+  "onboardingMessage1": "An offline-first task manager built around calm, focused momentum.",
+  "onboardingTitle2": "Expressive by default",
+  "onboardingMessage2": "Scalloped checkboxes, springy motion and Material You colour throughout.",
+  "onboardingTitle3": "Always within reach",
+  "onboardingMessage3": "Home-screen widgets keep your day visible without opening the app.",
+
+  "labelUntimed": "Untimed",
+  "labelListName": "List name",
+  "labelListColor": "Accent colour",
+  "labelListIcon": "Icon",
+  "actionCreateList": "Create list",
+  "actionDeleteList": "Delete list",
+  "momentumEmptyMessage": "Nothing scheduled yet — add a task to build momentum.",
+  "previewLabel": "Preview",
+  "widgetConfigSaved": "Widget settings saved",
+  "comingSoon": "Coming soon",
+
+  "errorTitle": "Something went wrong",
+  "errorMessage": "Please try again in a moment.",
+  "errorDatabaseMessage": "We couldn't read your tasks.",
+  "errorNotificationMessage": "We couldn't schedule that reminder.",
+  "errorWidgetMessage": "We couldn't refresh the home-screen widget.",
+  "errorValidationMessage": "Please check the highlighted fields.",
+
+  "defaultListName": "My Tasks",
+  "myDay": "My day",
+  "labelDays": "day",
+  "timeNow": "now",
+  "timeInMinutes": "in {minutes}m",
+  "@timeInMinutes": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "timeInHours": "in {hours}h",
+  "@timeInHours": {
+    "placeholders": { "hours": { "type": "int" } }
+  },
+  "timeInDays": "in {days}d",
+  "@timeInDays": {
+    "placeholders": { "days": { "type": "int" } }
+  }
+}
