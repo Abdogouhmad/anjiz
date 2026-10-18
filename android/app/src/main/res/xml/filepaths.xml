@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Paths the `ota_update` plugin is allowed to expose through its FileProvider.
+     The plugin downloads the update APK into `files/ota_update/` and hands that
+     file to Android's package installer, which may only read it through a
+     content:// URI. Changing this path breaks OTA installs. -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="internal_apk_storage" path="ota_update/" />
+</paths>

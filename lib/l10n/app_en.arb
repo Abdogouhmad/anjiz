@@ -1,0 +1,498 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Anjiz",
+  "appTagline": "Achieve today",
+
+  "navToday": "Today",
+  "navUpcoming": "Upcoming",
+  "navLists": "Lists",
+  "navSettings": "Settings",
+
+  "actionNewTask": "New Task",
+  "actionAddTask": "Add Task",
+  "actionAddAnother": "Add Another",
+  "actionAddSubtask": "Add subtask",
+  "actionDelete": "Delete",
+  "actionCancel": "Cancel",
+  "actionSave": "Save",
+  "actionDone": "Done",
+  "actionUndo": "Undo",
+  "actionRetry": "Retry",
+  "actionChange": "Change",
+  "actionClear": "Clear",
+  "actionClose": "Close",
+  "actionSkip": "Skip",
+  "actionNext": "Next",
+  "actionGetStarted": "Get started",
+  "actionMarkComplete": "Mark Complete",
+  "actionShare": "Share",
+  "actionSnooze": "Snooze",
+  "actionAddVoiceNote": "Voice note",
+  "actionNewList": "New List",
+  "actionRescheduleAll": "Reschedule all",
+  "actionPlanTomorrow": "Plan Tomorrow",
+  "actionReviewCompleted": "Review Completed Tasks",
+  "actionFullCalendar": "Full Calendar",
+  "actionManagePlan": "Manage Plan",
+  "actionOptions": "Options",
+  "actionExpandMenu": "Show more actions",
+  "actionCollapseMenu": "Hide actions",
+  "actionStarTask": "Star task",
+  "actionUnstarTask": "Unstar task",
+  "actionCompleteTask": "Complete {title}",
+  "@actionCompleteTask": {
+    "placeholders": { "title": { "type": "String" } }
+  },
+
+  "searchHint": "Search tasks",
+  "searchTitle": "Search",
+  "searchEmptyTitle": "No matches",
+  "searchEmptyMessage": "Try a different word or check another list.",
+  "searchPromptTitle": "Find anything",
+  "searchPromptMessage": "Search across every task by title or note.",
+
+  "todaySubtitle": "Achieve today",
+  "greetingMorning": "Good morning!",
+  "greetingAfternoon": "Good afternoon!",
+  "greetingEvening": "Good evening!",
+  "greetingMorningNamed": "Good morning, {name}!",
+  "@greetingMorningNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "greetingAfternoonNamed": "Good afternoon, {name}!",
+  "@greetingAfternoonNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "greetingEveningNamed": "Good evening, {name}!",
+  "@greetingEveningNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "todaySummary": "{count, plural, =0{Nothing left for a peaceful evening.} =1{1 task left for a peaceful evening.} other{{count} tasks left for a peaceful evening.}}",
+  "@todaySummary": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "sectionOverdue": "Overdue",
+  "sectionPlannedToday": "Planned Today",
+  "sectionLaterToday": "Later Today & Evening",
+  "sectionCompletedToday": "Completed",
+  "sortByPriority": "By priority",
+  "sortByTime": "By time",
+  "labelCompletedAt": "Completed {time}",
+  "@labelCompletedAt": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "hintSwipeToAct": "Swipe to act",
+  "emptyTodayTitle": "All clear for today!",
+  "emptyTodayMessage": "You completed {count} tasks. Time to unwind, breathe deeply, and enjoy your evening.",
+  "@emptyTodayMessage": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "statCompleted": "Completed",
+  "statDeepFocus": "Deep Focus",
+  "statStreak": "Streak",
+  "statStreakDays": "{count, plural, =1{1 Day} other{{count} Days}}",
+  "@statStreakDays": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "digitalTwilightTitle": "Digital Twilight",
+  "digitalTwilightMessage": "Notifications silenced until {time}",
+  "@digitalTwilightMessage": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+
+  "upcomingTitle": "Upcoming",
+  "upcomingSubtitle": "Plan ahead",
+  "momentumTitle": "Weekly Momentum",
+  "momentumScheduled": "{percent}% Scheduled",
+  "@momentumScheduled": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "labelTomorrow": "Tomorrow",
+  "labelToday": "Today",
+  "tasksCount": "{count, plural, =0{No tasks} =1{1 task} other{{count} tasks}}",
+  "@tasksCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "weekendLabel": "Weekend",
+  "emptyDayTitle": "No tasks scheduled — enjoy your day!",
+  "labelRecurringWeekly": "Recurring weekly",
+  "itemsInChecklist": "{count, plural, =1{1 item in checklist} other{{count} items in checklist}}",
+  "@itemsInChecklist": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "weekendMessage": "No tasks scheduled — enjoy your weekend!",
+
+  "listsTitle": "Lists",
+  "listsSubtitle": "Organise your sustained momentum and daily focus areas with clear intent.",
+  "projectsCount": "{count, plural, =1{1 Project} other{{count} Projects}}",
+  "@projectsCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "labelProjects": "Projects",
+  "labelActiveTasks": "Active Tasks",
+  "labelWeeklyVelocity": "Weekly Velocity",
+  "activeTasksCount": "{count, plural, =1{1 Active Task} other{{count} Active Tasks}}",
+  "@activeTasksCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "weeklyVelocity": "{percent}% Weekly Velocity",
+  "@weeklyVelocity": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "tasksRemaining": "{count, plural, =0{All done} =1{1 task remaining} other{{count} tasks remaining}}",
+  "@tasksRemaining": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "labelProgress": "Progress",
+  "labelPercent": "{percent}%",
+  "@labelPercent": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "labelAlmostThere": "Almost there",
+  "newProjectTitle": "New Project",
+  "newProjectSubtitle": "Create custom list",
+  "dailyMilestoneTitle": "Daily Milestone Momentum",
+  "dailyMilestoneSubtitle": "{count, plural, =1{1 task finished across all lists} other{{count} tasks finished across all lists}}",
+  "@dailyMilestoneSubtitle": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "labelXpEarned": "+{xp} XP",
+  "@labelXpEarned": {
+    "placeholders": { "xp": { "type": "int" } }
+  },
+  "tagHigh": "High",
+  "tagRoutine": "Routine",
+  "tagPriority": "Priority",
+  "emptyListTitle": "Nothing here yet",
+  "emptyListMessage": "Add your first task to start building momentum.",
+
+  "taskDetailTitle": "Task Details",
+  "labelTapToEdit": "Tap to edit",
+  "labelCreatedAt": "Created {time}",
+  "@labelCreatedAt": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "sectionNotes": "Notes & Brief",
+  "sectionSubtasks": "Subtasks",
+  "subtasksProgress": "{done} of {total} done",
+  "@subtasksProgress": {
+    "placeholders": {
+      "done": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "labelDueDateTime": "Due Date & Time",
+  "labelNoDueDate": "No due date",
+  "labelDueIn": "Due in {time}",
+  "@labelDueIn": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "labelOverdueBy": "Overdue by {time}",
+  "@labelOverdueBy": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "labelRecurrence": "Recurrence",
+  "recurrenceNone": "Does not repeat",
+  "repeatDaily": "Every day",
+  "repeatWeekly": "Every week",
+  "repeatMonthly": "Every month",
+  "labelProjectList": "Project List",
+  "labelTaskReminder": "Task Reminder",
+  "reminderOff": "Off",
+  "reminderAtDueTime": "At due time",
+  "reminderMinutesBefore": "{minutes} minutes before due",
+  "@reminderMinutesBefore": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "taskDeleted": "Task deleted",
+  "taskCompleted": "Task completed",
+  "taskMovedToTomorrow": "Moved to tomorrow",
+
+  "labelDueSchedule": "Due schedule",
+  "scheduleToday": "Today",
+  "scheduleTomorrow": "Tomorrow",
+  "scheduleNextWeek": "Next week",
+  "schedulePickDate": "Pick a date",
+  "labelTaskMetadata": "Task metadata",
+  "labelPriority": "Priority",
+  "priorityNone": "No priority",
+  "priorityLow": "Low",
+  "priorityMedium": "Medium",
+  "priorityHigh": "High",
+  "labelList": "List",
+  "addTaskHint": "What do you want to do?",
+  "labelNotes": "Notes",
+
+  "settingsTitle": "Settings",
+  "settingsSubtitle": "Your daily achievement",
+  "settingsGeneralTitle": "General",
+  "settingsGeneralSubtitle": "Theme, motion and haptics",
+  "settingsNotificationsSubtitle": "Daily briefing and home-screen widgets",
+  "settingsDataSubtitle": "Google Calendar, exports and history",
+  "settingsAboutTitle": "About",
+  "settingsAboutSubtitle": "Version, licences and credits",
+  "settingsAboutSummary": "Anjiz v{version}",
+  "@settingsAboutSummary": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "settingsPreferences": "Preferences",
+  "settingsData": "Data",
+  "settingsOther": "Other",
+  "settingsBrightness": "Brightness",
+  "settingsColour": "Colour",
+  "settingsMotion": "Motion",
+  "settingsCalendar": "Calendar",
+  "settingsExport": "Export",
+  "settingsLegal": "Legal",
+  "settingsNotificationsOn": "Daily briefing on",
+  "settingsNotificationsOff": "Daily briefing off",
+  "settingsPureBlackUnavailable": "Available in dark mode",
+  "aboutLicences": "Open-source licences",
+  "aboutLicencesSubtitle": "Flutter, Drift and other dependencies",
+  "themeSettingsTitle": "Theme",
+  "themeSettingsSubtitle": "Mode, accent tone and dynamic colour",
+  "motionSettingsTitle": "Motion & haptics",
+  "motionSettingsSubtitle": "Spring animations and tactile feedback",
+  "profileTitle": "Your profile",
+  "profileSubtitle": "Name, photo and contact details",
+  "profileEditAction": "Edit profile",
+  "profileNameMissing": "Add your name",
+  "profileLocalOnly": "Saved on this device",
+  "profileLocalTag": "On this device",
+  "profilePhotoTitle": "Profile photo",
+  "profileTakePhoto": "Take a photo",
+  "profileChooseFromGallery": "Choose from gallery",
+  "profileRemovePhoto": "Remove photo",
+  "profileSaved": "Profile saved",
+  "labelName": "Name",
+  "hintName": "Your name",
+  "labelEmail": "Email",
+  "hintEmail": "you@example.com",
+  "labelLastSynced": "Last synced {time} ago",
+  "@labelLastSynced": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "appearanceTitle": "Appearance & Theme",
+  "tagMaterialYou": "Material You",
+  "labelDynamicColor": "Dynamic Color",
+  "dynamicColorSubtitle": "Harmonise UI colours with your wallpaper palette",
+  "labelThemeMode": "Theme mode",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "labelPureBlack": "Pure black (OLED)",
+  "pureBlackSubtitle": "Use true black surfaces in dark mode",
+  "labelAccentTone": "Accent tone",
+  "accentEmerald": "Emerald",
+  "accentOcean": "Ocean",
+  "accentIndigo": "Indigo",
+  "accentViolet": "Violet",
+  "accentRose": "Rose",
+  "accentTerracotta": "Terracotta",
+  "accentAmber": "Amber",
+  "accentTeal": "Teal",
+  "accentLavender": "Lavender",
+  "accentSand": "Sand",
+  "shapeMotionTitle": "Shape & Expressive Motion",
+  "labelBurstAnimations": "Scalloped Burst Animations",
+  "burstAnimationsSubtitle": "Kinetic confetti & organic bursts upon task achievement",
+  "tagDelight": "Delight",
+  "labelSpringHaptics": "Spring Haptics",
+  "springHapticsSubtitle": "Biometric tactile feedback intensity",
+  "hapticOff": "Off",
+  "hapticSubtle": "Subtle",
+  "hapticExpressive": "Expressive",
+  "notificationsTitle": "Notifications",
+  "notificationsAndWidgetsTitle": "Notifications & Widgets",
+  "labelDailyBriefing": "Daily Briefing",
+  "dailyBriefingSubtitle": "Morning summary of prioritised tasks & milestones",
+  "dailyBriefingNotificationBody": "Here's your plan for today. Open Anjiz to get started.",
+  "labelWidgetConfig": "Widget Configuration & Previews",
+  "widgetConfigSubtitle": "List, completed tasks and opacity",
+  "dataTitle": "Data & Backup",
+  "dataCalendarNotConnected": "Not connected",
+  "labelGoogleCalendar": "Google Calendar",
+  "labelExportTasks": "Export Tasks & History",
+  "exportJson": "JSON",
+  "exportMarkdown": "MD",
+  "exportCsv": "CSV",
+  "exportStarted": "Export started",
+  "footerVersion": "Anjiz v{version} Expressive • Built with Material 3",
+  "@footerVersion": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "footerTagline": "Made with love to support daily achievement",
+
+  "widgetConfigTitle": "Widgets",
+  "widgetOverviewTitle": "Tasks Overview",
+  "widgetOverviewSubtitle": "List switcher, quick add and up to six tasks",
+  "widgetCompactTitle": "Compact",
+  "widgetCompactSubtitle": "Your next three tasks at a glance",
+  "widgetProgressTitle": "Progress",
+  "widgetProgressSubtitle": "A wavy ring of today's done/total",
+  "widgetQuickAddTitle": "Quick add",
+  "widgetQuickAddSubtitle": "Capture a task in one tap",
+  "widgetConfigListLabel": "Choose list",
+  "widgetConfigShowCompleted": "Show completed",
+  "widgetConfigOpacity": "Opacity",
+
+  "onboardingSkip": "Skip",
+  "onboardingTitle1": "Welcome to Anjiz",
+  "onboardingMessage1": "An offline-first task manager built around calm, focused momentum.",
+  "onboardingTitle2": "Expressive by default",
+  "onboardingMessage2": "Scalloped checkboxes, springy motion and Material You colour throughout.",
+  "onboardingTitle3": "Always within reach",
+  "onboardingMessage3": "Home-screen widgets keep your day visible without opening the app.",
+  "onboardingProfileTitle": "Set up your profile",
+  "onboardingProfileMessage": "Your name and photo stay on this device and personalise the app.",
+  "onboardingPermissionsTitle": "Stay on track",
+  "onboardingPermissionsMessage": "Allow reminders so Anjiz can nudge you at the right moment. You can change this later.",
+  "onboardingPermissionNotifications": "Reminders and the daily briefing",
+  "onboardingExactAlarmTitle": "Exact reminders",
+  "onboardingPermissionExactAlarms": "Nudge you at the precise minute",
+
+  "labelUntimed": "Untimed",
+  "labelListName": "List name",
+  "labelListColor": "Accent colour",
+  "labelListIcon": "Icon",
+  "actionCreateList": "Create list",
+  "actionDeleteList": "Delete list",
+  "momentumEmptyMessage": "Nothing scheduled yet — add a task to build momentum.",
+  "previewLabel": "Preview",
+  "widgetConfigSaved": "Widget settings saved",
+  "comingSoon": "Coming soon",
+
+  "updateTitle": "App update",
+  "updateSubtitle": "Newer releases install right over this one",
+  "updateInstalledVersion": "Installed v{version}",
+  "@updateInstalledVersion": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateLatestVersion": "Latest v{version}",
+  "@updateLatestVersion": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateCurrentSummary": "Anjiz v{version} · Up to date",
+  "@updateCurrentSummary": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateAvailableSummary": "Version {version} is ready",
+  "@updateAvailableSummary": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateDownloading": "Downloading…",
+  "updateInstalling": "Installing…",
+  "updateChecking": "Checking…",
+  "updateCheckingBody": "Looking for a newer release.",
+  "updateCheckFailed": "Couldn't check for updates",
+  "updateCurrentTitle": "You're up to date",
+  "updateCurrentBody": "This is the newest release of Anjiz.",
+  "updateAvailableTitle": "Version {version} is available",
+  "@updateAvailableTitle": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+  "updateAvailableBody": "The update downloads in the app and installs over this one.",
+  "updateWhatsNew": "What's new",
+  "updateCheckAction": "Check for updates",
+  "updateCheckAgainAction": "Check again",
+  "updateInstallAction": "Download and install",
+  "updateRetryAction": "Try again",
+  "updateDownloadingLabel": "Downloading… {percent}%",
+  "@updateDownloadingLabel": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+  "updateInstallingTitle": "Finishing in Android",
+  "updateInstallingBody": "Follow the installer on screen to complete the update.",
+  "updateInstallHint": "Android asks once to allow Anjiz to install apps.",
+  "updateErrorNetwork": "Couldn't reach the release server. Check your connection and try again.",
+  "updateErrorMalformed": "The release information couldn't be read. Try again later.",
+  "updateErrorUnsupported": "In-app updates are available on Android.",
+  "updateErrorPermission": "Allow Anjiz to install unknown apps in Android settings, then try again.",
+  "updateErrorChecksum": "The download didn't match the published file, so it was discarded.",
+  "updateErrorDownload": "The download failed. Try again.",
+  "updateErrorInstall": "Android refused the update. Try again.",
+  "updateErrorCancelled": "The download was cancelled.",
+  "updateErrorUnknown": "Something went wrong. Try again in a moment.",
+  "updateNotificationTitle": "Anjiz update available",
+  "updateNotificationBody": "Version {version} is ready to download.",
+  "@updateNotificationBody": {
+    "placeholders": { "version": { "type": "String" } }
+  },
+
+  "errorTitle": "Something went wrong",
+  "errorMessage": "Please try again in a moment.",
+  "errorDatabaseMessage": "We couldn't read your tasks.",
+  "errorNotificationMessage": "We couldn't schedule that reminder.",
+  "errorWidgetMessage": "We couldn't refresh the home-screen widget.",
+  "errorValidationMessage": "Please check the highlighted fields.",
+
+  "defaultListName": "My Tasks",
+  "myDay": "My day",
+  "labelDays": "day",
+  "durationMinutes": "{minutes}m",
+  "@durationMinutes": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "durationHours": "{hours}h",
+  "@durationHours": {
+    "placeholders": { "hours": { "type": "int" } }
+  },
+  "durationDays": "{days}d",
+  "@durationDays": {
+    "placeholders": { "days": { "type": "int" } }
+  },
+
+  "themePreviewTitle": "Button & Component Preview",
+  "themePreviewSubtitle": "Live preview of buttons and controls in this palette",
+  "themeButtonPrimary": "Primary Action",
+  "themeButtonTonal": "Tonal Button",
+  "themeButtonOutlined": "Outlined",
+  "themeChipTask": "High Priority",
+
+  "notificationsTestTitle": "Test Notification Delivery",
+  "notificationsTestSubtitle": "Send an instant test notification to check channel, vibration, and banner",
+  "notificationsSendTest": "Send test notification",
+  "notificationsTestSent": "Test notification delivered! Check your shade.",
+  "notificationsPermissionTitle": "Notification Permission",
+  "notificationsPermissionSubtitle": "Required for task reminders and daily briefings",
+  "notificationsPermissionGranted": "Permission granted",
+  "notificationsPermissionDenied": "Permission not granted",
+  "notificationsGrantAction": "Grant permission",
+  "notificationsChannelActive": "Android notification channels verified active",
+
+  "motionPlaygroundTitle": "Interactive Motion Playground",
+  "motionPlaygroundSubtitle": "Tap the checkbox below to test the spring morphing, bursts and tactile haptics live",
+  "motionDemoTask": "Review priority tasks for today",
+  "motionDemoSubtitle": "Tap the scalloped cookie checkbox to feel and see the motion",
+  "motionTestHaptics": "Tap to test current haptic strength",
+
+  "aboutAppDescription": "An offline-first, Material 3 Expressive task manager built for intentional daily achievement, spring physics, and Android home-screen widgets.",
+  "aboutSourceCode": "Source Code",
+  "aboutAuthor": "Crafted with passion by Abdo Gouhmad",
+  "aboutHighlightsTitle": "Architecture Highlights",
+  "aboutHighlightOffline": "Offline-first with SQLite (Drift) single source of truth",
+  "aboutHighlightExpressive": "Material 3 Expressive spring physics & custom shapes",
+  "aboutHighlightWidgets": "Native Android Glance home-screen widgets",
+
+  "updateUpToDate": "You are up to date",
+  "updateAvailableBadge": "New update available",
+  "updateDetailsTitle": "Version details",
+  "updateCurrentVersionLabel": "Current version",
+  "updateLatestVersionLabel": "Latest version",
+  "updateInstallType": "Install type",
+  "updateInstallTypeValue": "Universal APK",
+  "updateLastChecked": "Last checked",
+  "updateLastResult": "Last result",
+  "updateJustNow": "Just now",
+  "updateMinutesAgo": "{minutes} min ago",
+  "@updateMinutesAgo": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "updateHoursAgo": "{hours} h ago",
+  "@updateHoursAgo": {
+    "placeholders": { "hours": { "type": "int" } }
+  },
+  "updateNever": "Never",
+  "updateReadyInstallTitle": "Update verified & ready to install"
+}

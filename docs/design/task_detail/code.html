@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface": "#141d1a", "primary-fixed-dim": "#81d6bf", "on-error": "#ffffff", "on-tertiary-fixed": "#271900", "surface-bright": "#f2fcf5", "tertiary": "#704e00", "inverse-primary": "#81d6bf", "background": "#f2fcf5", "error": "#ba1a1a", "outline-variant": "#bec9c4", "secondary-fixed": "#cfe8de", "surface-container-low": "#ecf6f0", "surface": "#f2fcf5", "on-primary": "#ffffff", "on-secondary-fixed": "#091f19", "on-surface-variant": "#3e4945", "surface-tint": "#006b58", "surface-container-high": "#e0ebe4", "on-secondary-container": "#50675f", "secondary-container": "#cce5db", "on-secondary": "#ffffff", "on-primary-fixed": "#002019", "on-error-container": "#93000a", "inverse-surface": "#29322e", "outline": "#6e7a75", "surface-dim": "#d2dcd6", "on-primary-fixed-variant": "#005142", "tertiary-fixed-dim": "#eebf6c", "on-primary-container": "#afffe7", "on-tertiary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-container-highest": "#dbe5df", "on-tertiary-fixed-variant": "#5e4100", "tertiary-container": "#8b661b", "surface-variant": "#dbe5df", "inverse-on-surface": "#e9f3ed", "error-container": "#ffdad6", "on-background": "#141d1a", "on-tertiary-container": "#ffedd3", "tertiary-fixed": "#ffdea9", "secondary-fixed-dim": "#b3ccc2", "on-secondary-fixed-variant": "#354b44", "primary-container": "#1b7a66", "primary": "#00604f", "primary-fixed": "#9df3da", "surface-container": "#e6f0ea", "secondary": "#4c635b" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "margin-desktop": "48px", "space-lg": "24px", "space-xl": "32px", "space-xs": "4px", "gutter-tablet": "24px", "space-sm": "8px", "margin": "16px", "gutter": "16px", "gutter-desktop": "24px", "space-md": "16px", "margin-tablet": "24px" }, fontFamily: { "title-md": ["Roboto Flex"], "display-lg": ["Roboto Flex"], "title-sm": ["Roboto Flex"], "headline-lg": ["Roboto Flex"], "label-sm": ["Roboto Flex"], "label-lg": ["Roboto Flex"], "headline-md": ["Roboto Flex"], "display-lg-mobile": ["Roboto Flex"], "label-md": ["Roboto Flex"], "body-md": ["Roboto Flex"], "title-lg": ["Roboto Flex"], "body-lg": ["Roboto Flex"] }, fontSize: { "title-md": ["16px", { lineHeight: "24px", letterSpacing: "0.15px", fontWeight: "600" }], "display-lg": ["44px", { lineHeight: "52px", letterSpacing: "-0.5px", fontWeight: "700" }], "title-sm": ["14px", { lineHeight: "20px", letterSpacing: "0.1px", fontWeight: "600" }], "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "600" }], "label-sm": ["11px", { lineHeight: "16px", letterSpacing: "0.5px", fontWeight: "500" }], "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.1px", fontWeight: "600" }], "headline-md": ["28px", { lineHeight: "36px", fontWeight: "600" }], "display-lg-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.25px", fontWeight: "700" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.5px", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0.25px", fontWeight: "400" }], "title-lg": ["22px", { lineHeight: "28px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", letterSpacing: "0.5px", fontWeight: "400" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f2fcf5;color:#141d1a;font-family:"Roboto Flex",sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface text-on-surface min-h-screen flex flex-col relative antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-6 px-6 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm select-none"><span class="font-medium tracking-tight">9:41</span><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">signal_cellular_4_bar</span><span class="material-symbols-outlined text-[16px]">wifi</span><span class="material-symbols-outlined text-[16px]">battery_full</span></div></div><div class="h-16 px-3 flex items-center justify-between"><div class="flex items-center gap-2"><button aria-label="Navigate Back" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-all" onclick="history.back()"><span class="material-symbols-outlined text-[24px] rtl:rotate-180">arrow_back</span></button><h1 class="font-title-lg text-title-lg text-on-surface tracking-tight truncate">Task Details</h1></div><div class="flex items-center gap-2"><button aria-label="More options" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all"><span class="material-symbols-outlined text-[22px]">more_vert</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-4 pt-22 pb-8 bg-surface min-h-screen"><div class="flex flex-col w-full pb-28 space-y-4">
+<!-- Breadcrumb / Category Metadata Pill -->
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px] text-primary">folder_open</span>
+<span class="font-label-md text-label-md">Work • إنجاز</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>High Priority</span>
+</div>
+</div>
+<!-- Main Title & Expressive Scallop Checkbox -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-sm">
+<div class="flex items-start gap-3.5">
+<!-- 8-Lobe Celebratory Scallop Checkbox Button -->
+<button aria-label="Toggle task completion" class="relative shrink-0 w-11 h-11 flex items-center justify-center transition-transform active:scale-90" id="mainTaskCheckbox" onclick="toggleMainTask()">
+<svg class="w-10 h-10 transition-transform duration-300 text-outline" fill="none" id="mainCheckboxSvg" viewbox="0 0 40 40">
+<!-- 8-lobed expressive M3 scalloped contour -->
+<path d="M20 2C22.5 2 24 5 26.5 5.5C29 6 32 4.5 34 6.5C36 8.5 35 11.5 35.5 14C36 16.5 38 18 38 20.5C38 23 36 24.5 35.5 27C35 29.5 36 32.5 34 34.5C32 36.5 29 35 26.5 35.5C24 36 22.5 39 20 39C17.5 39 16 36 13.5 35.5C11 35 8 36.5 6 34.5C4 32.5 5 29.5 4.5 27C4 24.5 2 23 2 20.5C2 18 4 16.5 4.5 14C5 11.5 4 8.5 6 6.5C8 4.5 11 6 13.5 5.5C16 5 17.5 2 20 2Z" fill="transparent" id="scallopPath" stroke="currentColor" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+<span class="material-symbols-outlined absolute text-[22px] text-on-primary opacity-0 scale-50 transition-all duration-300" id="mainCheckIcon">check</span>
+</button>
+<!-- Editable Title Area -->
+<div class="flex-1 min-w-0">
+<div aria-multiline="true" class="font-headline-md text-headline-md text-on-surface tracking-tight focus:outline-none transition-colors duration-200" contenteditable="true" id="mainTaskTitle" role="textbox" spellcheck="false">
+          Review mobile wireframes for Injaz
+        </div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">edit_note</span>
+          Tap to edit • Created today at 08:45 AM
+        </p>
+</div>
+</div>
+</div>
+<!-- Notes Container Card (28dp / rounded-lg) -->
+<div class="bg-surface-container-low rounded-lg p-5">
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">notes</span>
+<span>Notes &amp; Brief</span>
+</div>
+<div class="font-body-lg text-body-lg text-on-surface focus:outline-none leading-relaxed" contenteditable="true">
+      Ensure all M3 Expressive components match the emerald dynamic palette and scalloped shape guidelines. Optical weighting must be checked across Arabic (إنجاز) and Latin scripts.
+    </div>
+<!-- Visual Attached Asset Preview -->
+<div class="mt-4 flex items-center gap-3 p-3 rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<div class="w-14 h-14 rounded-DEFAULT bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up architectural wireframe illustration rendered in soft emerald ink on pristine recycled paper with tactile geometric circles and arabesque grid lines, natural ambient light studio shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP_c_kkJOcYakH28JHmZ7wmUj9VbmuFwviZYlLvMgBQenJfexwLtaJLf4skgnaHJF16Qi07ONS3rDc_BbfgB8_yLhshdPJTWVjrTd98PkD1yXoEDsCEt4vA6QkezzzVe68keviOWn91DmiuaH7Idb3wtK-Yk1rzOZkNz16OygtthCYF3Fc37EL6l6BbJ3M8v_3UBXUHP_Rq_4QjDo7ikdaFUpzIWjIXDoIkhEzLfEoz55X8wWEsd6vHg"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-sm text-title-sm text-on-surface truncate">injaz_mobile_v3_tokens.fig</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Figma File • 4.8 MB</p>
+</div>
+<button aria-label="Download attachment" class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Subtasks Bento Card with Wavy Progress Dynamic Wave -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-sm space-y-4">
+<!-- Header & Counter -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">checklist</span>
+<h2 class="font-title-md text-title-md text-on-surface">Subtasks</h2>
+</div>
+<span class="font-label-lg text-label-lg px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container" id="subtaskCounter">
+        2 of 4 done
+      </span>
+</div>
+<!-- Expressive Sine-Wave Dynamic Progress Indicator -->
+<div class="w-full h-4 relative flex items-center overflow-hidden">
+<svg class="w-full h-4" preserveaspectratio="none" viewbox="0 0 320 16">
+<!-- Inactive sine-wave track -->
+<path d="M0,8 Q 20,2 40,8 T 80,8 T 120,8 T 160,8 T 200,8 T 240,8 T 280,8 T 320,8" fill="none" stroke="#dbe5df" stroke-linecap="round" stroke-width="4"></path>
+<!-- Active wavy progress track (50% completed: 160 of 320) -->
+<path class="transition-all duration-500" d="M0,8 Q 20,2 40,8 T 80,8 T 120,8 T 160,8" fill="none" id="waveProgress" stroke="#00604f" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+<!-- Subtasks Interactive List -->
+<div class="space-y-1 divide-none" id="subtaskList">
+<!-- Item 1: Checked -->
+<div class="group flex items-center gap-3 min-h-[48px] py-1 cursor-pointer" onclick="toggleSubtask(this)">
+<button aria-label="Subtask completed" class="subtask-btn shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all bg-primary text-on-primary">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C13.5 2 14.5 3.8 16 4.1C17.5 4.5 19.2 3.6 20.4 4.8C21.6 6 20.8 7.8 21.1 9.3C21.4 10.8 23 11.8 23 13.3C23 14.8 21.4 15.8 21.1 17.3C20.8 18.8 21.6 20.5 20.4 21.8C19.2 23 17.5 22.1 16 22.5C14.5 22.9 13.5 24.6 12 24.6C10.5 24.6 9.5 22.9 8 22.5C6.5 22.1 4.8 23 3.6 21.8C2.4 20.5 3.2 18.8 2.9 17.3C2.6 15.8 1 14.8 1 13.3C1 11.8 2.6 10.8 2.9 9.3C3.2 7.8 2.4 6 3.6 4.8C4.8 3.6 6.5 4.5 8 4.1C9.5 3.8 10.5 2 12 2Z" transform="scale(0.85) translate(2, 2)"></path>
+</svg>
+<span class="material-symbols-outlined absolute text-[15px] text-on-primary">check</span>
+</button>
+<span class="subtask-text font-body-md text-body-md text-outline line-through flex-1 min-w-0 truncate">Audit navigation bar &amp; pill active indicators</span>
+</div>
+<!-- Item 2: Checked -->
+<div class="group flex items-center gap-3 min-h-[48px] py-1 cursor-pointer" onclick="toggleSubtask(this)">
+<button aria-label="Subtask completed" class="subtask-btn shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all bg-primary text-on-primary">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C13.5 2 14.5 3.8 16 4.1C17.5 4.5 19.2 3.6 20.4 4.8C21.6 6 20.8 7.8 21.1 9.3C21.4 10.8 23 11.8 23 13.3C23 14.8 21.4 15.8 21.1 17.3C20.8 18.8 21.6 20.5 20.4 21.8C19.2 23 17.5 22.1 16 22.5C14.5 22.9 13.5 24.6 12 24.6C10.5 24.6 9.5 22.9 8 22.5C6.5 22.1 4.8 23 3.6 21.8C2.4 20.5 3.2 18.8 2.9 17.3C2.6 15.8 1 14.8 1 13.3C1 11.8 2.6 10.8 2.9 9.3C3.2 7.8 2.4 6 3.6 4.8C4.8 3.6 6.5 4.5 8 4.1C9.5 3.8 10.5 2 12 2Z" transform="scale(0.85) translate(2, 2)"></path>
+</svg>
+<span class="material-symbols-outlined absolute text-[15px] text-on-primary">check</span>
+</button>
+<span class="subtask-text font-body-md text-body-md text-outline line-through flex-1 min-w-0 truncate">Check RTL alignment for Arabic typography</span>
+</div>
+<!-- Item 3: Unchecked -->
+<div class="group flex items-center gap-3 min-h-[48px] py-1 cursor-pointer" onclick="toggleSubtask(this)">
+<button aria-label="Subtask pending" class="subtask-btn shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all bg-surface-container-high text-outline group-hover:bg-secondary-container">
+<div class="w-4 h-4 rounded-full bg-outline-variant/60"></div>
+</button>
+<span class="subtask-text font-body-md text-body-md text-on-surface flex-1 min-w-0 truncate">Verify wavy progress indicator animations</span>
+</div>
+<!-- Item 4: Unchecked -->
+<div class="group flex items-center gap-3 min-h-[48px] py-1 cursor-pointer" onclick="toggleSubtask(this)">
+<button aria-label="Subtask pending" class="subtask-btn shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all bg-surface-container-high text-outline group-hover:bg-secondary-container">
+<div class="w-4 h-4 rounded-full bg-outline-variant/60"></div>
+</button>
+<span class="subtask-text font-body-md text-body-md text-on-surface flex-1 min-w-0 truncate">Add haptic feedback specs to motion notes</span>
+</div>
+</div>
+<!-- Inline Add Subtask Row -->
+<button class="w-full flex items-center gap-3 h-12 px-3 rounded-full bg-surface-container-low hover:bg-surface-container active:scale-[0.99] transition-all text-primary font-label-lg text-label-lg" onclick="promptNewSubtask()">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Add subtask</span>
+</button>
+</div>
+<!-- Metadata Cards & Settings Grid -->
+<div class="grid grid-cols-1 gap-3">
+<!-- Due Date & Time Card -->
+<div class="bg-surface-container-lowest rounded-lg p-4 shadow-sm flex items-center justify-between min-h-[56px]">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">calendar_clock</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Due Date &amp; Time</span>
+<span class="font-title-sm text-title-sm text-on-surface">Today, Oct 25 at 11:30 AM</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">alarm</span>
+        Due in 2h
+      </span>
+</div>
+<!-- Repeat & Schedule Card -->
+<div class="bg-surface-container-lowest rounded-lg p-4 shadow-sm flex items-center justify-between min-h-[56px]">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[20px]">update</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Recurrence</span>
+<span class="font-title-sm text-title-sm text-on-surface">Weekly on Wednesdays</span>
+</div>
+</div>
+<button aria-label="Edit recurrence" class="w-10 h-10 rounded-full flex items-center justify-center text-outline hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<!-- List Category Selector Card -->
+<div class="bg-surface-container-lowest rounded-lg p-4 shadow-sm flex items-center justify-between min-h-[56px]">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Project List</span>
+<span class="font-title-sm text-title-sm text-on-surface">🎨 Design Systems</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+        Change
+      </span>
+</div>
+<!-- Reminder Toggle Switch Card with Material 3 Bell Knob -->
+<div class="bg-surface-container-lowest rounded-lg p-4 shadow-sm flex items-center justify-between min-h-[56px]">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">notifications_active</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-on-surface">Task Reminder</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">15 minutes before due</span>
+</div>
+</div>
+<!-- M3 Expressive Switch with Icon inside Thumb -->
+<button aria-checked="true" class="w-14 h-8 rounded-full bg-primary relative transition-colors duration-200 focus:outline-none flex items-center px-1" id="reminderSwitch" onclick="toggleSwitch(this)" role="switch">
+<span class="switch-thumb w-6 h-6 rounded-full bg-on-primary text-primary flex items-center justify-center shadow-sm transform translate-x-6 rtl:-translate-x-6 transition-transform duration-200">
+<span class="material-symbols-outlined text-[14px]">notifications</span>
+</span>
+</button>
+</div>
+</div>
+<!-- Ambient Inspiration Image Card (Organic Touch) -->
+<div class="bg-surface-container-low rounded-lg p-4 flex items-center gap-4">
+<div class="w-16 h-16 rounded-DEFAULT overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Serene minimalist design studio with warm afternoon sunbeams illuminating an emerald glass water carafe, notebook with fountain pen, calm productive atmosphere in natural earth tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzT9xeUJBJjHIPbn2dV4j08piM_AhRaZtcMr-3P96nrEuYVp09xCbP6tsKFCxfEK8SRdMLJM5ThMyV3bUkv68nTUUxpp6Aemqvp0fJhObNTPcYZFNmcMwKtK3yxEPSKPI0InmCMg781AwJLYT4ITpM0m23WkV1a2XLo484yQi3NdWugnNthdLku4yDbj8Wo2dDKPjM1MCJBZa0sYQQ7Dh7sKchSVtB42VrFXpJEgqE2z-8Wm17OAQGhw"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-sm text-title-sm text-primary">إنجاز اليوم يورث راحة الغد</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">"Today's sustained effort breeds tomorrow's peace." Maintain your design momentum.</p>
+</div>
+</div>
+<!-- Floating Action Toolbar (Bottom Pill Island) -->
+<div class="fixed bottom-6 left-0 right-0 px-4 flex justify-center z-40 pointer-events-none">
+<div class="pointer-events-auto flex items-center gap-1.5 p-1.5 rounded-full bg-surface-container-highest shadow-xl backdrop-blur-md">
+<!-- Mark Complete Primary Action Pill -->
+<button class="h-12 px-5 rounded-full bg-primary text-on-primary flex items-center gap-2 font-label-lg text-label-lg hover:bg-primary-container active:scale-95 transition-all shadow-sm" id="toolbarCompleteBtn" onclick="toggleMainTask()">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+<span>Mark Complete</span>
+</button>
+<!-- Reschedule Secondary Action -->
+<button aria-label="Reschedule task" class="h-12 px-3.5 rounded-full hover:bg-surface-container active:scale-95 transition-all flex items-center gap-1.5 text-on-surface-variant font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[20px] text-tertiary">schedule</span>
+<span class="hidden sm:inline">Reschedule</span>
+</button>
+<!-- Delete Action -->
+<button aria-label="Delete task" class="w-12 h-12 rounded-full hover:bg-error-container hover:text-on-error-container text-on-surface-variant active:scale-95 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-error">delete</span>
+</button>
+<!-- Share Action -->
+<button aria-label="Share task" class="w-12 h-12 rounded-full hover:bg-surface-container active:scale-95 transition-all flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Client Interaction Micro-scripts -->
+<script>
+  let isTaskComplete = false;
+
+  function toggleMainTask() {
+    isTaskComplete = !isTaskComplete;
+    const scallop = document.getElementById('scallopPath');
+    const checkIcon = document.getElementById('mainCheckIcon');
+    const title = document.getElementById('mainTaskTitle');
+    const completeBtn = document.getElementById('toolbarCompleteBtn');
+
+    if (isTaskComplete) {
+      scallop.setAttribute('fill', '#00604f');
+      scallop.setAttribute('stroke', '#00604f');
+      checkIcon.classList.remove('opacity-0', 'scale-50');
+      checkIcon.classList.add('opacity-100', 'scale-100');
+      title.classList.add('line-through', 'text-outline');
+      completeBtn.classList.remove('bg-primary');
+      completeBtn.classList.add('bg-secondary');
+      completeBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">undo</span><span>Completed</span>';
+    } else {
+      scallop.setAttribute('fill', 'transparent');
+      scallop.setAttribute('stroke', 'currentColor');
+      checkIcon.classList.add('opacity-0', 'scale-50');
+      checkIcon.classList.remove('opacity-100', 'scale-100');
+      title.classList.remove('line-through', 'text-outline');
+      completeBtn.classList.add('bg-primary');
+      completeBtn.classList.remove('bg-secondary');
+      completeBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">task_alt</span><span>Mark Complete</span>';
+    }
+  }
+
+  function toggleSubtask(row) {
+    const btn = row.querySelector('.subtask-btn');
+    const text = row.querySelector('.subtask-text');
+    const isDone = text.classList.contains('line-through');
+
+    if (isDone) {
+      // Revert to pending
+      text.classList.remove('line-through', 'text-outline');
+      text.classList.add('text-on-surface');
+      btn.className = 'subtask-btn shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all bg-surface-container-high text-outline group-hover:bg-secondary-container';
+      btn.innerHTML = '<div class="w-4 h-4 rounded-full bg-outline-variant/60"></div>';
+    } else {
+      // Mark as completed
+      text.classList.add('line-through', 'text-outline');
+      text.classList.remove('text-on-surface');
+      btn.className = 'subtask-btn shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all bg-primary text-on-primary';
+      btn.innerHTML = '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C13.5 2 14.5 3.8 16 4.1C17.5 4.5 19.2 3.6 20.4 4.8C21.6 6 20.8 7.8 21.1 9.3C21.4 10.8 23 11.8 23 13.3C23 14.8 21.4 15.8 21.1 17.3C20.8 18.8 21.6 20.5 20.4 21.8C19.2 23 17.5 22.1 16 22.5C14.5 22.9 13.5 24.6 12 24.6C10.5 24.6 9.5 22.9 8 22.5C6.5 22.1 4.8 23 3.6 21.8C2.4 20.5 3.2 18.8 2.9 17.3C2.6 15.8 1 14.8 1 13.3C1 11.8 2.6 10.8 2.9 9.3C3.2 7.8 2.4 6 3.6 4.8C4.8 3.6 6.5 4.5 8 4.1C9.5 3.8 10.5 2 12 2Z" transform="scale(0.85) translate(2, 2)"/></svg><span class="material-symbols-outlined absolute text-[15px] text-on-primary">check</span>';
+    }
+    updateSubtaskStats();
+  }
+
+  function updateSubtaskStats() {
+    const total = document.querySelectorAll('#subtaskList > div').length;
+    const completed = document.querySelectorAll('#subtaskList .line-through').length;
+    document.getElementById('subtaskCounter').textContent = `${completed} of ${total} done`;
+
+    const ratio = completed / (total || 1);
+    const waveProgress = document.getElementById('waveProgress');
+    const maxLen = 320;
+    const endX = Math.round(ratio * maxLen);
+    
+    // Smooth dynamic wave path calculation
+    let d = "M0,8";
+    for (let x = 0; x < endX; x += 40) {
+      d += ` Q ${x + 20},2 ${Math.min(x + 40, endX)},8`;
+    }
+    waveProgress.setAttribute('d', d || 'M0,8');
+  }
+
+  function toggleSwitch(btn) {
+    const isChecked = btn.getAttribute('aria-checked') === 'true';
+    const thumb = btn.querySelector('.switch-thumb');
+    
+    if (isChecked) {
+      btn.setAttribute('aria-checked', 'false');
+      btn.classList.remove('bg-primary');
+      btn.classList.add('bg-surface-container-high');
+      thumb.classList.remove('translate-x-6', 'rtl:-translate-x-6', 'text-primary');
+      thumb.classList.add('translate-x-0', 'text-outline');
+    } else {
+      btn.setAttribute('aria-checked', 'true');
+      btn.classList.add('bg-primary');
+      btn.classList.remove('bg-surface-container-high');
+      thumb.classList.add('translate-x-6', 'rtl:-translate-x-6', 'text-primary');
+      thumb.classList.remove('translate-x-0', 'text-outline');
+    }
+  }
+
+  function promptNewSubtask() {
+    const text = prompt('Enter new subtask for Injaz:');
+    if (!text || !text.trim()) return;
+
+    const list = document.getElementById('subtaskList');
+    const newRow = document.createElement('div');
+    newRow.className = 'group flex items-center gap-3 min-h-[48px] py-1 cursor-pointer';
+    newRow.onclick = function() { toggleSubtask(newRow); };
+    newRow.innerHTML = `
+      <button class="subtask-btn shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all bg-surface-container-high text-outline group-hover:bg-secondary-container" aria-label="Subtask pending">
+        <div class="w-4 h-4 rounded-full bg-outline-variant/60"></div>
+      </button>
+      <span class="subtask-text font-body-md text-body-md text-on-surface flex-1 min-w-0 truncate">${text.trim()}</span>
+    `;
+    list.appendChild(newRow);
+    updateSubtaskStats();
+  }
+</script></main><footer class="fixed bottom-0 w-full z-50 pointer-events-none pb-safe"><div class="w-full flex justify-center py-2"><div class="w-28 h-1 rounded-full bg-on-surface-variant/40"></div></div></footer></body></html>
