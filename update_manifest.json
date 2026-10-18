@@ -4,7 +4,7 @@
   "minSupportedVersionCode": 101,
   "mandatory": false,
   "apkUrl": "https://github.com/Abdogouhmad/anjiz/releases/download/v0.1.1/anjiz-v0.1.1-universal.apk",
-  "sha256": "",
-  "releaseNotes": "",
-  "publishedAt": ""
+  "sha256": "4284fda0d6d49a5c75be2d8efaf951f53ade6c5399e6289e78b3d2d14390fd1b",
+  "releaseNotes": "## [0.1.1] - 2026-10-18\n\n### Fixed\n\n- **Reminders and the daily briefing never fired on a real device.** The app\n  manifest was missing the `flutter_local_notifications` receivers the plugin\n  needs to deliver scheduled notifications. `ScheduledNotificationReceiver` is\n  the target of the `AlarmManager` alarm, so without it every scheduled\n  notification fired into the void; `ScheduledNotificationBootReceiver` restores\n  them after a reboot or update; and `ActionBroadcastReceiver` is what dispatches\n  notification action buttons. All three are now declared.\n- **The reminder \"Snooze\" action did nothing.** It depends on the same missing\n  `ActionBroadcastReceiver`; with the receiver registered, tapping Snooze\n  reschedules the reminder 10 minutes out under its original title.\n- **Exact reminders on Android 12+/14+.** Added the `USE_EXACT_ALARM` permission\n  (granted at install for reminder apps), alongside `SCHEDULE_EXACT_ALARM`, so\n  reminders can fire at the precise minute instead of degrading to inexact.\n- **Quick-add from the home-screen widget only worked once.** The widget-launch\n  stream de-duplicated every tap against the previous deep link, so once the\n  quick-add composer had been opened, tapping the same widget again emitted an\n  identical URI and was swallowed — the composer never reopened. Taps are now\n  passed through as-is, so the composer opens on every tap (cold start and\n  warm).",
+  "publishedAt": "2026-10-18T14:48:37.359543+00:00"
 }
