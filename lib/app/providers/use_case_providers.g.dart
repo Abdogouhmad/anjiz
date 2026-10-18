@@ -98,7 +98,7 @@ final class UpdateTaskProvider
   }
 }
 
-String _$updateTaskHash() => r'fc72a7a6a016e0551a3178296d27ab1ad7ea87f2';
+String _$updateTaskHash() => r'126bcf3926e46f4b12a4b53188572ea0256a5ccd';
 
 /// Provides the [DeleteTask] use case.
 

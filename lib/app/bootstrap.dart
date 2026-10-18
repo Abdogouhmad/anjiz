@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/services/app_info.dart';
 import '../core/services/background_refresh.dart';
+import '../core/services/daily_briefing.dart';
 import '../core/services/preferences_provider.dart';
 import '../core/services/service_providers.dart';
 import '../data/repositories/repository_providers.dart';
@@ -27,6 +28,8 @@ Future<ProviderContainer> bootstrap() async {
   );
   await AppInfo.init();
   await container.read(notificationServiceProvider).init();
+  // Re-register the daily briefing so it survives reboots and upgrades.
+  await reconcileDailyBriefing(container);
   final l10n = await AppLocalizations.delegate.load(const Locale('en'));
   await container
       .read(taskListRepositoryProvider)

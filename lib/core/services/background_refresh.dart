@@ -7,6 +7,7 @@ import '../../data/repositories/repository_providers.dart';
 import '../../domain/usecases/set_task_reminder.dart';
 import '../constants/app_constants.dart';
 import '../utils/platform_support.dart';
+import 'daily_briefing.dart';
 import 'preferences_provider.dart';
 import 'service_providers.dart';
 import 'widget_sync_service.dart';
@@ -54,6 +55,7 @@ Future<void> runBackgroundRefresh() async {
   );
   try {
     await _rescheduleReminders(container);
+    await reconcileDailyBriefing(container);
     await WidgetSyncService(
       container.read(taskRepositoryProvider),
       container.read(taskListRepositoryProvider),

@@ -29,7 +29,6 @@ class TodayAgendaSections extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final scheme = Theme.of(context).colorScheme;
-    final planned = <Task>[...agenda.completed, ...agenda.scheduled];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -51,17 +50,17 @@ class TodayAgendaSections extends StatelessWidget {
             onOpenTask: onOpenTask,
           ),
         ],
-        if (planned.isNotEmpty) ...[
+        if (agenda.scheduled.isNotEmpty) ...[
           const SizedBox(height: AnjizSpacing.sm),
           AnjizSectionHeader(
             title: l10n.sectionPlannedToday,
-            count: l10n.tasksCount(planned.length),
+            count: l10n.tasksCount(agenda.scheduled.length),
             trailing: AnjizMetaChip(
-              label: l10n.sortByPriority,
-              icon: Icons.sort_rounded,
+              label: l10n.sortByTime,
+              icon: Icons.schedule_rounded,
             ),
           ),
-          _TaskGroup(tasks: planned, onOpenTask: onOpenTask),
+          _TaskGroup(tasks: agenda.scheduled, onOpenTask: onOpenTask),
         ],
         if (agenda.anytime.isNotEmpty) ...[
           const SizedBox(height: AnjizSpacing.sm),
@@ -71,6 +70,19 @@ class TodayAgendaSections extends StatelessWidget {
             trailing: AnjizMetaChip(label: l10n.labelUntimed),
           ),
           _TaskGroup(tasks: agenda.anytime, onOpenTask: onOpenTask),
+        ],
+        if (agenda.completed.isNotEmpty) ...[
+          const SizedBox(height: AnjizSpacing.sm),
+          AnjizSectionHeader(
+            title: l10n.sectionCompletedToday,
+            count: l10n.tasksCount(agenda.completed.length),
+            dotColor: scheme.primary,
+          ),
+          _TaskGroup(
+            tasks: agenda.completed,
+            accentColor: scheme.primary,
+            onOpenTask: onOpenTask,
+          ),
         ],
       ],
     );

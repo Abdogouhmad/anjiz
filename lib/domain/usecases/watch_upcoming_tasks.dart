@@ -1,3 +1,4 @@
+import '../../core/extensions/datetime_extensions.dart';
 import '../entities/task.dart';
 import '../entities/upcoming_agenda.dart';
 import '../entities/upcoming_day.dart';
@@ -12,15 +13,20 @@ class WatchUpcomingTasks {
   final TaskRepository _tasks;
 
   /// Streams the upcoming agenda as tasks change.
+  ///
+  /// The window starts tomorrow; today's tasks live on the Today screen.
   Stream<UpcomingAgenda> call(DateTime now, {int days = 7}) {
-    final start = DateTime(now.year, now.month, now.day + 1);
-    final end = start.add(Duration(days: days));
+    final start = now.startOfDay.startOfNextDay;
+    final end = _dayAt(start, days);
     return _tasks
         .watchUpcoming(start)
         .map((tasks) => group(tasks, start: start, end: end, days: days));
   }
 
   /// Pure grouping logic, exposed for testing.
+  ///
+  /// Day buckets are built from calendar arithmetic (never `Duration` maths)
+  /// so a daylight-saving shift can never orphan a whole day's tasks.
   UpcomingAgenda group(
     List<Task> tasks, {
     required DateTime start,
@@ -32,18 +38,32 @@ class WatchUpcomingTasks {
       final due = task.dueAt;
       if (due == null || task.isDone) continue;
       if (due.isBefore(start) || !due.isBefore(end)) continue;
-      final day = DateTime(due.year, due.month, due.day);
-      buckets.putIfAbsent(day, () => <Task>[]).add(task);
+      buckets.putIfAbsent(due.startOfDay, () => <Task>[]).add(task);
     }
 
     final result = <UpcomingDay>[];
     var total = 0;
     for (var i = 0; i < days; i++) {
-      final date = start.add(Duration(days: i));
-      final dayTasks = buckets[date] ?? const <Task>[];
+      final date = _dayAt(start, i);
+      final dayTasks = List.of(buckets[date] ?? const <Task>[]);
+      _sort(dayTasks);
       total += dayTasks.length;
       result.add(UpcomingDay(date: date, tasks: dayTasks));
     }
     return UpcomingAgenda(days: result, total: total);
+  }
+
+  /// Midnight of the day [offset] calendar days after [start].
+  static DateTime _dayAt(DateTime start, int offset) =>
+      DateTime(start.year, start.month, start.day + offset);
+
+  /// Timed tasks first by time, then untimed by priority and manual order.
+  void _sort(List<Task> tasks) {
+    tasks.sort((a, b) {
+      if (a.hasTime != b.hasTime) return a.hasTime ? -1 : 1;
+      if (a.hasTime && b.hasTime) return a.dueAt!.compareTo(b.dueAt!);
+      final byPriority = b.priority.value.compareTo(a.priority.value);
+      return byPriority != 0 ? byPriority : a.sortOrder.compareTo(b.sortOrder);
+    });
   }
 }

@@ -1,11 +1,13 @@
 import 'package:anjiz_ui/anjiz_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../l10n/app_localizations.dart';
+import '../providers/profile_controller.dart';
 
 /// The Data screen body: a "Calendar" group (the Google Calendar connection)
 /// and an "Export" group of task-history formats.
-class DataSections extends StatelessWidget {
+class DataSections extends ConsumerWidget {
   /// Creates the data sections.
   const DataSections({
     required this.onCalendarOptions,
@@ -20,8 +22,9 @@ class DataSections extends StatelessWidget {
   final void Function(String format) onExport;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final email = ref.watch(profileProvider).email;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -30,7 +33,7 @@ class DataSections extends StatelessWidget {
           children: [
             AnjizSettingsNavTile(
               title: l10n.labelGoogleCalendar,
-              subtitle: l10n.profileEmail,
+              subtitle: email.isEmpty ? l10n.dataCalendarNotConnected : email,
               leading: const AnjizIconBadge(
                 icon: Icons.event_available_outlined,
                 tone: AnjizTone.primary,

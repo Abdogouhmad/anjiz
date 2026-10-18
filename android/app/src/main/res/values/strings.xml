@@ -15,10 +15,11 @@
     <string name="widget_all_tasks">All tasks</string>
     <string name="widget_empty">Nothing scheduled</string>
     <string name="widget_more">+%1$d more</string>
-    <string name="widget_progress_title">Completed</string>
+    <string name="widget_progress_title">Today</string>
     <string name="widget_progress_value">%1$d/%2$d</string>
     <string name="widget_quick_add_hint">Add a task</string>
     <string name="widget_today">Today</string>
     <string name="widget_tomorrow">Tomorrow</string>
     <string name="widget_due_with_time">%1$s · %2$s</string>
+    <string name="notification_snooze">Snooze 10 min</string>
 </resources>

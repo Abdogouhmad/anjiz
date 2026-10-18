@@ -1,7 +1,7 @@
 /// Stable string keys and ids used across Anjiz.
 abstract final class AppConstants {
   /// Human-readable application version shown in the settings footer.
-  static const String version = '1.0.0';
+  static const String version = '0.1.1';
 
   /// Id of the list created on first launch.
   static const String defaultListId = 'my-tasks';
@@ -56,6 +56,21 @@ abstract final class AppConstants {
 
   /// Notification id used for the manual notification test.
   static const int testNotificationId = 98;
+
+  /// Notification id used for the recurring daily briefing.
+  static const int dailyBriefingNotificationId = 97;
+
+  /// Local hour at which the daily briefing fires.
+  static const int dailyBriefingHour = 8;
+
+  /// Shared-preferences key for the profile display name.
+  static const String prefProfileName = 'profile.name';
+
+  /// Shared-preferences key for the profile e-mail.
+  static const String prefProfileEmail = 'profile.email';
+
+  /// Shared-preferences key for the profile avatar image path.
+  static const String prefProfileAvatar = 'profile.avatar';
 
   /// Shared-preferences key for the last update check (epoch milliseconds).
   static const String prefUpdateLastCheck = 'update.lastCheckAt';

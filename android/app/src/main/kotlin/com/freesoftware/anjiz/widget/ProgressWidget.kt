@@ -80,8 +80,8 @@ private fun ProgressContent(context: Context, snapshot: WidgetSnapshot) {
         Text(
             text = context.getString(
                 R.string.widget_progress_value,
-                snapshot.done,
-                snapshot.total,
+                snapshot.todayDone,
+                snapshot.todayTotal,
             ),
             style = TextStyle(
                 color = colors.primary,
@@ -92,7 +92,7 @@ private fun ProgressContent(context: Context, snapshot: WidgetSnapshot) {
         )
         Spacer(GlanceModifier.height(10.dp))
         LinearProgressIndicator(
-            progress = snapshot.progress,
+            progress = snapshot.todayProgress,
             modifier = GlanceModifier.fillMaxWidth().height(8.dp).cornerRadius(4.dp),
             color = colors.primary,
             backgroundColor = colors.surfaceVariant,

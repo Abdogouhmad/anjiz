@@ -33,6 +33,8 @@ AddTask addTask(Ref ref) => AddTask(
 UpdateTask updateTask(Ref ref) => UpdateTask(
   tasks: ref.watch(taskRepositoryProvider),
   widgetSync: ref.watch(widgetSyncServiceProvider),
+  scheduler: ref.watch(notificationServiceProvider),
+  reminders: ref.watch(reminderRepositoryProvider),
 );
 
 /// Provides the [DeleteTask] use case.

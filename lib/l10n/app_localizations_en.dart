@@ -158,6 +158,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get greetingEvening => 'Good evening!';
 
   @override
+  String greetingMorningNamed(String name) {
+    return 'Good morning, $name!';
+  }
+
+  @override
+  String greetingAfternoonNamed(String name) {
+    return 'Good afternoon, $name!';
+  }
+
+  @override
+  String greetingEveningNamed(String name) {
+    return 'Good evening, $name!';
+  }
+
+  @override
   String todaySummary(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -183,6 +198,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sortByPriority => 'By priority';
+
+  @override
+  String get sortByTime => 'By time';
 
   @override
   String labelCompletedAt(String time) {
@@ -596,13 +614,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String get motionSettingsSubtitle => 'Spring animations and tactile feedback';
 
   @override
-  String get profileName => 'Sarah Al-Mansoor';
+  String get profileTitle => 'Your profile';
 
   @override
-  String get profileEmail => 'sarah.mansoor@example.com';
+  String get profileSubtitle => 'Name, photo and contact details';
 
   @override
-  String get proSyncActive => 'Pro Sync Active';
+  String get profileEditAction => 'Edit profile';
+
+  @override
+  String get profileNameMissing => 'Add your name';
+
+  @override
+  String get profileLocalOnly => 'Saved on this device';
+
+  @override
+  String get profileLocalTag => 'On this device';
+
+  @override
+  String get profilePhotoTitle => 'Profile photo';
+
+  @override
+  String get profileTakePhoto => 'Take a photo';
+
+  @override
+  String get profileChooseFromGallery => 'Choose from gallery';
+
+  @override
+  String get profileRemovePhoto => 'Remove photo';
+
+  @override
+  String get profileSaved => 'Profile saved';
+
+  @override
+  String get labelName => 'Name';
+
+  @override
+  String get hintName => 'Your name';
+
+  @override
+  String get labelEmail => 'Email';
+
+  @override
+  String get hintEmail => 'you@example.com';
 
   @override
   String labelLastSynced(String time) {
@@ -715,6 +769,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Morning summary of prioritised tasks & milestones';
 
   @override
+  String get dailyBriefingNotificationBody =>
+      'Here\'s your plan for today. Open Anjiz to get started.';
+
+  @override
   String get labelWidgetConfig => 'Widget Configuration & Previews';
 
   @override
@@ -722,6 +780,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dataTitle => 'Data & Backup';
+
+  @override
+  String get dataCalendarNotConnected => 'Not connected';
 
   @override
   String get labelGoogleCalendar => 'Google Calendar';
@@ -809,6 +870,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingMessage3 =>
       'Home-screen widgets keep your day visible without opening the app.';
+
+  @override
+  String get onboardingProfileTitle => 'Set up your profile';
+
+  @override
+  String get onboardingProfileMessage =>
+      'Your name and photo stay on this device and personalise the app.';
+
+  @override
+  String get onboardingPermissionsTitle => 'Stay on track';
+
+  @override
+  String get onboardingPermissionsMessage =>
+      'Allow reminders so Anjiz can nudge you at the right moment. You can change this later.';
+
+  @override
+  String get onboardingPermissionNotifications =>
+      'Reminders and the daily briefing';
+
+  @override
+  String get onboardingExactAlarmTitle => 'Exact reminders';
+
+  @override
+  String get onboardingPermissionExactAlarms =>
+      'Nudge you at the precise minute';
 
   @override
   String get labelUntimed => 'Untimed';

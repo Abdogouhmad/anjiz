@@ -69,9 +69,9 @@ UpdateManifest _manifest(int versionCode) => UpdateManifest(
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  // The installed build reports 1.0.0 (10000) without a platform channel.
+  // The installed build reports 0.1.0 (100) without a platform channel.
   const newerVersionCode = 10200;
-  const olderVersionCode = 10000;
+  const olderVersionCode = 99;
 
   Future<
     ({

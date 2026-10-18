@@ -44,7 +44,7 @@ Future<Priority?> showPriorityPicker(
   Priority current,
 ) {
   final l10n = AppLocalizations.of(context);
-  final priorities = Priority.values;
+  const priorities = Priority.values;
   return AnjizBottomSheet.show<Priority>(
     context,
     child: AnjizSheetContent(

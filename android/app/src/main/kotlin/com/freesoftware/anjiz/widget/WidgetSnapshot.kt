@@ -17,6 +17,8 @@ internal data class WidgetSnapshot(
     val headerTitle: String?,
     val total: Int,
     val open: Int,
+    val todayTotal: Int,
+    val todayDone: Int,
     val items: List<WidgetTask>,
     val moreCount: Int,
     val opacity: Float,
@@ -24,9 +26,16 @@ internal data class WidgetSnapshot(
     /** Number of finished tasks in the current scope. */
     val done: Int get() = (total - open).coerceAtLeast(0)
 
-    /** Fraction complete, clamped to `0f..1f` for the progress widget. */
+    /** Fraction complete for the whole scope (fallback for old snapshots). */
     val progress: Float
-        get() = if (total <= 0) 0f else (done.toFloat() / total).coerceIn(0f, 1f)
+        get() = fraction(done, total)
+
+    /** Today's progress: the ring measures today, not all time. */
+    val todayProgress: Float
+        get() = fraction(todayDone, todayTotal)
+
+    private fun fraction(part: Int, whole: Int): Float =
+        if (whole <= 0) 0f else (part.toFloat() / whole).coerceIn(0f, 1f)
 
     /** Returns [count] items, with the compact layout showing fewer rows. */
     fun visible(count: Int): List<WidgetTask> = items.take(count)
@@ -40,7 +49,7 @@ internal data class WidgetSnapshot(
         const val KEY = "anjiz.widget.snapshot"
 
         /** Snapshot used before the first Flutter sync. */
-        val empty = WidgetSnapshot(null, 0, 0, emptyList(), 0, 1f)
+        val empty = WidgetSnapshot(null, 0, 0, 0, 0, emptyList(), 0, 1f)
 
         /** Parses [raw], falling back to an empty snapshot on bad input. */
         fun parse(raw: String?): WidgetSnapshot {
@@ -53,10 +62,16 @@ internal data class WidgetSnapshot(
             val items = (0 until array.length()).mapNotNull { index ->
                 array.optJSONObject(index)?.let(::item)
             }
+            val open = json.optInt("open", 0)
+            val total = json.optInt("total", 0)
+            val completedToday = json.optInt("completedToday", 0)
             return WidgetSnapshot(
                 headerTitle = json.stringOrNull("headerTitle"),
-                total = json.optInt("total", 0),
-                open = json.optInt("open", 0),
+                total = total,
+                open = open,
+                // Older snapshots omit the today counters: derive them.
+                todayTotal = json.optInt("todayTotal", (total - open) + completedToday),
+                todayDone = json.optInt("todayDone", completedToday),
                 items = items,
                 moreCount = json.optInt("moreCount", 0),
                 opacity = json.optDouble("opacity", 1.0).toFloat(),

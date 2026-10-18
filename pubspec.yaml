@@ -1,8 +1,7 @@
 name: anjiz
 description: "Anjiz (أنجِز) — an offline-first, Material 3 Expressive to-do app with Android home-screen widgets."
 publish_to: "none"
-version: 1.0.0+1
-
+version: 0.1.1+2
 environment:
   sdk: ^3.13.0
 
@@ -16,6 +15,7 @@ dependencies:
     sdk: flutter
   anjiz_ui:
     path: packages/anjiz_ui
+  image_picker: ^1.1.2
   flutter_riverpod: ^3.0.0
   riverpod_annotation: ^4.0.0
   go_router: ^14.8.1
@@ -25,6 +25,7 @@ dependencies:
   path: ^1.9.0
   freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
+  characters: ^1.3.0
   collection: ^1.19.0
   intl: ^0.20.2
   flutter_local_notifications: ^19.0.0

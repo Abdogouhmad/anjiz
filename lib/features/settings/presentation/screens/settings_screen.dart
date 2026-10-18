@@ -56,10 +56,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
               sliver: SliverList.list(
                 children: [
-                  ProfileCard(
-                    onManagePlan: () =>
-                        AnjizSnackBar.show(context, message: l10n.comingSoon),
-                  ),
+                  const ProfileCard(),
                   const SizedBox(height: AnjizSpacing.md),
                   AnjizSectionHeader(title: l10n.settingsPreferences),
                   AnjizSettingsNavGroup(

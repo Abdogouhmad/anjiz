@@ -5,6 +5,7 @@ import 'presentation/screens/data_settings_screen.dart';
 import 'presentation/screens/general_settings_screen.dart';
 import 'presentation/screens/motion_settings_screen.dart';
 import 'presentation/screens/notifications_settings_screen.dart';
+import 'presentation/screens/profile_screen.dart';
 import 'presentation/screens/theme_settings_screen.dart';
 import 'presentation/screens/update_screen.dart';
 import 'presentation/screens/widget_config_screen.dart';
@@ -14,6 +15,7 @@ import 'presentation/screens/widget_config_screen.dart';
 /// General carries its own children so the hub, the section and the leaf screen
 /// form a single pop stack.
 List<RouteBase> settingsRoutes() => [
+  GoRoute(path: 'profile', builder: (context, state) => const ProfileScreen()),
   GoRoute(
     path: 'general',
     builder: (context, state) => const GeneralSettingsScreen(),

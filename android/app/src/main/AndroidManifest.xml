@@ -3,6 +3,9 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!-- Reminder apps qualify for USE_EXACT_ALARM, which is granted at install
+         (unlike SCHEDULE_EXACT_ALARM, denied by default on Android 14+). -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <!-- Widgets are refreshed on boot by WorkManager. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Over-the-air updates hand a downloaded APK to Android's package
@@ -87,6 +90,32 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="es.antonborri.home_widget.action.BACKGROUND" />
+            </intent-filter>
+        </receiver>
+
+        <!-- flutter_local_notifications: delivers scheduled reminders/briefing
+             when the AlarmManager alarm fires. Without this declared, scheduled
+             notifications never reach the user. -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+            android:exported="false" />
+
+        <!-- flutter_local_notifications: processes notification action buttons
+             (e.g. the reminder "Snooze" action) and triggers the callback. -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+            android:exported="false" />
+
+        <!-- flutter_local_notifications: reschedules pending notifications after
+             a reboot or an app update. -->
+        <receiver
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
 

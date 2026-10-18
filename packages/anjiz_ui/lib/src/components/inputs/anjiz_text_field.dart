@@ -18,6 +18,7 @@ class AnjizTextField extends StatelessWidget {
     this.autofocus = false,
     this.maxLines = 1,
     this.minLines,
+    this.keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.sentences,
     super.key,
@@ -53,6 +54,9 @@ class AnjizTextField extends StatelessWidget {
   /// Minimum lines.
   final int? minLines;
 
+  /// Keyboard type (e.g. `TextInputType.emailAddress`).
+  final TextInputType? keyboardType;
+
   /// Keyboard action button.
   final TextInputAction? textInputAction;
 
@@ -81,6 +85,7 @@ class AnjizTextField extends StatelessWidget {
           autofocus: autofocus,
           maxLines: maxLines,
           minLines: minLines,
+          keyboardType: keyboardType,
           textInputAction: textInputAction,
           textCapitalization: textCapitalization,
           onChanged: onChanged,

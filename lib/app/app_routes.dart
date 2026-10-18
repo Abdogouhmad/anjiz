@@ -18,6 +18,9 @@ abstract final class AppRoutes {
   /// The nested settings screens.
   static const String settingsGeneral = '/settings/general';
 
+  /// The local profile editor.
+  static const String settingsProfile = '/settings/profile';
+
   /// Theme controls, nested under General.
   static const String settingsTheme = '/settings/general/theme';
 

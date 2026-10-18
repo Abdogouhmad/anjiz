@@ -18,7 +18,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   the shell uses `Scaffold.extendBody` so content scrolls behind it.
 - **Nested Settings**: the hub is now a status page — a profile header plus
   sections ("Preferences", "Data", "Other") whose rows name their current value
-  ("Dark · Material You", "Daily briefing off", "Anjiz v1.0.0"). Each area opens
+  ("Dark · Material You", "Daily briefing off", "Anjiz v0.1.0"). Each area opens
   its own screen: General (`/settings/general` → Theme, Motion & haptics),
   Notifications & Widgets (`/settings/notifications` → `/settings/widgets`),
   Data & Backup (`/settings/data`) and About (`/settings/about`). Every nested
@@ -107,7 +107,31 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - The accent-tone swatch row keeps equal-width slots and ellipsizes its labels,
   so a long localised name (or 2× text scale) no longer overflows the row.
 
-## [1.0.0] - 2026-10-16
+## [0.1.1] - 2026-10-18
+
+### Fixed
+
+- **Reminders and the daily briefing never fired on a real device.** The app
+  manifest was missing the `flutter_local_notifications` receivers the plugin
+  needs to deliver scheduled notifications. `ScheduledNotificationReceiver` is
+  the target of the `AlarmManager` alarm, so without it every scheduled
+  notification fired into the void; `ScheduledNotificationBootReceiver` restores
+  them after a reboot or update; and `ActionBroadcastReceiver` is what dispatches
+  notification action buttons. All three are now declared.
+- **The reminder "Snooze" action did nothing.** It depends on the same missing
+  `ActionBroadcastReceiver`; with the receiver registered, tapping Snooze
+  reschedules the reminder 10 minutes out under its original title.
+- **Exact reminders on Android 12+/14+.** Added the `USE_EXACT_ALARM` permission
+  (granted at install for reminder apps), alongside `SCHEDULE_EXACT_ALARM`, so
+  reminders can fire at the precise minute instead of degrading to inexact.
+- **Quick-add from the home-screen widget only worked once.** The widget-launch
+  stream de-duplicated every tap against the previous deep link, so once the
+  quick-add composer had been opened, tapping the same widget again emitted an
+  identical URI and was swallowed — the composer never reopened. Taps are now
+  passed through as-is, so the composer opens on every tap (cold start and
+  warm).
+
+## [0.1.0] - 2026-10-16
 
 The first release: an offline-first Material 3 Expressive to-do app with Android
 home-screen widgets.

@@ -1,5 +1,6 @@
 import 'package:anjiz/app/app_routes.dart';
 import 'package:anjiz/app/providers/task_queries.dart';
+import 'package:anjiz/core/constants/app_constants.dart';
 import 'package:anjiz/core/services/preferences_provider.dart';
 import 'package:anjiz/domain/entities/task_list.dart';
 import 'package:anjiz/features/settings/settings.dart';
@@ -93,7 +94,7 @@ void main() {
     expect(find.text('Daily briefing off'), findsOneWidget);
     expect(find.text('Data & Backup'), findsOneWidget);
     expect(find.text('About'), findsOneWidget);
-    expect(find.text('Anjiz v1.0.0'), findsOneWidget);
+    expect(find.text('Anjiz v${AppConstants.version}'), findsOneWidget);
   });
 
   testWidgets('General opens the theme and motion sections', (tester) async {

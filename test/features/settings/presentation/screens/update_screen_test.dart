@@ -1,3 +1,4 @@
+import 'package:anjiz/core/constants/app_constants.dart';
 import 'package:anjiz/core/services/notification_service.dart';
 import 'package:anjiz/core/services/preferences_provider.dart';
 import 'package:anjiz/core/services/service_providers.dart';
@@ -97,9 +98,9 @@ void main() {
         updateServiceProvider.overrideWithValue(
           _AvailableUpdateService(
             const UpdateManifest(
-              latestVersionName: '1.0.0',
-              latestVersionCode: 10000,
-              apkUrl: 'https://example.test/anjiz-1.0.0.apk',
+              latestVersionName: '0.1.0',
+              latestVersionCode: 100,
+              apkUrl: 'https://example.test/anjiz-0.1.0.apk',
               sha256: 'abc',
             ),
           ),
@@ -123,6 +124,6 @@ void main() {
 
     expect(find.text('You\'re up to date'), findsOneWidget);
     expect(find.text('Check again'), findsOneWidget);
-    expect(find.text('Installed v1.0.0'), findsOneWidget);
+    expect(find.text('Installed v${AppConstants.version}'), findsOneWidget);
   });
 }

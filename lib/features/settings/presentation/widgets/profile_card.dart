@@ -1,22 +1,24 @@
 import 'package:anjiz_ui/anjiz_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../app/app_routes.dart';
 import '../../../../app/widgets/profile_avatar.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../providers/profile_controller.dart';
 
-/// The redesigned profile hero card on the settings screen.
-class ProfileCard extends StatelessWidget {
+/// The profile hero card on the settings screen: real local data, one action.
+class ProfileCard extends ConsumerWidget {
   /// Creates the profile card.
-  const ProfileCard({required this.onManagePlan, super.key});
-
-  /// Called when "Manage Plan" is tapped.
-  final VoidCallback onManagePlan;
+  const ProfileCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final scheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final profile = ref.watch(profileProvider);
 
     return AnjizCard(
       elevated: true,
@@ -26,41 +28,16 @@ class ProfileCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Stack(
-                children: [
-                  const ProfileAvatar(size: 60),
-                  PositionedDirectional(
-                    bottom: 0,
-                    end: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        color: scheme.surface,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                          color: scheme.primary,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.verified_rounded,
-                          size: 12,
-                          color: scheme.onPrimary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              const ProfileAvatar(size: 60),
               const SizedBox(width: AnjizSpacing.md12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n.profileName,
+                      profile.name.isEmpty
+                          ? l10n.profileNameMissing
+                          : profile.name,
                       style: textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -69,7 +46,9 @@ class ProfileCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      l10n.profileEmail,
+                      profile.email.isEmpty
+                          ? l10n.profileLocalOnly
+                          : profile.email,
                       style: textTheme.bodySmall?.copyWith(
                         color: scheme.onSurfaceVariant,
                       ),
@@ -80,9 +59,9 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
               AnjizTagPill(
-                label: l10n.proSyncActive,
-                tone: AnjizTone.primary,
-                icon: Icons.cloud_done_outlined,
+                label: l10n.profileLocalTag,
+                tone: AnjizTone.neutral,
+                icon: Icons.offline_bolt_outlined,
                 compact: true,
               ),
             ],
@@ -93,17 +72,12 @@ class ProfileCard extends StatelessWidget {
             color: scheme.outlineVariant.withValues(alpha: 0.5),
           ),
           const SizedBox(height: AnjizSpacing.md),
-          Row(
-            children: [
-              Expanded(
-                child: AnjizButton(
-                  label: l10n.actionManagePlan,
-                  icon: Icons.star_rounded,
-                  variant: AnjizButtonVariant.tonal,
-                  onPressed: onManagePlan,
-                ),
-              ),
-            ],
+          AnjizButton(
+            label: l10n.profileEditAction,
+            icon: Icons.edit_rounded,
+            variant: AnjizButtonVariant.tonal,
+            expand: true,
+            onPressed: () => context.go(AppRoutes.settingsProfile),
           ),
         ],
       ),

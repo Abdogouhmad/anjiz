@@ -5,9 +5,15 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../settings/presentation/providers/profile_controller.dart';
 import '../../../settings/presentation/providers/settings_controller.dart';
+import '../widgets/onboarding_dots.dart';
+import '../widgets/onboarding_page.dart';
+import '../widgets/onboarding_permissions_page.dart';
+import '../widgets/onboarding_profile_page.dart';
 
-/// The first-run onboarding flow: three expressive pages and a single action.
+/// The first-run onboarding flow: three expressive pages, a profile step and
+/// a permissions step, finished with a single action.
 class OnboardingScreen extends ConsumerStatefulWidget {
   /// Creates the onboarding screen.
   const OnboardingScreen({super.key});
@@ -18,44 +24,71 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final PageController _controller = PageController();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _email = TextEditingController();
   int _index = 0;
+
+  /// Index of the profile step, so it can be swapped in and out.
+  static const int _profileIndex = 3;
 
   @override
   void dispose() {
     _controller.dispose();
+    _name.dispose();
+    _email.dispose();
     super.dispose();
   }
 
-  List<({IconData icon, String title, String message})> _pages(
-    AppLocalizations l10n,
-  ) => [
-    (
-      icon: Icons.done_all_rounded,
-      title: l10n.onboardingTitle1,
-      message: l10n.onboardingMessage1,
-    ),
-    (
-      icon: Icons.auto_awesome_rounded,
-      title: l10n.onboardingTitle2,
-      message: l10n.onboardingMessage2,
-    ),
-    (
-      icon: Icons.widgets_rounded,
-      title: l10n.onboardingTitle3,
-      message: l10n.onboardingMessage3,
-    ),
-  ];
+  int get _pageCount => _profileIndex + 2;
 
   Future<void> _finish() async {
+    await _saveProfile();
     await ref.read(settingsControllerProvider.notifier).completeOnboarding();
     if (mounted) context.go(AppRoutes.today);
   }
 
+  /// Persists whatever was typed; the avatar is saved in place by the picker.
+  Future<void> _saveProfile() async {
+    await ref
+        .read(profileProvider.notifier)
+        .save(name: _name.text, email: _email.text);
+  }
+
+  void _goToPage(int index) {
+    _controller.animateToPage(
+      index,
+      duration: AnjizMotion.standard,
+      curve: AnjizMotion.standardCurve,
+    );
+  }
+
+  Widget _page(int index, AppLocalizations l10n) => switch (index) {
+    0 => OnboardingPage(
+      icon: Icons.done_all_rounded,
+      title: l10n.onboardingTitle1,
+      message: l10n.onboardingMessage1,
+    ),
+    1 => OnboardingPage(
+      icon: Icons.auto_awesome_rounded,
+      title: l10n.onboardingTitle2,
+      message: l10n.onboardingMessage2,
+    ),
+    2 => OnboardingPage(
+      icon: Icons.widgets_rounded,
+      title: l10n.onboardingTitle3,
+      message: l10n.onboardingMessage3,
+    ),
+    _profileIndex => OnboardingProfilePage(
+      nameController: _name,
+      emailController: _email,
+    ),
+    _ => const OnboardingPermissionsPage(),
+  };
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final pages = _pages(l10n);
-    final isLast = _index == pages.length - 1;
+    final isLast = _index == _pageCount - 1;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -74,16 +107,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   controller: _controller,
                   onPageChanged: (index) => setState(() => _index = index),
                   children: [
-                    for (final page in pages)
-                      _OnboardingPage(
-                        icon: page.icon,
-                        title: page.title,
-                        message: page.message,
-                      ),
+                    for (var i = 0; i < _pageCount; i++) _page(i, l10n),
                   ],
                 ),
               ),
-              _PageDots(count: pages.length, index: _index),
+              OnboardingDots(count: _pageCount, index: _index),
               const SizedBox(height: AnjizSpacing.lg),
               AnjizButton(
                 label: isLast ? l10n.actionGetStarted : l10n.actionNext,
@@ -91,94 +119,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 trailingIcon: isLast ? null : Icons.arrow_forward_rounded,
                 expand: true,
                 size: AnjizButtonSize.large,
-                onPressed: () {
-                  if (isLast) {
-                    _finish();
-                  } else {
-                    _controller.nextPage(
-                      duration: AnjizMotion.standard,
-                      curve: AnjizMotion.standardCurve,
-                    );
-                  }
-                },
+                onPressed: isLast ? _finish : () => _goToPage(_index + 1),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class _OnboardingPage extends StatelessWidget {
-  const _OnboardingPage({
-    required this.icon,
-    required this.title,
-    required this.message,
-  });
-
-  final IconData icon;
-  final String title;
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AnjizIconBadge(
-          icon: icon,
-          tone: AnjizTone.primary,
-          size: 132,
-          iconSize: 64,
-        ),
-        const SizedBox(height: AnjizSpacing.xl),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: textTheme.headlineSmall,
-        ),
-        const SizedBox(height: AnjizSpacing.md12),
-        Text(
-          message,
-          textAlign: TextAlign.center,
-          style: textTheme.bodyLarge?.copyWith(color: scheme.onSurfaceVariant),
-        ),
-      ],
-    );
-  }
-}
-
-class _PageDots extends StatelessWidget {
-  const _PageDots({required this.count, required this.index});
-
-  final int count;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (var i = 0; i < count; i++)
-          AnimatedContainer(
-            duration: AnjizMotion.fast,
-            margin: const EdgeInsetsDirectional.symmetric(
-              horizontal: AnjizSpacing.xs,
-            ),
-            width: i == index ? 28 : 10,
-            height: 10,
-            decoration: BoxDecoration(
-              color: i == index
-                  ? scheme.primary
-                  : scheme.surfaceContainerHighest,
-              borderRadius: AnjizShapes.pill,
-            ),
-          ),
-      ],
     );
   }
 }

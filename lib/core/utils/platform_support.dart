@@ -22,6 +22,9 @@ abstract final class PlatformSupport {
   static bool get otaUpdates =>
       !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
 
+  /// Whether the profile photo can be picked from gallery or camera.
+  static bool get avatarPicker => _isMobile;
+
   static bool get _isMobile =>
       !kIsWeb &&
       (defaultTargetPlatform == TargetPlatform.android ||

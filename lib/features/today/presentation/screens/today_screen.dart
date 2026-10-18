@@ -11,6 +11,7 @@ import '../../../../domain/entities/task.dart';
 import '../../../../domain/entities/today_agenda.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../add_task/add_task.dart';
+import '../../../settings/presentation/providers/profile_controller.dart';
 import '../providers/today_agenda_provider.dart';
 import '../widgets/today_agenda_sections.dart';
 import '../widgets/today_greeting_banner.dart';
@@ -59,7 +60,10 @@ class TodayScreen extends ConsumerWidget {
               ),
               sliver: SliverList.list(
                 children: [
-                  TodayGreetingBanner(remaining: agenda.value?.remaining ?? 0),
+                  TodayGreetingBanner(
+                    remaining: agenda.value?.remaining ?? 0,
+                    name: ref.watch(profileProvider).name,
+                  ),
                   const SizedBox(height: AnjizSpacing.lg),
                   ..._body(context, ref, l10n, agenda),
                 ],

@@ -382,6 +382,24 @@ abstract class AppLocalizations {
   /// **'Good evening!'**
   String get greetingEvening;
 
+  /// No description provided for @greetingMorningNamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning, {name}!'**
+  String greetingMorningNamed(String name);
+
+  /// No description provided for @greetingAfternoonNamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon, {name}!'**
+  String greetingAfternoonNamed(String name);
+
+  /// No description provided for @greetingEveningNamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening, {name}!'**
+  String greetingEveningNamed(String name);
+
   /// No description provided for @todaySummary.
   ///
   /// In en, this message translates to:
@@ -417,6 +435,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'By priority'**
   String get sortByPriority;
+
+  /// No description provided for @sortByTime.
+  ///
+  /// In en, this message translates to:
+  /// **'By time'**
+  String get sortByTime;
 
   /// No description provided for @labelCompletedAt.
   ///
@@ -1066,23 +1090,95 @@ abstract class AppLocalizations {
   /// **'Spring animations and tactile feedback'**
   String get motionSettingsSubtitle;
 
-  /// No description provided for @profileName.
+  /// No description provided for @profileTitle.
   ///
   /// In en, this message translates to:
-  /// **'Sarah Al-Mansoor'**
-  String get profileName;
+  /// **'Your profile'**
+  String get profileTitle;
 
-  /// No description provided for @profileEmail.
+  /// No description provided for @profileSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'sarah.mansoor@example.com'**
-  String get profileEmail;
+  /// **'Name, photo and contact details'**
+  String get profileSubtitle;
 
-  /// No description provided for @proSyncActive.
+  /// No description provided for @profileEditAction.
   ///
   /// In en, this message translates to:
-  /// **'Pro Sync Active'**
-  String get proSyncActive;
+  /// **'Edit profile'**
+  String get profileEditAction;
+
+  /// No description provided for @profileNameMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your name'**
+  String get profileNameMissing;
+
+  /// No description provided for @profileLocalOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on this device'**
+  String get profileLocalOnly;
+
+  /// No description provided for @profileLocalTag.
+  ///
+  /// In en, this message translates to:
+  /// **'On this device'**
+  String get profileLocalTag;
+
+  /// No description provided for @profilePhotoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo'**
+  String get profilePhotoTitle;
+
+  /// No description provided for @profileTakePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo'**
+  String get profileTakePhoto;
+
+  /// No description provided for @profileChooseFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get profileChooseFromGallery;
+
+  /// No description provided for @profileRemovePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get profileRemovePhoto;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile saved'**
+  String get profileSaved;
+
+  /// No description provided for @labelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get labelName;
+
+  /// No description provided for @hintName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get hintName;
+
+  /// No description provided for @labelEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get labelEmail;
+
+  /// No description provided for @hintEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'you@example.com'**
+  String get hintEmail;
 
   /// No description provided for @labelLastSynced.
   ///
@@ -1294,6 +1390,12 @@ abstract class AppLocalizations {
   /// **'Morning summary of prioritised tasks & milestones'**
   String get dailyBriefingSubtitle;
 
+  /// No description provided for @dailyBriefingNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Here\'s your plan for today. Open Anjiz to get started.'**
+  String get dailyBriefingNotificationBody;
+
   /// No description provided for @labelWidgetConfig.
   ///
   /// In en, this message translates to:
@@ -1311,6 +1413,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Data & Backup'**
   String get dataTitle;
+
+  /// No description provided for @dataCalendarNotConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Not connected'**
+  String get dataCalendarNotConnected;
 
   /// No description provided for @labelGoogleCalendar.
   ///
@@ -1473,6 +1581,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Home-screen widgets keep your day visible without opening the app.'**
   String get onboardingMessage3;
+
+  /// No description provided for @onboardingProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up your profile'**
+  String get onboardingProfileTitle;
+
+  /// No description provided for @onboardingProfileMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name and photo stay on this device and personalise the app.'**
+  String get onboardingProfileMessage;
+
+  /// No description provided for @onboardingPermissionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay on track'**
+  String get onboardingPermissionsTitle;
+
+  /// No description provided for @onboardingPermissionsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow reminders so Anjiz can nudge you at the right moment. You can change this later.'**
+  String get onboardingPermissionsMessage;
+
+  /// No description provided for @onboardingPermissionNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders and the daily briefing'**
+  String get onboardingPermissionNotifications;
+
+  /// No description provided for @onboardingExactAlarmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact reminders'**
+  String get onboardingExactAlarmTitle;
+
+  /// No description provided for @onboardingPermissionExactAlarms.
+  ///
+  /// In en, this message translates to:
+  /// **'Nudge you at the precise minute'**
+  String get onboardingPermissionExactAlarms;
 
   /// No description provided for @labelUntimed.
   ///

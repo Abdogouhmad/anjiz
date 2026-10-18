@@ -13,6 +13,13 @@ part of 'widget_launch.dart';
 ///
 /// The shell listens to this to open the quick-add composer. Empty on platforms
 /// without home-screen widgets.
+///
+/// Each tap is emitted as-is (no de-duplication): a cold start delivers its
+/// link through [HomeWidget.initiallyLaunchedFromHomeWidget] while a running
+/// app receives fresh taps through [HomeWidget.widgetClicked], and the two
+/// never fire for the same physical tap. De-duplicating here would swallow the
+/// second and later taps of the same widget (identical URI), so the composer
+/// would fail to reopen.
 
 @ProviderFor(widgetLaunches)
 final widgetLaunchesProvider = WidgetLaunchesProvider._();
@@ -22,6 +29,13 @@ final widgetLaunchesProvider = WidgetLaunchesProvider._();
 ///
 /// The shell listens to this to open the quick-add composer. Empty on platforms
 /// without home-screen widgets.
+///
+/// Each tap is emitted as-is (no de-duplication): a cold start delivers its
+/// link through [HomeWidget.initiallyLaunchedFromHomeWidget] while a running
+/// app receives fresh taps through [HomeWidget.widgetClicked], and the two
+/// never fire for the same physical tap. De-duplicating here would swallow the
+/// second and later taps of the same widget (identical URI), so the composer
+/// would fail to reopen.
 
 final class WidgetLaunchesProvider
     extends $FunctionalProvider<AsyncValue<Uri?>, Uri?, Stream<Uri?>>
@@ -31,6 +45,13 @@ final class WidgetLaunchesProvider
   ///
   /// The shell listens to this to open the quick-add composer. Empty on platforms
   /// without home-screen widgets.
+  ///
+  /// Each tap is emitted as-is (no de-duplication): a cold start delivers its
+  /// link through [HomeWidget.initiallyLaunchedFromHomeWidget] while a running
+  /// app receives fresh taps through [HomeWidget.widgetClicked], and the two
+  /// never fire for the same physical tap. De-duplicating here would swallow the
+  /// second and later taps of the same widget (identical URI), so the composer
+  /// would fail to reopen.
   WidgetLaunchesProvider._()
     : super(
         from: null,
@@ -56,4 +77,4 @@ final class WidgetLaunchesProvider
   }
 }
 
-String _$widgetLaunchesHash() => r'da4713bb0628a307530a2b126ee1ffd21aceb58b';
+String _$widgetLaunchesHash() => r'2477b0ef1f61745b9543b053ba84b40aa6305f76';

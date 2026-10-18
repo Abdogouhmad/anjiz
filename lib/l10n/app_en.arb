@@ -56,6 +56,18 @@
   "greetingMorning": "Good morning!",
   "greetingAfternoon": "Good afternoon!",
   "greetingEvening": "Good evening!",
+  "greetingMorningNamed": "Good morning, {name}!",
+  "@greetingMorningNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "greetingAfternoonNamed": "Good afternoon, {name}!",
+  "@greetingAfternoonNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "greetingEveningNamed": "Good evening, {name}!",
+  "@greetingEveningNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
   "todaySummary": "{count, plural, =0{Nothing left for a peaceful evening.} =1{1 task left for a peaceful evening.} other{{count} tasks left for a peaceful evening.}}",
   "@todaySummary": {
     "placeholders": { "count": { "type": "int" } }
@@ -65,6 +77,7 @@
   "sectionLaterToday": "Later Today & Evening",
   "sectionCompletedToday": "Completed",
   "sortByPriority": "By priority",
+  "sortByTime": "By time",
   "labelCompletedAt": "Completed {time}",
   "@labelCompletedAt": {
     "placeholders": { "time": { "type": "String" } }
@@ -241,9 +254,21 @@
   "themeSettingsSubtitle": "Mode, accent tone and dynamic colour",
   "motionSettingsTitle": "Motion & haptics",
   "motionSettingsSubtitle": "Spring animations and tactile feedback",
-  "profileName": "Sarah Al-Mansoor",
-  "profileEmail": "sarah.mansoor@example.com",
-  "proSyncActive": "Pro Sync Active",
+  "profileTitle": "Your profile",
+  "profileSubtitle": "Name, photo and contact details",
+  "profileEditAction": "Edit profile",
+  "profileNameMissing": "Add your name",
+  "profileLocalOnly": "Saved on this device",
+  "profileLocalTag": "On this device",
+  "profilePhotoTitle": "Profile photo",
+  "profileTakePhoto": "Take a photo",
+  "profileChooseFromGallery": "Choose from gallery",
+  "profileRemovePhoto": "Remove photo",
+  "profileSaved": "Profile saved",
+  "labelName": "Name",
+  "hintName": "Your name",
+  "labelEmail": "Email",
+  "hintEmail": "you@example.com",
   "labelLastSynced": "Last synced {time} ago",
   "@labelLastSynced": {
     "placeholders": { "time": { "type": "String" } }
@@ -282,9 +307,11 @@
   "notificationsAndWidgetsTitle": "Notifications & Widgets",
   "labelDailyBriefing": "Daily Briefing",
   "dailyBriefingSubtitle": "Morning summary of prioritised tasks & milestones",
+  "dailyBriefingNotificationBody": "Here's your plan for today. Open Anjiz to get started.",
   "labelWidgetConfig": "Widget Configuration & Previews",
   "widgetConfigSubtitle": "List, completed tasks and opacity",
   "dataTitle": "Data & Backup",
+  "dataCalendarNotConnected": "Not connected",
   "labelGoogleCalendar": "Google Calendar",
   "labelExportTasks": "Export Tasks & History",
   "exportJson": "JSON",
@@ -317,6 +344,13 @@
   "onboardingMessage2": "Scalloped checkboxes, springy motion and Material You colour throughout.",
   "onboardingTitle3": "Always within reach",
   "onboardingMessage3": "Home-screen widgets keep your day visible without opening the app.",
+  "onboardingProfileTitle": "Set up your profile",
+  "onboardingProfileMessage": "Your name and photo stay on this device and personalise the app.",
+  "onboardingPermissionsTitle": "Stay on track",
+  "onboardingPermissionsMessage": "Allow reminders so Anjiz can nudge you at the right moment. You can change this later.",
+  "onboardingPermissionNotifications": "Reminders and the daily briefing",
+  "onboardingExactAlarmTitle": "Exact reminders",
+  "onboardingPermissionExactAlarms": "Nudge you at the precise minute",
 
   "labelUntimed": "Untimed",
   "labelListName": "List name",
