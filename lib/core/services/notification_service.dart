@@ -4,6 +4,7 @@ import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../domain/services/reminder_scheduler.dart';
+import '../../l10n/app_localizations.dart';
 import '../constants/app_constants.dart';
 import '../utils/platform_support.dart';
 import 'notification_channels.dart';
@@ -25,7 +26,11 @@ class NotificationService implements ReminderScheduler {
   NotificationPresenter get _presenter => NotificationPresenter(_plugin);
 
   /// Initialises timezones, the plugin and Android channels (idempotent).
-  Future<void> init() async {
+  ///
+  /// [l10n] supplies the notification-channel copy Android shows in system
+  /// settings; the first init call wins, since the OS snapshots a channel's
+  /// name at creation time.
+  Future<void> init(AppLocalizations l10n) async {
     if (_initialized || !PlatformSupport.notifications) return;
     tz_data.initializeTimeZones();
     await _configureLocalTimezone();
@@ -37,7 +42,7 @@ class NotificationService implements ReminderScheduler {
       settings,
       onDidReceiveNotificationResponse: _onNotificationResponse,
     );
-    await createNotificationChannels(_android);
+    await createNotificationChannels(_android, l10n);
     _initialized = true;
   }
 

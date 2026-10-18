@@ -27,10 +27,10 @@ Future<ProviderContainer> bootstrap() async {
     overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
   );
   await AppInfo.init();
-  await container.read(notificationServiceProvider).init();
+  final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+  await container.read(notificationServiceProvider).init(l10n);
   // Re-register the daily briefing so it survives reboots and upgrades.
   await reconcileDailyBriefing(container);
-  final l10n = await AppLocalizations.delegate.load(const Locale('en'));
   await container
       .read(taskListRepositoryProvider)
       .ensureDefault(l10n.defaultListName);

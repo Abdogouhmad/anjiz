@@ -46,8 +46,8 @@ Future<void> reconcileDailyBriefing(ProviderContainer container) async {
   final SharedPreferences prefs = container.read(sharedPreferencesProvider);
   final enabled = prefs.getBool(AppConstants.prefDailyBriefing) ?? false;
   final notifications = container.read(notificationServiceProvider);
-  await notifications.init();
   final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+  await notifications.init(l10n);
   await DailyBriefingScheduler(notifications).apply(
     enabled: enabled,
     title: l10n.labelDailyBriefing,

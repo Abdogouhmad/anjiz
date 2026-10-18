@@ -494,5 +494,12 @@
     "placeholders": { "hours": { "type": "int" } }
   },
   "updateNever": "Never",
-  "updateReadyInstallTitle": "Update verified & ready to install"
+  "updateReadyInstallTitle": "Update verified & ready to install",
+  "notifChannelRemindersName": "Task reminders",
+  "notifChannelRemindersDescription": "Reminders for tasks with a due time.",
+  "notifChannelBriefingName": "Daily briefing",
+  "notifChannelBriefingDescription": "A morning summary of prioritised tasks.",
+  "notifChannelUpdatesName": "App updates",
+  "notifChannelUpdatesDescription":
+      "Tells you when a newer version of Anjiz is available."
 }

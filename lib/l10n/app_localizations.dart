@@ -2217,6 +2217,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update verified & ready to install'**
   String get updateReadyInstallTitle;
+
+  /// No description provided for @notifChannelRemindersName.
+  ///
+  /// In en, this message translates to:
+  /// **'Task reminders'**
+  String get notifChannelRemindersName;
+
+  /// No description provided for @notifChannelRemindersDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders for tasks with a due time.'**
+  String get notifChannelRemindersDescription;
+
+  /// No description provided for @notifChannelBriefingName.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily briefing'**
+  String get notifChannelBriefingName;
+
+  /// No description provided for @notifChannelBriefingDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A morning summary of prioritised tasks.'**
+  String get notifChannelBriefingDescription;
+
+  /// No description provided for @notifChannelUpdatesName.
+  ///
+  /// In en, this message translates to:
+  /// **'App updates'**
+  String get notifChannelUpdatesName;
+
+  /// No description provided for @notifChannelUpdatesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tells you when a newer version of Anjiz is available.'**
+  String get notifChannelUpdatesDescription;
 }
 
 class _AppLocalizationsDelegate

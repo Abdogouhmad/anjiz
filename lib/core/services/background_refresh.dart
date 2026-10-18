@@ -5,6 +5,7 @@ import 'package:workmanager/workmanager.dart';
 
 import '../../data/repositories/repository_providers.dart';
 import '../../domain/usecases/set_task_reminder.dart';
+import '../../l10n/app_localizations.dart';
 import '../constants/app_constants.dart';
 import '../utils/platform_support.dart';
 import 'daily_briefing.dart';
@@ -72,7 +73,8 @@ Future<void> _rescheduleReminders(ProviderContainer container) async {
   final reminders = await container.read(reminderRepositoryProvider).findAll();
   if (reminders.isEmpty) return;
   final notifications = container.read(notificationServiceProvider);
-  await notifications.init();
+  final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+  await notifications.init(l10n);
   final schedule = SetTaskReminder(
     reminders: container.read(reminderRepositoryProvider),
     scheduler: notifications,

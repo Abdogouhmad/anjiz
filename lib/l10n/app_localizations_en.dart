@@ -1238,4 +1238,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateReadyInstallTitle => 'Update verified & ready to install';
+
+  @override
+  String get notifChannelRemindersName => 'Task reminders';
+
+  @override
+  String get notifChannelRemindersDescription =>
+      'Reminders for tasks with a due time.';
+
+  @override
+  String get notifChannelBriefingName => 'Daily briefing';
+
+  @override
+  String get notifChannelBriefingDescription =>
+      'A morning summary of prioritised tasks.';
+
+  @override
+  String get notifChannelUpdatesName => 'App updates';
+
+  @override
+  String get notifChannelUpdatesDescription =>
+      'Tells you when a newer version of Anjiz is available.';
 }
