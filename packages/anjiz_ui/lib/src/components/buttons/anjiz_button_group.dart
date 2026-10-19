@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
 import '../inputs/anjiz_segmented_selector.dart';
@@ -77,7 +78,10 @@ class AnjizButtonGroup<T> extends StatelessWidget {
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
-          onTap: onTap,
+          onTap: () {
+            AnjizHaptics.selection();
+            onTap();
+          },
           borderRadius: AnjizShapes.pill,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),

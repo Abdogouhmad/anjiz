@@ -18,6 +18,9 @@ export 'src/theme/anjiz_typography.dart';
 // Common
 export 'src/components/common/anjiz_tone.dart';
 
+// Services
+export 'src/services/anjiz_haptics.dart';
+
 // Buttons
 export 'src/components/buttons/anjiz_button.dart';
 export 'src/components/buttons/anjiz_button_group.dart';

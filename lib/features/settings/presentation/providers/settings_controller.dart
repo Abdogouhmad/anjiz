@@ -65,7 +65,7 @@ class SettingsController extends _$SettingsController {
     state = state.copyWith(burstAnimations: enabled);
     await _prefs.setBool(AppConstants.prefBurstAnimations, enabled);
     if (enabled) {
-      await AnjizHaptics.burst(state.hapticLevel);
+      ref.read(hapticServiceProvider).success();
     }
   }
 
@@ -73,7 +73,8 @@ class SettingsController extends _$SettingsController {
   Future<void> setHapticLevel(int level) async {
     state = state.copyWith(hapticLevel: level);
     await _prefs.setInt(AppConstants.prefHapticLevel, level);
-    await AnjizHaptics.trigger(level);
+    ref.invalidate(hapticLevelProvider);
+    ref.read(hapticServiceProvider).tap();
   }
 
   /// Toggles the daily briefing.

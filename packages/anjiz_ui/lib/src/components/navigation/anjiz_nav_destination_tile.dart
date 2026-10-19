@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_motion.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
@@ -40,7 +41,10 @@ class AnjizNavDestinationTile extends StatelessWidget {
         // The icon and label are decorative; the node's own label is announced.
         excludeSemantics: true,
         child: InkWell(
-          onTap: onTap,
+          onTap: () {
+            AnjizHaptics.selection();
+            onTap();
+          },
           customBorder: const StadiumBorder(),
           child: Column(
             mainAxisSize: MainAxisSize.min,

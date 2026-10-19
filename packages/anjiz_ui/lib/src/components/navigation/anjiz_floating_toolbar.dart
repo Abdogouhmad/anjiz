@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_elevation.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
@@ -58,7 +59,12 @@ class AnjizFloatingToolbar extends StatelessWidget {
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
-                  onTap: onPrimaryPressed,
+                  onTap: onPrimaryPressed == null
+                      ? null
+                      : () {
+                          AnjizHaptics.tap();
+                          onPrimaryPressed!();
+                        },
                   borderRadius: AnjizShapes.pill,
                   child: Padding(
                     padding: const EdgeInsetsDirectional.symmetric(
@@ -83,7 +89,12 @@ class AnjizFloatingToolbar extends StatelessWidget {
             ),
           for (final action in actions)
             IconButton(
-              onPressed: action.onPressed,
+              onPressed: action.onPressed == null
+                  ? null
+                  : () {
+                      AnjizHaptics.tap();
+                      action.onPressed!();
+                    },
               tooltip: action.tooltip,
               icon: Icon(action.icon, color: scheme.onSurfaceVariant),
             ),

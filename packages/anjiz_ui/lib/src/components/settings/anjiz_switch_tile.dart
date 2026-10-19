@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_spacing.dart';
 
 /// A title/subtitle row with a trailing switch.
@@ -61,7 +62,15 @@ class AnjizSwitchTile extends StatelessWidget {
             ),
             const SizedBox(width: AnjizSpacing.md),
             MergeSemantics(
-              child: Switch(value: value, onChanged: onChanged),
+              child: Switch(
+                value: value,
+                onChanged: onChanged == null
+                    ? null
+                    : (value) {
+                        AnjizHaptics.selection();
+                        onChanged!(value);
+                      },
+              ),
             ),
           ],
         ),

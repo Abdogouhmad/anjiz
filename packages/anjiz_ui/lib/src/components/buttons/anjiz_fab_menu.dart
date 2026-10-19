@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_motion.dart';
 import '../../tokens/anjiz_spacing.dart';
 import 'anjiz_fab_action_pill.dart';
@@ -70,6 +71,7 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
   }
 
   void _toggle() {
+    AnjizHaptics.tap();
     setState(() => _expanded = !_expanded);
     if (_expanded) {
       _controller.forward();
@@ -116,7 +118,10 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
             AnjizFabPrimaryPill(
               label: widget.label,
               icon: widget.icon,
-              onPressed: widget.onPressed,
+              onPressed: () {
+                AnjizHaptics.tap();
+                widget.onPressed();
+              },
               scheme: scheme,
             ),
             if (widget.actions.isNotEmpty) ...[

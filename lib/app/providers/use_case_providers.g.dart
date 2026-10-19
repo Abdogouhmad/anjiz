@@ -52,7 +52,7 @@ final class AddTaskProvider
   }
 }
 
-String _$addTaskHash() => r'61aace9ad9d6bc4f62fd030ca38fc8a0860b3391';
+String _$addTaskHash() => r'bc2c85d3842f4993daf13fe18c13b80e7475bb4c';
 
 /// Provides the [UpdateTask] use case.
 
@@ -190,7 +190,7 @@ final class ToggleTaskDoneProvider
   }
 }
 
-String _$toggleTaskDoneHash() => r'8c6080ac6a6231384563412331c37498d89fcc4c';
+String _$toggleTaskDoneHash() => r'c786592c689e8aa1f1b4344fd75de20bdd786985';
 
 /// Provides the [ToggleTaskStar] use case.
 

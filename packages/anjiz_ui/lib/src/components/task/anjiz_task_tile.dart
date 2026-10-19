@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_elevation.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
+import 'anjiz_task_accent_bar.dart';
 import 'anjiz_task_checkbox.dart';
+import 'anjiz_task_tile_body.dart';
 
 /// A task row card: scalloped checkbox, title with optional strikethrough,
 /// metadata chips and a star toggle. Feature screens compose this rather than
@@ -17,6 +20,7 @@ class AnjizTaskTile extends StatelessWidget {
     this.onToggle,
     this.onStarToggle,
     this.onTap,
+    this.onLongPress,
     this.subtitle,
     this.meta = const <Widget>[],
     this.trailing,
@@ -45,6 +49,9 @@ class AnjizTaskTile extends StatelessWidget {
   /// Row tap handler.
   final VoidCallback? onTap;
 
+  /// Long-press handler (e.g. selection/reorder); fires heavy haptics.
+  final VoidCallback? onLongPress;
+
   /// Optional secondary line below the title.
   final Widget? subtitle;
 
@@ -69,15 +76,6 @@ class AnjizTaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    final titleStyle = textTheme.titleMedium!.copyWith(
-      color: isDone ? scheme.onSurfaceVariant : scheme.onSurface,
-      decoration: isDone && strikethroughOnDone
-          ? TextDecoration.lineThrough
-          : TextDecoration.none,
-      decorationColor: scheme.onSurfaceVariant,
-    );
-
     return Container(
       decoration: BoxDecoration(
         color: flat
@@ -90,6 +88,12 @@ class AnjizTaskTile extends StatelessWidget {
         type: MaterialType.transparency,
         child: InkWell(
           onTap: onTap,
+          onLongPress: onLongPress == null
+              ? null
+              : () {
+                  AnjizHaptics.heavy();
+                  onLongPress!();
+                },
           borderRadius: AnjizShapes.card,
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -102,19 +106,7 @@ class AnjizTaskTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (accentColor != null) ...[
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      top: AnjizSpacing.xs,
-                    ),
-                    child: Container(
-                      width: 4,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: accentColor,
-                        borderRadius: AnjizShapes.pill,
-                      ),
-                    ),
-                  ),
+                  AnjizTaskAccentBar(color: accentColor!),
                   const SizedBox(width: AnjizSpacing.xs),
                 ],
                 Padding(
@@ -127,28 +119,12 @@ class AnjizTaskTile extends StatelessWidget {
                 ),
                 const SizedBox(width: AnjizSpacing.xs),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(title, style: titleStyle),
-                      if (subtitle != null) ...[
-                        const SizedBox(height: AnjizSpacing.xs),
-                        DefaultTextStyle.merge(
-                          style: textTheme.bodyMedium!.copyWith(
-                            color: scheme.onSurfaceVariant,
-                          ),
-                          child: subtitle!,
-                        ),
-                      ],
-                      if (meta.isNotEmpty) ...[
-                        const SizedBox(height: AnjizSpacing.sm),
-                        Wrap(
-                          spacing: AnjizSpacing.sm,
-                          runSpacing: AnjizSpacing.sm,
-                          children: meta,
-                        ),
-                      ],
-                    ],
+                  child: AnjizTaskTileBody(
+                    title: title,
+                    isDone: isDone,
+                    strikethroughOnDone: strikethroughOnDone,
+                    subtitle: subtitle,
+                    meta: meta,
                   ),
                 ),
                 if (trailing != null) trailing!,

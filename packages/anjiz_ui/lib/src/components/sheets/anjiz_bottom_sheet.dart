@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
 import 'anjiz_drag_handle.dart';
@@ -59,6 +60,8 @@ class AnjizSheetContent extends StatelessWidget {
 /// Helpers for presenting Anjiz modal bottom sheets.
 abstract final class AnjizBottomSheet {
   /// Shows a modal sheet hosting [child], respecting safe areas.
+  ///
+  /// Confirming the sheet (a non-null result) fires selection feedback.
   static Future<T?> show<T>(
     BuildContext context, {
     required Widget child,
@@ -74,6 +77,9 @@ abstract final class AnjizBottomSheet {
         ),
       ),
       builder: (context) => SafeArea(top: false, child: child),
-    );
+    ).then((result) {
+      if (result != null) AnjizHaptics.selection();
+      return result;
+    });
   }
 }

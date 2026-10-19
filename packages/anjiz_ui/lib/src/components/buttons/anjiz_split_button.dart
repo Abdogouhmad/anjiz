@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
 
@@ -46,7 +47,12 @@ class AnjizSplitButton extends StatelessWidget {
           Material(
             type: MaterialType.transparency,
             child: InkWell(
-              onTap: onPressed,
+              onTap: onPressed == null
+                  ? null
+                  : () {
+                      AnjizHaptics.tap();
+                      onPressed!();
+                    },
               borderRadius: AnjizShapes.pill,
               child: Padding(
                 padding: const EdgeInsetsDirectional.symmetric(
@@ -75,7 +81,12 @@ class AnjizSplitButton extends StatelessWidget {
             color: scheme.onPrimary.withValues(alpha: 0.3),
           ),
           IconButton(
-            onPressed: onArrowPressed,
+            onPressed: onArrowPressed == null
+                ? null
+                : () {
+                    AnjizHaptics.tap();
+                    onArrowPressed!();
+                  },
             tooltip: arrowTooltip,
             icon: Icon(Icons.arrow_drop_down_rounded, color: scheme.onPrimary),
           ),

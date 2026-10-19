@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
 import '../common/anjiz_tone.dart';
@@ -43,10 +44,16 @@ class AnjizSelectChip extends StatelessWidget {
         ? colors.container
         : scheme.surfaceContainerHigh;
     final foreground = selected ? colors.onContainer : scheme.onSurfaceVariant;
+    final tapped = onTap == null
+        ? null
+        : () {
+            AnjizHaptics.selection();
+            onTap!();
+          };
     return Material(
       type: MaterialType.transparency,
       child: InkWell(
-        onTap: onTap,
+        onTap: tapped,
         borderRadius: AnjizShapes.pill,
         child: Container(
           height: 40,

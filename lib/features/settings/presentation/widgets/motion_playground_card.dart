@@ -33,17 +33,18 @@ class _MotionPlaygroundCardState extends ConsumerState<MotionPlaygroundCard>
     super.dispose();
   }
 
-  Future<void> _handleToggle(bool value) async {
+  void _handleToggle(bool value) {
     final settings = ref.read(settingsControllerProvider);
+    final haptics = ref.read(hapticServiceProvider);
     setState(() => _completed = value);
 
     if (value) {
-      await AnjizHaptics.burst(settings.hapticLevel);
+      haptics.success();
       if (settings.burstAnimations) {
         _burstController.forward(from: 0);
       }
     } else {
-      await AnjizHaptics.selection(settings.hapticLevel);
+      haptics.selection();
     }
   }
 
@@ -165,7 +166,7 @@ class _MotionPlaygroundCardState extends ConsumerState<MotionPlaygroundCard>
             label: l10n.motionTestHaptics,
             icon: Icons.vibration_rounded,
             variant: AnjizButtonVariant.tonal,
-            onPressed: () => AnjizHaptics.burst(settings.hapticLevel),
+            onPressed: () => ref.read(hapticServiceProvider).success(),
           ),
         ],
       ),

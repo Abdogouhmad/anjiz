@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
 
@@ -47,6 +48,8 @@ class AnjizSwipeRow extends StatelessWidget {
               iconColor: scheme.onErrorContainer,
             ),
       confirmDismiss: (direction) async {
+        // Fires once the swipe crosses the dismiss threshold.
+        AnjizHaptics.tap();
         if (direction == DismissDirection.startToEnd) {
           onComplete?.call();
           return false;
