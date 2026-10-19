@@ -26,6 +26,7 @@ part 'use_case_providers.g.dart';
 AddTask addTask(Ref ref) => AddTask(
   tasks: ref.watch(taskRepositoryProvider),
   widgetSync: ref.watch(widgetSyncServiceProvider),
+  reminder: ref.watch(setTaskReminderProvider),
 );
 
 /// Provides the [UpdateTask] use case.
@@ -51,6 +52,7 @@ ToggleTaskDone toggleTaskDone(Ref ref) => ToggleTaskDone(
   tasks: ref.watch(taskRepositoryProvider),
   widgetSync: ref.watch(widgetSyncServiceProvider),
   reminders: ref.watch(notificationServiceProvider),
+  reminderRows: ref.watch(reminderRepositoryProvider),
 );
 
 /// Provides the [ToggleTaskStar] use case.

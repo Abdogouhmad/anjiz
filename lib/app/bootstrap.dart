@@ -8,6 +8,7 @@ import '../core/services/app_info.dart';
 import '../core/services/background_refresh.dart';
 import '../core/services/daily_briefing.dart';
 import '../core/services/preferences_provider.dart';
+import '../core/services/reminder_resync.dart';
 import '../core/services/service_providers.dart';
 import '../data/repositories/repository_providers.dart';
 import '../features/settings/presentation/providers/update_controller.dart';
@@ -29,6 +30,9 @@ Future<ProviderContainer> bootstrap() async {
   await AppInfo.init();
   final l10n = await AppLocalizations.delegate.load(const Locale('en'));
   await container.read(notificationServiceProvider).init(l10n);
+  // Android drops alarms on reboot/update: rebuild pending reminders from
+  // the database on every start (WorkManager covers the no-launch case).
+  await reschedulePendingReminders(container);
   // Re-register the daily briefing so it survives reboots and upgrades.
   await reconcileDailyBriefing(container);
   await container
