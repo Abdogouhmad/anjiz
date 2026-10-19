@@ -1,7 +1,7 @@
 /// Stable string keys and ids used across Anjiz.
 abstract final class AppConstants {
   /// Human-readable application version shown in the settings footer.
-  static const String version = '0.1.1';
+  static const String version = '0.2.0';
 
   /// Id of the list created on first launch.
   static const String defaultListId = 'my-tasks';
