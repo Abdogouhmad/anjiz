@@ -63,7 +63,9 @@ class ReminderNotificationScheduler {
   tz.Location _fixedOffsetLocation(Duration offset) {
     // The Etc/GMT±N zones are inverted: Etc/GMT-5 means UTC+5.
     final hours = (offset.inMinutes / 60).round().clamp(-12, 14);
-    final name = hours == 0 ? 'UTC' : 'Etc/GMT${hours.isNegative ? '+' : '-'}${hours.abs()}';
+    final name = hours == 0
+        ? 'UTC'
+        : 'Etc/GMT${hours.isNegative ? '+' : '-'}${hours.abs()}';
     try {
       return tz.getLocation(name);
     } on Object {

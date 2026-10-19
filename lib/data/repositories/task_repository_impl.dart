@@ -64,6 +64,10 @@ class TaskRepositoryImpl implements TaskRepository {
       _dao.reorder(ordered.map((task) => task.id).toList());
 
   @override
+  Future<void> addFocusTime(String taskId, int minutes) =>
+      _dao.addFocusTime(taskId, minutes);
+
+  @override
   Future<void> delete(String id) => _dao.deleteById(id);
 
   @override

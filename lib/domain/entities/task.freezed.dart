@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Task {
 
- String get id; String get listId; String get title; String get notes; bool get isDone; bool get isStarred; Priority get priority; DateTime? get dueAt; bool get hasTime; String? get repeatRule; int get sortOrder; DateTime? get completedAt; DateTime get createdAt; DateTime get updatedAt;
+ String get id; String get listId; String get title; String get notes; bool get isDone; bool get isStarred; Priority get priority; DateTime? get dueAt; bool get hasTime; String? get repeatRule; int get sortOrder; int get focusSessions; int get focusMinutes; DateTime? get completedAt; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TaskCopyWith<Task> get copyWith => _$TaskCopyWithImpl<Task>(this as Task, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Task&&(identical(other.id, id) || other.id == id)&&(identical(other.listId, listId) || other.listId == listId)&&(identical(other.title, title) || other.title == title)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.isDone, isDone) || other.isDone == isDone)&&(identical(other.isStarred, isStarred) || other.isStarred == isStarred)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.dueAt, dueAt) || other.dueAt == dueAt)&&(identical(other.hasTime, hasTime) || other.hasTime == hasTime)&&(identical(other.repeatRule, repeatRule) || other.repeatRule == repeatRule)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Task&&(identical(other.id, id) || other.id == id)&&(identical(other.listId, listId) || other.listId == listId)&&(identical(other.title, title) || other.title == title)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.isDone, isDone) || other.isDone == isDone)&&(identical(other.isStarred, isStarred) || other.isStarred == isStarred)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.dueAt, dueAt) || other.dueAt == dueAt)&&(identical(other.hasTime, hasTime) || other.hasTime == hasTime)&&(identical(other.repeatRule, repeatRule) || other.repeatRule == repeatRule)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.focusSessions, focusSessions) || other.focusSessions == focusSessions)&&(identical(other.focusMinutes, focusMinutes) || other.focusMinutes == focusMinutes)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,listId,title,notes,isDone,isStarred,priority,dueAt,hasTime,repeatRule,sortOrder,completedAt,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,listId,title,notes,isDone,isStarred,priority,dueAt,hasTime,repeatRule,sortOrder,focusSessions,focusMinutes,completedAt,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Task(id: $id, listId: $listId, title: $title, notes: $notes, isDone: $isDone, isStarred: $isStarred, priority: $priority, dueAt: $dueAt, hasTime: $hasTime, repeatRule: $repeatRule, sortOrder: $sortOrder, completedAt: $completedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Task(id: $id, listId: $listId, title: $title, notes: $notes, isDone: $isDone, isStarred: $isStarred, priority: $priority, dueAt: $dueAt, hasTime: $hasTime, repeatRule: $repeatRule, sortOrder: $sortOrder, focusSessions: $focusSessions, focusMinutes: $focusMinutes, completedAt: $completedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TaskCopyWith<$Res>  {
   factory $TaskCopyWith(Task value, $Res Function(Task) _then) = _$TaskCopyWithImpl;
 @useResult
 $Res call({
- String id, String listId, String title, String notes, bool isDone, bool isStarred, Priority priority, DateTime? dueAt, bool hasTime, String? repeatRule, int sortOrder, DateTime? completedAt, DateTime createdAt, DateTime updatedAt
+ String id, String listId, String title, String notes, bool isDone, bool isStarred, Priority priority, DateTime? dueAt, bool hasTime, String? repeatRule, int sortOrder, int focusSessions, int focusMinutes, DateTime? completedAt, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -65,7 +65,7 @@ class _$TaskCopyWithImpl<$Res>
 
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? listId = null,Object? title = null,Object? notes = null,Object? isDone = null,Object? isStarred = null,Object? priority = null,Object? dueAt = freezed,Object? hasTime = null,Object? repeatRule = freezed,Object? sortOrder = null,Object? completedAt = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? listId = null,Object? title = null,Object? notes = null,Object? isDone = null,Object? isStarred = null,Object? priority = null,Object? dueAt = freezed,Object? hasTime = null,Object? repeatRule = freezed,Object? sortOrder = null,Object? focusSessions = null,Object? focusMinutes = null,Object? completedAt = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,listId: null == listId ? _self.listId : listId // ignore: cast_nullable_to_non_nullable
@@ -78,6 +78,8 @@ as Priority,dueAt: freezed == dueAt ? _self.dueAt : dueAt // ignore: cast_nullab
 as DateTime?,hasTime: null == hasTime ? _self.hasTime : hasTime // ignore: cast_nullable_to_non_nullable
 as bool,repeatRule: freezed == repeatRule ? _self.repeatRule : repeatRule // ignore: cast_nullable_to_non_nullable
 as String?,sortOrder: null == sortOrder ? _self.sortOrder : sortOrder // ignore: cast_nullable_to_non_nullable
+as int,focusSessions: null == focusSessions ? _self.focusSessions : focusSessions // ignore: cast_nullable_to_non_nullable
+as int,focusMinutes: null == focusMinutes ? _self.focusMinutes : focusMinutes // ignore: cast_nullable_to_non_nullable
 as int,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -166,10 +168,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String listId,  String title,  String notes,  bool isDone,  bool isStarred,  Priority priority,  DateTime? dueAt,  bool hasTime,  String? repeatRule,  int sortOrder,  DateTime? completedAt,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String listId,  String title,  String notes,  bool isDone,  bool isStarred,  Priority priority,  DateTime? dueAt,  bool hasTime,  String? repeatRule,  int sortOrder,  int focusSessions,  int focusMinutes,  DateTime? completedAt,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Task() when $default != null:
-return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that.isStarred,_that.priority,_that.dueAt,_that.hasTime,_that.repeatRule,_that.sortOrder,_that.completedAt,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that.isStarred,_that.priority,_that.dueAt,_that.hasTime,_that.repeatRule,_that.sortOrder,_that.focusSessions,_that.focusMinutes,_that.completedAt,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -187,10 +189,10 @@ return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String listId,  String title,  String notes,  bool isDone,  bool isStarred,  Priority priority,  DateTime? dueAt,  bool hasTime,  String? repeatRule,  int sortOrder,  DateTime? completedAt,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String listId,  String title,  String notes,  bool isDone,  bool isStarred,  Priority priority,  DateTime? dueAt,  bool hasTime,  String? repeatRule,  int sortOrder,  int focusSessions,  int focusMinutes,  DateTime? completedAt,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Task():
-return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that.isStarred,_that.priority,_that.dueAt,_that.hasTime,_that.repeatRule,_that.sortOrder,_that.completedAt,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that.isStarred,_that.priority,_that.dueAt,_that.hasTime,_that.repeatRule,_that.sortOrder,_that.focusSessions,_that.focusMinutes,_that.completedAt,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -207,10 +209,10 @@ return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String listId,  String title,  String notes,  bool isDone,  bool isStarred,  Priority priority,  DateTime? dueAt,  bool hasTime,  String? repeatRule,  int sortOrder,  DateTime? completedAt,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String listId,  String title,  String notes,  bool isDone,  bool isStarred,  Priority priority,  DateTime? dueAt,  bool hasTime,  String? repeatRule,  int sortOrder,  int focusSessions,  int focusMinutes,  DateTime? completedAt,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Task() when $default != null:
-return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that.isStarred,_that.priority,_that.dueAt,_that.hasTime,_that.repeatRule,_that.sortOrder,_that.completedAt,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that.isStarred,_that.priority,_that.dueAt,_that.hasTime,_that.repeatRule,_that.sortOrder,_that.focusSessions,_that.focusMinutes,_that.completedAt,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -222,7 +224,7 @@ return $default(_that.id,_that.listId,_that.title,_that.notes,_that.isDone,_that
 @JsonSerializable()
 
 class _Task extends Task {
-  const _Task({required this.id, required this.listId, required this.title, this.notes = '', this.isDone = false, this.isStarred = false, this.priority = Priority.none, this.dueAt, this.hasTime = false, this.repeatRule, this.sortOrder = 0, this.completedAt, required this.createdAt, required this.updatedAt}): super._();
+  const _Task({required this.id, required this.listId, required this.title, this.notes = '', this.isDone = false, this.isStarred = false, this.priority = Priority.none, this.dueAt, this.hasTime = false, this.repeatRule, this.sortOrder = 0, this.focusSessions = 0, this.focusMinutes = 0, this.completedAt, required this.createdAt, required this.updatedAt}): super._();
   factory _Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
 @override final  String id;
@@ -236,6 +238,8 @@ class _Task extends Task {
 @override@JsonKey() final  bool hasTime;
 @override final  String? repeatRule;
 @override@JsonKey() final  int sortOrder;
+@override@JsonKey() final  int focusSessions;
+@override@JsonKey() final  int focusMinutes;
 @override final  DateTime? completedAt;
 @override final  DateTime createdAt;
 @override final  DateTime updatedAt;
@@ -253,16 +257,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Task&&(identical(other.id, id) || other.id == id)&&(identical(other.listId, listId) || other.listId == listId)&&(identical(other.title, title) || other.title == title)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.isDone, isDone) || other.isDone == isDone)&&(identical(other.isStarred, isStarred) || other.isStarred == isStarred)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.dueAt, dueAt) || other.dueAt == dueAt)&&(identical(other.hasTime, hasTime) || other.hasTime == hasTime)&&(identical(other.repeatRule, repeatRule) || other.repeatRule == repeatRule)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Task&&(identical(other.id, id) || other.id == id)&&(identical(other.listId, listId) || other.listId == listId)&&(identical(other.title, title) || other.title == title)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.isDone, isDone) || other.isDone == isDone)&&(identical(other.isStarred, isStarred) || other.isStarred == isStarred)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.dueAt, dueAt) || other.dueAt == dueAt)&&(identical(other.hasTime, hasTime) || other.hasTime == hasTime)&&(identical(other.repeatRule, repeatRule) || other.repeatRule == repeatRule)&&(identical(other.sortOrder, sortOrder) || other.sortOrder == sortOrder)&&(identical(other.focusSessions, focusSessions) || other.focusSessions == focusSessions)&&(identical(other.focusMinutes, focusMinutes) || other.focusMinutes == focusMinutes)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,listId,title,notes,isDone,isStarred,priority,dueAt,hasTime,repeatRule,sortOrder,completedAt,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,listId,title,notes,isDone,isStarred,priority,dueAt,hasTime,repeatRule,sortOrder,focusSessions,focusMinutes,completedAt,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Task(id: $id, listId: $listId, title: $title, notes: $notes, isDone: $isDone, isStarred: $isStarred, priority: $priority, dueAt: $dueAt, hasTime: $hasTime, repeatRule: $repeatRule, sortOrder: $sortOrder, completedAt: $completedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Task(id: $id, listId: $listId, title: $title, notes: $notes, isDone: $isDone, isStarred: $isStarred, priority: $priority, dueAt: $dueAt, hasTime: $hasTime, repeatRule: $repeatRule, sortOrder: $sortOrder, focusSessions: $focusSessions, focusMinutes: $focusMinutes, completedAt: $completedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -273,7 +277,7 @@ abstract mixin class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$TaskCopyWith(_Task value, $Res Function(_Task) _then) = __$TaskCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String listId, String title, String notes, bool isDone, bool isStarred, Priority priority, DateTime? dueAt, bool hasTime, String? repeatRule, int sortOrder, DateTime? completedAt, DateTime createdAt, DateTime updatedAt
+ String id, String listId, String title, String notes, bool isDone, bool isStarred, Priority priority, DateTime? dueAt, bool hasTime, String? repeatRule, int sortOrder, int focusSessions, int focusMinutes, DateTime? completedAt, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -290,7 +294,7 @@ class __$TaskCopyWithImpl<$Res>
 
 /// Create a copy of Task
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? listId = null,Object? title = null,Object? notes = null,Object? isDone = null,Object? isStarred = null,Object? priority = null,Object? dueAt = freezed,Object? hasTime = null,Object? repeatRule = freezed,Object? sortOrder = null,Object? completedAt = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? listId = null,Object? title = null,Object? notes = null,Object? isDone = null,Object? isStarred = null,Object? priority = null,Object? dueAt = freezed,Object? hasTime = null,Object? repeatRule = freezed,Object? sortOrder = null,Object? focusSessions = null,Object? focusMinutes = null,Object? completedAt = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_Task(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,listId: null == listId ? _self.listId : listId // ignore: cast_nullable_to_non_nullable
@@ -303,6 +307,8 @@ as Priority,dueAt: freezed == dueAt ? _self.dueAt : dueAt // ignore: cast_nullab
 as DateTime?,hasTime: null == hasTime ? _self.hasTime : hasTime // ignore: cast_nullable_to_non_nullable
 as bool,repeatRule: freezed == repeatRule ? _self.repeatRule : repeatRule // ignore: cast_nullable_to_non_nullable
 as String?,sortOrder: null == sortOrder ? _self.sortOrder : sortOrder // ignore: cast_nullable_to_non_nullable
+as int,focusSessions: null == focusSessions ? _self.focusSessions : focusSessions // ignore: cast_nullable_to_non_nullable
+as int,focusMinutes: null == focusMinutes ? _self.focusMinutes : focusMinutes // ignore: cast_nullable_to_non_nullable
 as int,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable

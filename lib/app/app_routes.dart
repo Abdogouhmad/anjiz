@@ -27,6 +27,9 @@ abstract final class AppRoutes {
   /// Motion and haptics controls, nested under General.
   static const String settingsMotion = '/settings/general/motion';
 
+  /// Focus-timer lengths and rhythm, nested under General.
+  static const String settingsFocus = '/settings/general/focus';
+
   /// Notification and widget settings.
   static const String settingsNotifications = '/settings/notifications';
 

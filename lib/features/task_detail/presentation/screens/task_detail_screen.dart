@@ -8,6 +8,7 @@ import '../../../../app/providers/task_queries.dart';
 import '../../../../app/widgets/profile_avatar.dart';
 import '../../../../domain/entities/task.dart';
 import '../../../../domain/entities/task_list.dart';
+import '../../../../features/pomodoro/pomodoro.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../providers/task_by_id_provider.dart';
 import '../widgets/notes_card.dart';
@@ -116,6 +117,8 @@ class TaskDetailScreen extends ConsumerWidget {
       ),
       const SizedBox(height: AnjizSpacing.md),
       SubtaskListCard(taskId: task.id),
+      const SizedBox(height: AnjizSpacing.md),
+      FocusTaskCard(task: task),
       const SizedBox(height: AnjizSpacing.md),
       TaskDetailInfoCard(
         task: task,

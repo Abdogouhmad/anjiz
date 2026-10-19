@@ -1,6 +1,7 @@
 package com.freesoftware.anjiz.pomodoro
 
 import android.content.Context
+import android.content.Intent
 import org.json.JSONObject
 
 /**
@@ -40,6 +41,8 @@ internal data class PomodoroState(
         "phaseEndEpochMs" to phaseEndEpochMs,
         "paused" to paused,
         "remainingMs" to remainingMs,
+        // Dart reads this back on getState/events to keep the focused task.
+        "taskId" to taskId,
     )
 
     fun toJson(): JSONObject = JSONObject().apply {
@@ -61,6 +64,47 @@ internal data class PomodoroState(
     }
 
     companion object {
+        private const val MINUTE_MS = 60_000L
+
+        /**
+         * Initial state of an ACTION_START command. `totalSessions` defaults to
+         * the long-break interval when Dart does not name it explicitly.
+         */
+        fun fromStartIntent(intent: Intent, nowMs: Long): PomodoroState {
+            val focus = intExtra(intent, PomodoroContract.EXTRA_FOCUS_MINUTES, 25)
+            val interval = intExtra(intent, PomodoroContract.EXTRA_LONG_BREAK_INTERVAL, 4)
+            return PomodoroState(
+                taskId = intent.getStringExtra(PomodoroContract.EXTRA_TASK_ID).orEmpty(),
+                title = intent.getStringExtra(PomodoroContract.EXTRA_TITLE).orEmpty(),
+                phase = PomodoroContract.PHASE_FOCUS,
+                session = 1,
+                totalSessions = intExtra(intent, PomodoroContract.EXTRA_TOTAL_SESSIONS, interval),
+                phaseEndEpochMs = nowMs + focus * MINUTE_MS,
+                paused = false,
+                remainingMs = focus * MINUTE_MS,
+                focusMinutes = focus,
+                breakMinutes = intExtra(intent, PomodoroContract.EXTRA_BREAK_MINUTES, 5),
+                longBreakMinutes =
+                    intExtra(intent, PomodoroContract.EXTRA_LONG_BREAK_MINUTES, 15),
+                longBreakInterval = interval,
+                autoStartNext = intent.getBooleanExtra(
+                    PomodoroContract.EXTRA_AUTO_START_NEXT,
+                    true,
+                ),
+                primaryColor = intent.getIntExtra(
+                    PomodoroContract.EXTRA_PRIMARY_COLOR,
+                    PomodoroContract.DEFAULT_PRIMARY_COLOR,
+                ),
+                tertiaryColor = intent.getIntExtra(
+                    PomodoroContract.EXTRA_TERTIARY_COLOR,
+                    PomodoroContract.DEFAULT_TERTIARY_COLOR,
+                ),
+            )
+        }
+
+        private fun intExtra(intent: Intent, key: String, fallback: Int): Int =
+            intent.getIntExtra(key, fallback).coerceAtLeast(1)
+
         /** Restores the persisted run, or null when no run is active. */
         fun load(context: Context): PomodoroState? {
             val raw = prefs(context).getString(PomodoroContract.PREFS_STATE_KEY, null)

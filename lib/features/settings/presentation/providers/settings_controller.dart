@@ -31,6 +31,14 @@ class SettingsController extends _$SettingsController {
       dailyBriefing: prefs.getBool(AppConstants.prefDailyBriefing) ?? false,
       onboardingComplete:
           prefs.getBool(AppConstants.prefOnboardingDone) ?? false,
+      focusMinutes: prefs.getInt(AppConstants.prefPomodoroFocusMinutes) ?? 25,
+      breakMinutes: prefs.getInt(AppConstants.prefPomodoroBreakMinutes) ?? 5,
+      longBreakMinutes:
+          prefs.getInt(AppConstants.prefPomodoroLongBreakMinutes) ?? 15,
+      longBreakInterval:
+          prefs.getInt(AppConstants.prefPomodoroLongBreakInterval) ?? 4,
+      pomodoroAutoStart:
+          prefs.getBool(AppConstants.prefPomodoroAutoStart) ?? false,
     );
   }
 
@@ -81,6 +89,36 @@ class SettingsController extends _$SettingsController {
   Future<void> setDailyBriefing({required bool enabled}) async {
     state = state.copyWith(dailyBriefing: enabled);
     await _prefs.setBool(AppConstants.prefDailyBriefing, enabled);
+  }
+
+  /// Sets the focus-phase length in minutes.
+  Future<void> setFocusMinutes(int minutes) async {
+    state = state.copyWith(focusMinutes: minutes);
+    await _prefs.setInt(AppConstants.prefPomodoroFocusMinutes, minutes);
+  }
+
+  /// Sets the short-break length in minutes.
+  Future<void> setBreakMinutes(int minutes) async {
+    state = state.copyWith(breakMinutes: minutes);
+    await _prefs.setInt(AppConstants.prefPomodoroBreakMinutes, minutes);
+  }
+
+  /// Sets the long-break length in minutes.
+  Future<void> setLongBreakMinutes(int minutes) async {
+    state = state.copyWith(longBreakMinutes: minutes);
+    await _prefs.setInt(AppConstants.prefPomodoroLongBreakMinutes, minutes);
+  }
+
+  /// Sets how many focus phases precede a long break.
+  Future<void> setLongBreakInterval(int sessions) async {
+    state = state.copyWith(longBreakInterval: sessions);
+    await _prefs.setInt(AppConstants.prefPomodoroLongBreakInterval, sessions);
+  }
+
+  /// Toggles auto-starting the phase after the current one.
+  Future<void> setPomodoroAutoStart({required bool enabled}) async {
+    state = state.copyWith(pomodoroAutoStart: enabled);
+    await _prefs.setBool(AppConstants.prefPomodoroAutoStart, enabled);
   }
 
   /// Marks onboarding as completed.

@@ -752,3 +752,49 @@ final class SetTaskReminderProvider
 }
 
 String _$setTaskReminderHash() => r'21f655b94e10d7493efe84404befe48c304d3cec';
+
+/// Provides the [LogFocusTime] use case.
+
+@ProviderFor(logFocusTime)
+final logFocusTimeProvider = LogFocusTimeProvider._();
+
+/// Provides the [LogFocusTime] use case.
+
+final class LogFocusTimeProvider
+    extends $FunctionalProvider<LogFocusTime, LogFocusTime, LogFocusTime>
+    with $Provider<LogFocusTime> {
+  /// Provides the [LogFocusTime] use case.
+  LogFocusTimeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'logFocusTimeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$logFocusTimeHash();
+
+  @$internal
+  @override
+  $ProviderElement<LogFocusTime> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  LogFocusTime create(Ref ref) {
+    return logFocusTime(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(LogFocusTime value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LogFocusTime>(value),
+    );
+  }
+}
+
+String _$logFocusTimeHash() => r'230d65ba4d2398715ecfeee2c34bdb1609e72515';

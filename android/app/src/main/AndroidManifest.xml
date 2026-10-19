@@ -12,6 +12,11 @@
          installer. The `ota_update` plugin merges the same permission; declaring
          it here keeps the requirement visible in the app manifest. -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- The Pomodoro timer runs as a foreground service with a promoted
+         "Live Update" notification (Android 16+). -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_PROMOTED_NOTIFICATIONS" />
 
     <application
         android:label="@string/app_name"
@@ -131,6 +136,23 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
+
+        <!-- Pomodoro Live Update (Android 16+): the foreground service that owns
+             the focus timer and the promoted ongoing notification. -->
+        <service
+            android:name=".pomodoro.PomodoroService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="pomodoro_focus_timer_live_update" />
+        </service>
+
+        <!-- Pomodoro Live Update: receives notification action taps and phase-end
+             alarms, then forwards them to the service. -->
+        <receiver
+            android:name=".pomodoro.PomodoroActionReceiver"
+            android:exported="false" />
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

@@ -501,5 +501,61 @@
   "notifChannelBriefingDescription": "A morning summary of prioritised tasks.",
   "notifChannelUpdatesName": "App updates",
   "notifChannelUpdatesDescription":
-      "Tells you when a newer version of Anjiz is available."
+      "Tells you when a newer version of Anjiz is available.",
+
+  "settingsFocusTitle": "Focus timer",
+  "settingsFocusSubtitle": "Pomodoro lengths and rhythm",
+  "pomodoroFocusLength": "Focus length",
+  "pomodoroBreakLength": "Break length",
+  "pomodoroLongBreakLength": "Long break length",
+  "pomodoroLongBreakInterval": "Long break interval",
+  "pomodoroAutoStartNext": "Auto-start next phase",
+  "pomodoroAutoStartNextSubtitle": "Move straight from focus into the break",
+  "pomodoroMinutesValue": "{minutes} min",
+  "@pomodoroMinutesValue": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "pomodoroSessionsValue": "{count} sessions",
+  "@pomodoroSessionsValue": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "pomodoroStartFocus": "Start focus",
+  "pomodoroTitle": "Focus timer",
+  "pomodoroPhaseFocus": "Focus",
+  "pomodoroPhaseBreak": "Break",
+  "pomodoroPhaseLongBreak": "Long break",
+  "pomodoroSessionOf": "Session {session} of {total}",
+  "@pomodoroSessionOf": {
+    "placeholders": {
+      "session": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "pomodoroPausedValue": "Paused · {time}",
+  "@pomodoroPausedValue": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "pomodoroActionPause": "Pause",
+  "pomodoroActionResume": "Resume",
+  "pomodoroActionSkip": "Skip",
+  "pomodoroActionDone": "Done",
+  "pomodoroSwitchPrompt":
+      "A focus session is already running. Switch to this task?",
+  "pomodoroSessionsDone": "Focus cycle complete — nice work!",
+  "pomodoroFocusMinutesMeta": "{minutes} min focus",
+  "@pomodoroFocusMinutesMeta": {
+    "placeholders": { "minutes": { "type": "int" } }
+  },
+  "pomodoroPromotedDisabled":
+      "Live updates are off for Anjiz, so the focus timer can't appear as an ongoing notification. Turn them on in the app's notification settings.",
+  "pomodoroUnsupported":
+      "The focus timer needs Android 16 or newer for its Live Update notification.",
+  "pomodoroRunningFor": "Focusing on this task",
+  "pomodoroChannelLiveName": "Pomodoro timer",
+  "pomodoroChannelLiveDescription":
+      "The ongoing focus timer with Live Update controls.",
+  "pomodoroChannelAlertName": "Pomodoro alerts",
+  "pomodoroChannelAlertDescription":
+      "Plays a sound when a focus or break phase ends."
 }

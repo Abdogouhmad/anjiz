@@ -30,6 +30,15 @@ List<Widget> buildTaskMetaChips(
   if (showPriority && task.priority != Priority.none) {
     chips.add(AnjizPriorityChip(label: priorityLabel(l10n, task.priority)));
   }
+  if (task.focusMinutes > 0) {
+    chips.add(
+      AnjizMetaChip(
+        label: l10n.pomodoroFocusMinutesMeta(task.focusMinutes),
+        icon: Icons.timer_outlined,
+        tone: AnjizTone.tertiary,
+      ),
+    );
+  }
   return chips;
 }
 

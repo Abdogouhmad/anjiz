@@ -53,6 +53,14 @@ internal object PomodoroContract {
     const val PHASE_BREAK = "break"
     const val PHASE_LONG_BREAK = "longBreak"
 
+    /**
+     * Asks the system to promote the ongoing notification to a Live Update.
+     * `Notification.Builder.setRequestPromotedOngoing` and the matching
+     * constant landed only in API 36.1, so at compileSdk 36 the documented
+     * wire format is this extra (androidx.core uses the same string).
+     */
+    const val EXTRA_REQUEST_PROMOTED_ONGOING = "android.requestPromotedOngoing"
+
     /** PendingIntent request codes; one per action so taps stay distinct. */
     const val REQUEST_PAUSE = 41010
     const val REQUEST_RESUME = 41011

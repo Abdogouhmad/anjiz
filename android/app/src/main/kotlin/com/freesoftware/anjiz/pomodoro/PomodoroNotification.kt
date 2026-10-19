@@ -76,7 +76,12 @@ internal object PomodoroNotification {
         builder.setProgress(totalMinutes, elapsed, false)
         if (Build.VERSION.SDK_INT >= 36) {
             applyProgressStyle(builder, state, segments, elapsed)
-            builder.setRequestPromotedOngoing(true)
+            // Request promotion through the extra: the dedicated setter is
+            // API 36.1-only, which compileSdk 36 cannot reference.
+            builder.extras.putBoolean(
+                PomodoroContract.EXTRA_REQUEST_PROMOTED_ONGOING,
+                true,
+            )
         }
     }
 

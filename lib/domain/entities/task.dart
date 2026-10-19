@@ -19,6 +19,8 @@ abstract class Task with _$Task {
     @Default(false) bool hasTime,
     String? repeatRule,
     @Default(0) int sortOrder,
+    @Default(0) int focusSessions,
+    @Default(0) int focusMinutes,
     DateTime? completedAt,
     required DateTime createdAt,
     required DateTime updatedAt,

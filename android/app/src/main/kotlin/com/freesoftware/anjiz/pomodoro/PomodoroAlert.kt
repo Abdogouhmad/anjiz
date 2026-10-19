@@ -63,6 +63,15 @@ internal object PomodoroAlert {
             ?.notify(PomodoroContract.ALERT_NOTIFICATION_ID, notification)
     }
 
+    /** Copy for the phase-end ping: what comes next, or a small finale. */
+    fun phaseEndBody(ended: PomodoroState, next: PomodoroState?): String = when {
+        next == null -> "All ${ended.totalSessions} sessions complete"
+        next.phase == PomodoroContract.PHASE_FOCUS ->
+            "Back to focus · Session ${next.session} of ${next.totalSessions}"
+        next.phase == PomodoroContract.PHASE_BREAK -> "Break · ${next.breakMinutes} min"
+        else -> "Long break · ${next.longBreakMinutes} min"
+    }
+
     /** Bare notification used only to satisfy startForeground before stopping. */
     fun buildIdle(context: Context): Notification {
         ensureChannels(context)

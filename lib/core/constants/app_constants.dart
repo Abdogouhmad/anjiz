@@ -33,6 +33,25 @@ abstract final class AppConstants {
   /// Shared-preferences key storing whether onboarding has been completed.
   static const String prefOnboardingDone = 'settings.onboardingDone';
 
+  /// Shared-preferences key for the focus-phase length in minutes.
+  static const String prefPomodoroFocusMinutes =
+      'settings.pomodoro.focusMinutes';
+
+  /// Shared-preferences key for the short-break length in minutes.
+  static const String prefPomodoroBreakMinutes =
+      'settings.pomodoro.breakMinutes';
+
+  /// Shared-preferences key for the long-break length in minutes.
+  static const String prefPomodoroLongBreakMinutes =
+      'settings.pomodoro.longBreakMinutes';
+
+  /// Shared-preferences key for how many focus phases precede a long break.
+  static const String prefPomodoroLongBreakInterval =
+      'settings.pomodoro.longBreakInterval';
+
+  /// Shared-preferences key for auto-starting the next phase.
+  static const String prefPomodoroAutoStart = 'settings.pomodoro.autoStart';
+
   /// Shared-preferences key for the widget's selected list id.
   static const String prefWidgetListId = 'widget.listId';
 
@@ -50,6 +69,16 @@ abstract final class AppConstants {
 
   /// Android notification channel id for "a new version is available".
   static const String updatesChannelId = 'anjiz.updates';
+
+  /// Android notification channel id for the Pomodoro Live Update timer.
+  ///
+  /// Must match `PomodoroContract.CHANNEL_LIVE` on the native side.
+  static const String pomodoroChannelLiveId = 'pomodoro';
+
+  /// Android notification channel id for one-shot Pomodoro phase alerts.
+  ///
+  /// Must match `PomodoroContract.CHANNEL_ALERT` on the native side.
+  static const String pomodoroChannelAlertId = 'pomodoro_alert';
 
   /// Notification id used for the update announcement (never reused).
   static const int updateNotificationId = 99;

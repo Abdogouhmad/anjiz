@@ -536,6 +536,30 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
     requiredDuringInsert: false,
     defaultValue: const Constant(0),
   );
+  static const VerificationMeta _focusSessionsMeta = const VerificationMeta(
+    'focusSessions',
+  );
+  @override
+  late final GeneratedColumn<int> focusSessions = GeneratedColumn<int>(
+    'focus_sessions',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _focusMinutesMeta = const VerificationMeta(
+    'focusMinutes',
+  );
+  @override
+  late final GeneratedColumn<int> focusMinutes = GeneratedColumn<int>(
+    'focus_minutes',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
   static const VerificationMeta _completedAtMeta = const VerificationMeta(
     'completedAt',
   );
@@ -582,6 +606,8 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
     hasTime,
     repeatRule,
     sortOrder,
+    focusSessions,
+    focusMinutes,
     completedAt,
     createdAt,
     updatedAt,
@@ -667,6 +693,24 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
         sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
       );
     }
+    if (data.containsKey('focus_sessions')) {
+      context.handle(
+        _focusSessionsMeta,
+        focusSessions.isAcceptableOrUnknown(
+          data['focus_sessions']!,
+          _focusSessionsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('focus_minutes')) {
+      context.handle(
+        _focusMinutesMeta,
+        focusMinutes.isAcceptableOrUnknown(
+          data['focus_minutes']!,
+          _focusMinutesMeta,
+        ),
+      );
+    }
     if (data.containsKey('completed_at')) {
       context.handle(
         _completedAtMeta,
@@ -745,6 +789,14 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, TaskRow> {
         DriftSqlType.int,
         data['${effectivePrefix}sort_order'],
       )!,
+      focusSessions: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}focus_sessions'],
+      )!,
+      focusMinutes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}focus_minutes'],
+      )!,
       completedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}completed_at'],
@@ -778,6 +830,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
   final bool hasTime;
   final String? repeatRule;
   final int sortOrder;
+  final int focusSessions;
+  final int focusMinutes;
   final DateTime? completedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -793,6 +847,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
     required this.hasTime,
     this.repeatRule,
     required this.sortOrder,
+    required this.focusSessions,
+    required this.focusMinutes,
     this.completedAt,
     required this.createdAt,
     required this.updatedAt,
@@ -815,6 +871,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
       map['repeat_rule'] = Variable<String>(repeatRule);
     }
     map['sort_order'] = Variable<int>(sortOrder);
+    map['focus_sessions'] = Variable<int>(focusSessions);
+    map['focus_minutes'] = Variable<int>(focusMinutes);
     if (!nullToAbsent || completedAt != null) {
       map['completed_at'] = Variable<DateTime>(completedAt);
     }
@@ -840,6 +898,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
           ? const Value.absent()
           : Value(repeatRule),
       sortOrder: Value(sortOrder),
+      focusSessions: Value(focusSessions),
+      focusMinutes: Value(focusMinutes),
       completedAt: completedAt == null && nullToAbsent
           ? const Value.absent()
           : Value(completedAt),
@@ -865,6 +925,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
       hasTime: serializer.fromJson<bool>(json['hasTime']),
       repeatRule: serializer.fromJson<String?>(json['repeatRule']),
       sortOrder: serializer.fromJson<int>(json['sortOrder']),
+      focusSessions: serializer.fromJson<int>(json['focusSessions']),
+      focusMinutes: serializer.fromJson<int>(json['focusMinutes']),
       completedAt: serializer.fromJson<DateTime?>(json['completedAt']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
@@ -885,6 +947,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
       'hasTime': serializer.toJson<bool>(hasTime),
       'repeatRule': serializer.toJson<String?>(repeatRule),
       'sortOrder': serializer.toJson<int>(sortOrder),
+      'focusSessions': serializer.toJson<int>(focusSessions),
+      'focusMinutes': serializer.toJson<int>(focusMinutes),
       'completedAt': serializer.toJson<DateTime?>(completedAt),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
@@ -903,6 +967,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
     bool? hasTime,
     Value<String?> repeatRule = const Value.absent(),
     int? sortOrder,
+    int? focusSessions,
+    int? focusMinutes,
     Value<DateTime?> completedAt = const Value.absent(),
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -918,6 +984,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
     hasTime: hasTime ?? this.hasTime,
     repeatRule: repeatRule.present ? repeatRule.value : this.repeatRule,
     sortOrder: sortOrder ?? this.sortOrder,
+    focusSessions: focusSessions ?? this.focusSessions,
+    focusMinutes: focusMinutes ?? this.focusMinutes,
     completedAt: completedAt.present ? completedAt.value : this.completedAt,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -937,6 +1005,12 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
           ? data.repeatRule.value
           : this.repeatRule,
       sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
+      focusSessions: data.focusSessions.present
+          ? data.focusSessions.value
+          : this.focusSessions,
+      focusMinutes: data.focusMinutes.present
+          ? data.focusMinutes.value
+          : this.focusMinutes,
       completedAt: data.completedAt.present
           ? data.completedAt.value
           : this.completedAt,
@@ -959,6 +1033,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
           ..write('hasTime: $hasTime, ')
           ..write('repeatRule: $repeatRule, ')
           ..write('sortOrder: $sortOrder, ')
+          ..write('focusSessions: $focusSessions, ')
+          ..write('focusMinutes: $focusMinutes, ')
           ..write('completedAt: $completedAt, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt')
@@ -979,6 +1055,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
     hasTime,
     repeatRule,
     sortOrder,
+    focusSessions,
+    focusMinutes,
     completedAt,
     createdAt,
     updatedAt,
@@ -998,6 +1076,8 @@ class TaskRow extends DataClass implements Insertable<TaskRow> {
           other.hasTime == this.hasTime &&
           other.repeatRule == this.repeatRule &&
           other.sortOrder == this.sortOrder &&
+          other.focusSessions == this.focusSessions &&
+          other.focusMinutes == this.focusMinutes &&
           other.completedAt == this.completedAt &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt);
@@ -1015,6 +1095,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
   final Value<bool> hasTime;
   final Value<String?> repeatRule;
   final Value<int> sortOrder;
+  final Value<int> focusSessions;
+  final Value<int> focusMinutes;
   final Value<DateTime?> completedAt;
   final Value<DateTime> createdAt;
   final Value<DateTime> updatedAt;
@@ -1031,6 +1113,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
     this.hasTime = const Value.absent(),
     this.repeatRule = const Value.absent(),
     this.sortOrder = const Value.absent(),
+    this.focusSessions = const Value.absent(),
+    this.focusMinutes = const Value.absent(),
     this.completedAt = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
@@ -1048,6 +1132,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
     this.hasTime = const Value.absent(),
     this.repeatRule = const Value.absent(),
     this.sortOrder = const Value.absent(),
+    this.focusSessions = const Value.absent(),
+    this.focusMinutes = const Value.absent(),
     this.completedAt = const Value.absent(),
     required DateTime createdAt,
     required DateTime updatedAt,
@@ -1069,6 +1155,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
     Expression<bool>? hasTime,
     Expression<String>? repeatRule,
     Expression<int>? sortOrder,
+    Expression<int>? focusSessions,
+    Expression<int>? focusMinutes,
     Expression<DateTime>? completedAt,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
@@ -1086,6 +1174,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
       if (hasTime != null) 'has_time': hasTime,
       if (repeatRule != null) 'repeat_rule': repeatRule,
       if (sortOrder != null) 'sort_order': sortOrder,
+      if (focusSessions != null) 'focus_sessions': focusSessions,
+      if (focusMinutes != null) 'focus_minutes': focusMinutes,
       if (completedAt != null) 'completed_at': completedAt,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
@@ -1105,6 +1195,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
     Value<bool>? hasTime,
     Value<String?>? repeatRule,
     Value<int>? sortOrder,
+    Value<int>? focusSessions,
+    Value<int>? focusMinutes,
     Value<DateTime?>? completedAt,
     Value<DateTime>? createdAt,
     Value<DateTime>? updatedAt,
@@ -1122,6 +1214,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
       hasTime: hasTime ?? this.hasTime,
       repeatRule: repeatRule ?? this.repeatRule,
       sortOrder: sortOrder ?? this.sortOrder,
+      focusSessions: focusSessions ?? this.focusSessions,
+      focusMinutes: focusMinutes ?? this.focusMinutes,
       completedAt: completedAt ?? this.completedAt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -1165,6 +1259,12 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
     if (sortOrder.present) {
       map['sort_order'] = Variable<int>(sortOrder.value);
     }
+    if (focusSessions.present) {
+      map['focus_sessions'] = Variable<int>(focusSessions.value);
+    }
+    if (focusMinutes.present) {
+      map['focus_minutes'] = Variable<int>(focusMinutes.value);
+    }
     if (completedAt.present) {
       map['completed_at'] = Variable<DateTime>(completedAt.value);
     }
@@ -1194,6 +1294,8 @@ class TasksCompanion extends UpdateCompanion<TaskRow> {
           ..write('hasTime: $hasTime, ')
           ..write('repeatRule: $repeatRule, ')
           ..write('sortOrder: $sortOrder, ')
+          ..write('focusSessions: $focusSessions, ')
+          ..write('focusMinutes: $focusMinutes, ')
           ..write('completedAt: $completedAt, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
@@ -2245,6 +2347,8 @@ typedef $$TasksTableCreateCompanionBuilder = TasksCompanion Function({
   Value<bool> hasTime,
   Value<String?> repeatRule,
   Value<int> sortOrder,
+  Value<int> focusSessions,
+  Value<int> focusMinutes,
   Value<DateTime?> completedAt,
   required DateTime createdAt,
   required DateTime updatedAt,
@@ -2262,6 +2366,8 @@ typedef $$TasksTableUpdateCompanionBuilder = TasksCompanion Function({
   Value<bool> hasTime,
   Value<String?> repeatRule,
   Value<int> sortOrder,
+  Value<int> focusSessions,
+  Value<int> focusMinutes,
   Value<DateTime?> completedAt,
   Value<DateTime> createdAt,
   Value<DateTime> updatedAt,
@@ -2382,6 +2488,16 @@ class $$TasksTableFilterComposer
 
   ColumnFilters<int> get sortOrder => $composableBuilder(
     column: $table.sortOrder,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get focusSessions => $composableBuilder(
+    column: $table.focusSessions,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get focusMinutes => $composableBuilder(
+    column: $table.focusMinutes,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2533,6 +2649,16 @@ class $$TasksTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get focusSessions => $composableBuilder(
+    column: $table.focusSessions,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get focusMinutes => $composableBuilder(
+    column: $table.focusMinutes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get completedAt => $composableBuilder(
     column: $table.completedAt,
     builder: (column) => ColumnOrderings(column),
@@ -2612,6 +2738,16 @@ class $$TasksTableAnnotationComposer
 
   GeneratedColumn<int> get sortOrder =>
       $composableBuilder(column: $table.sortOrder, builder: (column) => column);
+
+  GeneratedColumn<int> get focusSessions => $composableBuilder(
+    column: $table.focusSessions,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get focusMinutes => $composableBuilder(
+    column: $table.focusMinutes,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get completedAt => $composableBuilder(
     column: $table.completedAt,
@@ -2741,6 +2877,8 @@ class $$TasksTableTableManager
                 Value<bool> hasTime = const Value.absent(),
                 Value<String?> repeatRule = const Value.absent(),
                 Value<int> sortOrder = const Value.absent(),
+                Value<int> focusSessions = const Value.absent(),
+                Value<int> focusMinutes = const Value.absent(),
                 Value<DateTime?> completedAt = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<DateTime> updatedAt = const Value.absent(),
@@ -2757,6 +2895,8 @@ class $$TasksTableTableManager
                 hasTime: hasTime,
                 repeatRule: repeatRule,
                 sortOrder: sortOrder,
+                focusSessions: focusSessions,
+                focusMinutes: focusMinutes,
                 completedAt: completedAt,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
@@ -2775,6 +2915,8 @@ class $$TasksTableTableManager
                 Value<bool> hasTime = const Value.absent(),
                 Value<String?> repeatRule = const Value.absent(),
                 Value<int> sortOrder = const Value.absent(),
+                Value<int> focusSessions = const Value.absent(),
+                Value<int> focusMinutes = const Value.absent(),
                 Value<DateTime?> completedAt = const Value.absent(),
                 required DateTime createdAt,
                 required DateTime updatedAt,
@@ -2791,6 +2933,8 @@ class $$TasksTableTableManager
                 hasTime: hasTime,
                 repeatRule: repeatRule,
                 sortOrder: sortOrder,
+                focusSessions: focusSessions,
+                focusMinutes: focusMinutes,
                 completedAt: completedAt,
                 createdAt: createdAt,
                 updatedAt: updatedAt,

@@ -41,4 +41,20 @@ Future<void> createNotificationChannels(
       importance: Importance.low,
     ),
   );
+  await android?.createNotificationChannel(
+    AndroidNotificationChannel(
+      AppConstants.pomodoroChannelLiveId,
+      l10n.pomodoroChannelLiveName,
+      description: l10n.pomodoroChannelLiveDescription,
+      importance: Importance.low,
+    ),
+  );
+  await android?.createNotificationChannel(
+    AndroidNotificationChannel(
+      AppConstants.pomodoroChannelAlertId,
+      l10n.pomodoroChannelAlertName,
+      description: l10n.pomodoroChannelAlertDescription,
+      importance: Importance.high,
+    ),
+  );
 }

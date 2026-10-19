@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettings {
 
- ThemeMode get themeMode; bool get useDynamicColor; int get accentIndex; bool get usePureBlack; bool get burstAnimations; int get hapticLevel; bool get dailyBriefing; bool get onboardingComplete;
+ ThemeMode get themeMode; bool get useDynamicColor; int get accentIndex; bool get usePureBlack; bool get burstAnimations; int get hapticLevel; bool get dailyBriefing; bool get onboardingComplete; int get focusMinutes; int get breakMinutes; int get longBreakMinutes; int get longBreakInterval; bool get pomodoroAutoStart;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $AppSettingsCopyWith<AppSettings> get copyWith => _$AppSettingsCopyWithImpl<AppS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.usePureBlack, usePureBlack) || other.usePureBlack == usePureBlack)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.usePureBlack, usePureBlack) || other.usePureBlack == usePureBlack)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete)&&(identical(other.focusMinutes, focusMinutes) || other.focusMinutes == focusMinutes)&&(identical(other.breakMinutes, breakMinutes) || other.breakMinutes == breakMinutes)&&(identical(other.longBreakMinutes, longBreakMinutes) || other.longBreakMinutes == longBreakMinutes)&&(identical(other.longBreakInterval, longBreakInterval) || other.longBreakInterval == longBreakInterval)&&(identical(other.pomodoroAutoStart, pomodoroAutoStart) || other.pomodoroAutoStart == pomodoroAutoStart));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,usePureBlack,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,usePureBlack,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete,focusMinutes,breakMinutes,longBreakMinutes,longBreakInterval,pomodoroAutoStart);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, usePureBlack: $usePureBlack, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, usePureBlack: $usePureBlack, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete, focusMinutes: $focusMinutes, breakMinutes: $breakMinutes, longBreakMinutes: $longBreakMinutes, longBreakInterval: $longBreakInterval, pomodoroAutoStart: $pomodoroAutoStart)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $AppSettingsCopyWith<$Res>  {
   factory $AppSettingsCopyWith(AppSettings value, $Res Function(AppSettings) _then) = _$AppSettingsCopyWithImpl;
 @useResult
 $Res call({
- ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool usePureBlack, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete
+ ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool usePureBlack, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete, int focusMinutes, int breakMinutes, int longBreakMinutes, int longBreakInterval, bool pomodoroAutoStart
 });
 
 
@@ -62,7 +62,7 @@ class _$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? usePureBlack = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? usePureBlack = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,Object? focusMinutes = null,Object? breakMinutes = null,Object? longBreakMinutes = null,Object? longBreakInterval = null,Object? pomodoroAutoStart = null,}) {
   return _then(_self.copyWith(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as ThemeMode,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
@@ -72,6 +72,11 @@ as bool,burstAnimations: null == burstAnimations ? _self.burstAnimations : burst
 as bool,hapticLevel: null == hapticLevel ? _self.hapticLevel : hapticLevel // ignore: cast_nullable_to_non_nullable
 as int,dailyBriefing: null == dailyBriefing ? _self.dailyBriefing : dailyBriefing // ignore: cast_nullable_to_non_nullable
 as bool,onboardingComplete: null == onboardingComplete ? _self.onboardingComplete : onboardingComplete // ignore: cast_nullable_to_non_nullable
+as bool,focusMinutes: null == focusMinutes ? _self.focusMinutes : focusMinutes // ignore: cast_nullable_to_non_nullable
+as int,breakMinutes: null == breakMinutes ? _self.breakMinutes : breakMinutes // ignore: cast_nullable_to_non_nullable
+as int,longBreakMinutes: null == longBreakMinutes ? _self.longBreakMinutes : longBreakMinutes // ignore: cast_nullable_to_non_nullable
+as int,longBreakInterval: null == longBreakInterval ? _self.longBreakInterval : longBreakInterval // ignore: cast_nullable_to_non_nullable
+as int,pomodoroAutoStart: null == pomodoroAutoStart ? _self.pomodoroAutoStart : pomodoroAutoStart // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -157,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete,  int focusMinutes,  int breakMinutes,  int longBreakMinutes,  int longBreakInterval,  bool pomodoroAutoStart)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete,_that.focusMinutes,_that.breakMinutes,_that.longBreakMinutes,_that.longBreakInterval,_that.pomodoroAutoStart);case _:
   return orElse();
 
 }
@@ -178,10 +183,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.us
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete,  int focusMinutes,  int breakMinutes,  int longBreakMinutes,  int longBreakInterval,  bool pomodoroAutoStart)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings():
-return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete,_that.focusMinutes,_that.breakMinutes,_that.longBreakMinutes,_that.longBreakInterval,_that.pomodoroAutoStart);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +203,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.us
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode themeMode,  bool useDynamicColor,  int accentIndex,  bool usePureBlack,  bool burstAnimations,  int hapticLevel,  bool dailyBriefing,  bool onboardingComplete,  int focusMinutes,  int breakMinutes,  int longBreakMinutes,  int longBreakInterval,  bool pomodoroAutoStart)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.usePureBlack,_that.burstAnimations,_that.hapticLevel,_that.dailyBriefing,_that.onboardingComplete,_that.focusMinutes,_that.breakMinutes,_that.longBreakMinutes,_that.longBreakInterval,_that.pomodoroAutoStart);case _:
   return null;
 
 }
@@ -213,7 +218,7 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.accentIndex,_that.us
 
 
 class _AppSettings implements AppSettings {
-  const _AppSettings({this.themeMode = ThemeMode.system, this.useDynamicColor = true, this.accentIndex = 0, this.usePureBlack = false, this.burstAnimations = true, this.hapticLevel = 2, this.dailyBriefing = false, this.onboardingComplete = false});
+  const _AppSettings({this.themeMode = ThemeMode.system, this.useDynamicColor = true, this.accentIndex = 0, this.usePureBlack = false, this.burstAnimations = true, this.hapticLevel = 2, this.dailyBriefing = false, this.onboardingComplete = false, this.focusMinutes = 25, this.breakMinutes = 5, this.longBreakMinutes = 15, this.longBreakInterval = 4, this.pomodoroAutoStart = false});
   
 
 @override@JsonKey() final  ThemeMode themeMode;
@@ -224,6 +229,11 @@ class _AppSettings implements AppSettings {
 @override@JsonKey() final  int hapticLevel;
 @override@JsonKey() final  bool dailyBriefing;
 @override@JsonKey() final  bool onboardingComplete;
+@override@JsonKey() final  int focusMinutes;
+@override@JsonKey() final  int breakMinutes;
+@override@JsonKey() final  int longBreakMinutes;
+@override@JsonKey() final  int longBreakInterval;
+@override@JsonKey() final  bool pomodoroAutoStart;
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +245,16 @@ _$AppSettingsCopyWith<_AppSettings> get copyWith => __$AppSettingsCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.usePureBlack, usePureBlack) || other.usePureBlack == usePureBlack)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.accentIndex, accentIndex) || other.accentIndex == accentIndex)&&(identical(other.usePureBlack, usePureBlack) || other.usePureBlack == usePureBlack)&&(identical(other.burstAnimations, burstAnimations) || other.burstAnimations == burstAnimations)&&(identical(other.hapticLevel, hapticLevel) || other.hapticLevel == hapticLevel)&&(identical(other.dailyBriefing, dailyBriefing) || other.dailyBriefing == dailyBriefing)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete)&&(identical(other.focusMinutes, focusMinutes) || other.focusMinutes == focusMinutes)&&(identical(other.breakMinutes, breakMinutes) || other.breakMinutes == breakMinutes)&&(identical(other.longBreakMinutes, longBreakMinutes) || other.longBreakMinutes == longBreakMinutes)&&(identical(other.longBreakInterval, longBreakInterval) || other.longBreakInterval == longBreakInterval)&&(identical(other.pomodoroAutoStart, pomodoroAutoStart) || other.pomodoroAutoStart == pomodoroAutoStart));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,usePureBlack,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,accentIndex,usePureBlack,burstAnimations,hapticLevel,dailyBriefing,onboardingComplete,focusMinutes,breakMinutes,longBreakMinutes,longBreakInterval,pomodoroAutoStart);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, usePureBlack: $usePureBlack, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, accentIndex: $accentIndex, usePureBlack: $usePureBlack, burstAnimations: $burstAnimations, hapticLevel: $hapticLevel, dailyBriefing: $dailyBriefing, onboardingComplete: $onboardingComplete, focusMinutes: $focusMinutes, breakMinutes: $breakMinutes, longBreakMinutes: $longBreakMinutes, longBreakInterval: $longBreakInterval, pomodoroAutoStart: $pomodoroAutoStart)';
 }
 
 
@@ -255,7 +265,7 @@ abstract mixin class _$AppSettingsCopyWith<$Res> implements $AppSettingsCopyWith
   factory _$AppSettingsCopyWith(_AppSettings value, $Res Function(_AppSettings) _then) = __$AppSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool usePureBlack, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete
+ ThemeMode themeMode, bool useDynamicColor, int accentIndex, bool usePureBlack, bool burstAnimations, int hapticLevel, bool dailyBriefing, bool onboardingComplete, int focusMinutes, int breakMinutes, int longBreakMinutes, int longBreakInterval, bool pomodoroAutoStart
 });
 
 
@@ -272,7 +282,7 @@ class __$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? usePureBlack = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? accentIndex = null,Object? usePureBlack = null,Object? burstAnimations = null,Object? hapticLevel = null,Object? dailyBriefing = null,Object? onboardingComplete = null,Object? focusMinutes = null,Object? breakMinutes = null,Object? longBreakMinutes = null,Object? longBreakInterval = null,Object? pomodoroAutoStart = null,}) {
   return _then(_AppSettings(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as ThemeMode,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
@@ -282,6 +292,11 @@ as bool,burstAnimations: null == burstAnimations ? _self.burstAnimations : burst
 as bool,hapticLevel: null == hapticLevel ? _self.hapticLevel : hapticLevel // ignore: cast_nullable_to_non_nullable
 as int,dailyBriefing: null == dailyBriefing ? _self.dailyBriefing : dailyBriefing // ignore: cast_nullable_to_non_nullable
 as bool,onboardingComplete: null == onboardingComplete ? _self.onboardingComplete : onboardingComplete // ignore: cast_nullable_to_non_nullable
+as bool,focusMinutes: null == focusMinutes ? _self.focusMinutes : focusMinutes // ignore: cast_nullable_to_non_nullable
+as int,breakMinutes: null == breakMinutes ? _self.breakMinutes : breakMinutes // ignore: cast_nullable_to_non_nullable
+as int,longBreakMinutes: null == longBreakMinutes ? _self.longBreakMinutes : longBreakMinutes // ignore: cast_nullable_to_non_nullable
+as int,longBreakInterval: null == longBreakInterval ? _self.longBreakInterval : longBreakInterval // ignore: cast_nullable_to_non_nullable
+as int,pomodoroAutoStart: null == pomodoroAutoStart ? _self.pomodoroAutoStart : pomodoroAutoStart // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

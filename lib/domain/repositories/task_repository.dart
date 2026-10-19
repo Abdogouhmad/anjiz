@@ -42,6 +42,9 @@ abstract interface class TaskRepository {
   /// Persists a new manual ordering.
   Future<void> reorder(List<Task> ordered);
 
+  /// Records one completed focus session of [minutes] on a task.
+  Future<void> addFocusTime(String taskId, int minutes);
+
   /// Deletes a task and its dependents.
   Future<void> delete(String id);
 
