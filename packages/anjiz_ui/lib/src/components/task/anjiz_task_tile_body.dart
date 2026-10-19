@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../tokens/anjiz_motion.dart';
 import '../../tokens/anjiz_spacing.dart';
 
 /// The text block of an [AnjizTaskTile]: title, optional subtitle and meta
@@ -46,7 +47,12 @@ class AnjizTaskTileBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: titleStyle),
+        AnimatedDefaultTextStyle(
+          duration: AnjizMotion.standard,
+          curve: AnjizMotion.standardCurve,
+          style: titleStyle,
+          child: Text(title),
+        ),
         if (subtitle != null) ...[
           const SizedBox(height: AnjizSpacing.xs),
           DefaultTextStyle.merge(

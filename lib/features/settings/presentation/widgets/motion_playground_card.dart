@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:anjiz_ui/anjiz_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/motion/springs.dart';
 import '../../../../core/services/haptic_service.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../providers/settings_controller.dart';
@@ -24,7 +26,6 @@ class _MotionPlaygroundCardState extends ConsumerState<MotionPlaygroundCard>
   bool _completed = false;
   late final AnimationController _burstController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 650),
   );
 
   @override
@@ -41,7 +42,10 @@ class _MotionPlaygroundCardState extends ConsumerState<MotionPlaygroundCard>
     if (value) {
       haptics.success();
       if (settings.burstAnimations) {
-        _burstController.forward(from: 0);
+        _burstController.value = 0;
+        unawaited(
+          Springs.run(_burstController, 1, spring: AnjizMotion.expressive),
+        );
       }
     } else {
       haptics.selection();

@@ -18,6 +18,12 @@ export 'src/theme/anjiz_typography.dart';
 // Common
 export 'src/components/common/anjiz_tone.dart';
 
+// Motion
+export 'src/components/motion/spring_collapse.dart';
+export 'src/components/motion/spring_in.dart';
+export 'src/components/motion/spring_press_scale.dart';
+export 'src/components/motion/spring_scale.dart';
+
 // Services
 export 'src/services/anjiz_haptics.dart';
 
@@ -43,6 +49,7 @@ export 'src/components/lists/anjiz_swipe_row.dart';
 export 'src/components/lists/anjiz_tag_pill.dart';
 
 // Task
+export 'src/components/task/animated_check.dart';
 export 'src/components/task/anjiz_meta_chip.dart';
 export 'src/components/task/anjiz_priority_chip.dart';
 export 'src/components/task/anjiz_task_checkbox.dart';

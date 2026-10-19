@@ -39,9 +39,7 @@ class AnjizButtonContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final foreground = style.foregroundColor?.resolve(
-      const <WidgetState>{},
-    );
+    final foreground = style.foregroundColor?.resolve(const <WidgetState>{});
     if (loading) {
       return SizedBox(
         height: 18,

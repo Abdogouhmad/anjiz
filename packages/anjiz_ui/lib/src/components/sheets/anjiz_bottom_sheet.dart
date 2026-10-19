@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/motion/spring_in.dart';
 import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
@@ -76,7 +77,7 @@ abstract final class AnjizBottomSheet {
           top: Radius.circular(AnjizShapes.extraLarge),
         ),
       ),
-      builder: (context) => SafeArea(top: false, child: child),
+      builder: (context) => SafeArea(top: false, child: SpringIn(child: child)),
     ).then((result) {
       if (result != null) AnjizHaptics.selection();
       return result;

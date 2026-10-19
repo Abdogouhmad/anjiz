@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/motion/spring_press_scale.dart';
 import '../../services/anjiz_haptics.dart';
 import 'anjiz_button_content.dart';
 import 'anjiz_button_style.dart';
@@ -106,6 +107,9 @@ class AnjizButton extends StatelessWidget {
     final padded = expand
         ? SizedBox(width: double.infinity, child: sized)
         : sized;
+    final childWithScale = effective == null
+        ? padded
+        : SpringPressScale(child: padded);
     final pressed = effective == null
         ? null
         : () {
@@ -117,22 +121,22 @@ class AnjizButton extends StatelessWidget {
       AnjizButtonVariant.filled => FilledButton(
         onPressed: pressed,
         style: style,
-        child: padded,
+        child: childWithScale,
       ),
       AnjizButtonVariant.tonal => FilledButton(
         onPressed: pressed,
         style: style,
-        child: padded,
+        child: childWithScale,
       ),
       AnjizButtonVariant.outlined => OutlinedButton(
         onPressed: pressed,
         style: style,
-        child: padded,
+        child: childWithScale,
       ),
       AnjizButtonVariant.text => TextButton(
         onPressed: pressed,
         style: style,
-        child: padded,
+        child: childWithScale,
       ),
     };
   }

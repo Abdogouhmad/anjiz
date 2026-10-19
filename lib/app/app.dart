@@ -2,6 +2,7 @@ import 'package:anjiz_ui/anjiz_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/motion/motion_tokens.dart';
 import '../features/settings/settings.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
@@ -16,6 +17,12 @@ class AnjizApp extends ConsumerWidget {
     final settings = ref.watch(settingsControllerProvider);
     final router = ref.watch(routerProvider);
     final useSeed = !settings.useDynamicColor && settings.accentIndex != 0;
+
+    MotionTokens.configureReducedMotion(
+      reduced:
+          !settings.burstAnimations || MediaQuery.disableAnimationsOf(context),
+    );
+
     return AnjizDynamicTheme(
       useDynamicColor: settings.useDynamicColor,
       seedColor: useSeed ? accentSeedFor(settings.accentIndex) : null,

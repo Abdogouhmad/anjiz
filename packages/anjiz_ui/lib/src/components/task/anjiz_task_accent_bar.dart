@@ -20,10 +20,7 @@ class AnjizTaskAccentBar extends StatelessWidget {
       child: Container(
         width: 4,
         height: 44,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: AnjizShapes.pill,
-        ),
+        decoration: BoxDecoration(color: color, borderRadius: AnjizShapes.pill),
       ),
     );
   }
