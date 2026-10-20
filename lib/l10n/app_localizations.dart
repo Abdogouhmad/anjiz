@@ -2401,7 +2401,7 @@ abstract class AppLocalizations {
   /// No description provided for @pomodoroPromotedDisabled.
   ///
   /// In en, this message translates to:
-  /// **'Live updates are off for Anjiz, so the focus timer can't appear as an ongoing notification. Turn them on in the app's notification settings.'**
+  /// **'Live updates are off for Anjiz, so the focus timer can\'t appear as an ongoing notification. Turn them on in the app\'s notification settings.'**
   String get pomodoroPromotedDisabled;
 
   /// No description provided for @pomodoroUnsupported.

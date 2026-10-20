@@ -1,5 +1,6 @@
 package com.freesoftware.anjiz.pomodoro
 
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -92,7 +93,8 @@ internal object PomodoroChannelHandler : MethodChannel.MethodCallHandler {
         if (!NotificationManagerCompat.from(context).areNotificationsEnabled()) return false
         // Promoted "Live Update" notifications only exist from Android 16.
         if (Build.VERSION.SDK_INT < 36) return false
-        return NotificationManagerCompat.canPostPromotedNotifications()
+        val manager = context.getSystemService(NotificationManager::class.java) ?: return false
+        return manager.canPostPromotedNotifications()
     }
 
     private fun start(context: Context, call: MethodCall) {
