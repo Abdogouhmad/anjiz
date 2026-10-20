@@ -28,8 +28,7 @@ class NotificationsSections extends ConsumerWidget {
       title: l10n.notificationsTitle,
       body: l10n.notificationsTestSent,
     );
-    final settings = ref.read(settingsControllerProvider);
-    await AnjizHaptics.burst(settings.hapticLevel);
+    ref.read(hapticServiceProvider).success();
     if (context.mounted) {
       AnjizSnackBar.show(context, message: l10n.notificationsTestSent);
     }

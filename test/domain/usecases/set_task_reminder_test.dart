@@ -1,3 +1,4 @@
+import 'package:anjiz/core/utils/id_generator.dart';
 import 'package:anjiz/domain/entities/reminder.dart';
 import 'package:anjiz/domain/repositories/reminder_repository.dart';
 import 'package:anjiz/domain/services/reminder_scheduler.dart';
@@ -90,7 +91,7 @@ void main() {
     final task = makeTask(id: 'abc');
     expect(
       SetTaskReminder.notificationIdFor(task),
-      task.id.hashCode & 0x7fffffff,
+      IdGenerator.notificationIdFor(task.id),
     );
   });
 }

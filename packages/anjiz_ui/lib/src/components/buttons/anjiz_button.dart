@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../tokens/anjiz_spacing.dart';
+import '../../components/motion/spring_press_scale.dart';
+import '../../services/anjiz_haptics.dart';
+import 'anjiz_button_content.dart';
+import 'anjiz_button_style.dart';
 
 /// Visual variants for [AnjizButton].
 enum AnjizButtonVariant {
@@ -29,7 +32,19 @@ enum AnjizButtonSize {
   large,
 }
 
+/// Height in logical pixels for each [AnjizButtonSize].
+extension AnjizButtonSizeHeight on AnjizButtonSize {
+  /// Height in logical pixels.
+  double get buttonHeight => switch (this) {
+    AnjizButtonSize.small => 40,
+    AnjizButtonSize.medium => 48,
+    AnjizButtonSize.large => 56,
+  };
+}
+
 /// The Anjiz pill button with optional leading icon, variants and sizes.
+///
+/// Pressing the button fires light haptic feedback (see [AnjizHaptics]).
 class AnjizButton extends StatelessWidget {
   /// Creates a button.
   const AnjizButton({
@@ -68,128 +83,60 @@ class AnjizButton extends StatelessWidget {
   /// Shows a spinner and disables interaction.
   final bool loading;
 
-  double get _height => switch (size) {
-    AnjizButtonSize.small => 40,
-    AnjizButtonSize.medium => 48,
-    AnjizButtonSize.large => 56,
-  };
-
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    final style = _style(scheme, textTheme);
-    final effective = loading ? null : onPressed;
-    // Resolve the foreground for the *current* state so the label matches the
-    // icon. A bare `textTheme` style would carry the theme's default onSurface
-    // colour, which is unreadable on filled/tonal container backgrounds.
-    final foreground = style.foregroundColor?.resolve(
-      effective == null
-          ? const <WidgetState>{WidgetState.disabled}
-          : const <WidgetState>{},
+    final style = anjizButtonStyle(
+      variant: variant,
+      size: size,
+      scheme: scheme,
+      textTheme: Theme.of(context).textTheme,
     );
-    final labelStyle = textTheme.labelLarge?.copyWith(color: foreground);
-
-    final child = loading
-        ? SizedBox(
-            height: 18,
-            width: 18,
-            child: CircularProgressIndicator(strokeWidth: 2, color: foreground),
-          )
-        : Row(
-            mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (icon != null) ...[
-                Icon(icon, size: 20),
-                const SizedBox(width: AnjizSpacing.sm),
-              ],
-              Flexible(
-                child: Text(
-                  label,
-                  overflow: TextOverflow.ellipsis,
-                  style: labelStyle,
-                ),
-              ),
-              if (trailingIcon != null) ...[
-                const SizedBox(width: AnjizSpacing.sm),
-                Icon(trailingIcon, size: 20),
-              ],
-            ],
-          );
-
-    final sized = SizedBox(height: _height, child: child);
+    final effective = loading ? null : onPressed;
+    final sized = SizedBox(
+      height: size.buttonHeight,
+      child: AnjizButtonContent(
+        label: label,
+        loading: loading,
+        expand: expand,
+        style: style,
+        icon: icon,
+        trailingIcon: trailingIcon,
+      ),
+    );
     final padded = expand
         ? SizedBox(width: double.infinity, child: sized)
         : sized;
+    final childWithScale = effective == null
+        ? padded
+        : SpringPressScale(child: padded);
+    final pressed = effective == null
+        ? null
+        : () {
+            AnjizHaptics.tap();
+            effective();
+          };
 
     return switch (variant) {
       AnjizButtonVariant.filled => FilledButton(
-        onPressed: effective,
+        onPressed: pressed,
         style: style,
-        child: padded,
+        child: childWithScale,
       ),
       AnjizButtonVariant.tonal => FilledButton(
-        onPressed: effective,
+        onPressed: pressed,
         style: style,
-        child: padded,
+        child: childWithScale,
       ),
       AnjizButtonVariant.outlined => OutlinedButton(
-        onPressed: effective,
+        onPressed: pressed,
         style: style,
-        child: padded,
+        child: childWithScale,
       ),
       AnjizButtonVariant.text => TextButton(
-        onPressed: effective,
+        onPressed: pressed,
         style: style,
-        child: padded,
-      ),
-    };
-  }
-
-  ButtonStyle _style(ColorScheme scheme, TextTheme textTheme) {
-    final padding = EdgeInsetsDirectional.symmetric(
-      horizontal: size == AnjizButtonSize.small
-          ? AnjizSpacing.md
-          : AnjizSpacing.lg,
-    );
-    final base = ButtonStyle(
-      minimumSize: WidgetStatePropertyAll(Size(0, _height)),
-      padding: WidgetStatePropertyAll(padding),
-      textStyle: WidgetStatePropertyAll(textTheme.labelLarge),
-      shape: const WidgetStatePropertyAll(StadiumBorder()),
-    );
-    return switch (variant) {
-      AnjizButtonVariant.filled => base.copyWith(
-        backgroundColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.disabled)
-              ? scheme.onSurface.withValues(alpha: 0.12)
-              : scheme.primary,
-        ),
-        foregroundColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.disabled)
-              ? scheme.onSurface.withValues(alpha: 0.38)
-              : scheme.onPrimary,
-        ),
-      ),
-      AnjizButtonVariant.tonal => base.copyWith(
-        backgroundColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.disabled)
-              ? scheme.onSurface.withValues(alpha: 0.12)
-              : scheme.secondaryContainer,
-        ),
-        foregroundColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.disabled)
-              ? scheme.onSurface.withValues(alpha: 0.38)
-              : scheme.onSecondaryContainer,
-        ),
-      ),
-      AnjizButtonVariant.outlined => base.copyWith(
-        side: WidgetStatePropertyAll(BorderSide(color: scheme.outlineVariant)),
-        foregroundColor: WidgetStatePropertyAll(scheme.primary),
-      ),
-      AnjizButtonVariant.text => base.copyWith(
-        foregroundColor: WidgetStatePropertyAll(scheme.primary),
+        child: childWithScale,
       ),
     };
   }

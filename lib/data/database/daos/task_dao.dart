@@ -113,6 +113,19 @@ class TaskDao extends DatabaseAccessor<AnjizDatabase> with _$TaskDaoMixin {
     });
   }
 
+  /// Records one completed focus session of [minutes] on a task.
+  Future<void> addFocusTime(String taskId, int minutes) async {
+    final row = await findById(taskId);
+    if (row == null) return;
+    await (update(tasks)..where((t) => t.id.equals(taskId))).write(
+      TasksCompanion(
+        focusSessions: Value(row.focusSessions + 1),
+        focusMinutes: Value(row.focusMinutes + minutes),
+        updatedAt: Value(DateTime.now()),
+      ),
+    );
+  }
+
   /// Deletes a task by id.
   Future<void> deleteById(String id) =>
       (delete(tasks)..where((t) => t.id.equals(id))).go();

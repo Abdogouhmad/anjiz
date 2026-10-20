@@ -2253,6 +2253,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tells you when a newer version of Anjiz is available.'**
   String get notifChannelUpdatesDescription;
+
+  /// No description provided for @settingsFocusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus timer'**
+  String get settingsFocusTitle;
+
+  /// No description provided for @settingsFocusSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pomodoro lengths and rhythm'**
+  String get settingsFocusSubtitle;
+
+  /// No description provided for @pomodoroFocusLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus length'**
+  String get pomodoroFocusLength;
+
+  /// No description provided for @pomodoroBreakLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Break length'**
+  String get pomodoroBreakLength;
+
+  /// No description provided for @pomodoroLongBreakLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Long break length'**
+  String get pomodoroLongBreakLength;
+
+  /// No description provided for @pomodoroLongBreakInterval.
+  ///
+  /// In en, this message translates to:
+  /// **'Long break interval'**
+  String get pomodoroLongBreakInterval;
+
+  /// No description provided for @pomodoroAutoStartNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-start next phase'**
+  String get pomodoroAutoStartNext;
+
+  /// No description provided for @pomodoroAutoStartNextSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Move straight from focus into the break'**
+  String get pomodoroAutoStartNextSubtitle;
+
+  /// No description provided for @pomodoroMinutesValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String pomodoroMinutesValue(int minutes);
+
+  /// No description provided for @pomodoroSessionsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sessions'**
+  String pomodoroSessionsValue(int count);
+
+  /// No description provided for @pomodoroStartFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Start focus'**
+  String get pomodoroStartFocus;
+
+  /// No description provided for @pomodoroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus timer'**
+  String get pomodoroTitle;
+
+  /// No description provided for @pomodoroPhaseFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus'**
+  String get pomodoroPhaseFocus;
+
+  /// No description provided for @pomodoroPhaseBreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Break'**
+  String get pomodoroPhaseBreak;
+
+  /// No description provided for @pomodoroPhaseLongBreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Long break'**
+  String get pomodoroPhaseLongBreak;
+
+  /// No description provided for @pomodoroSessionOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Session {session} of {total}'**
+  String pomodoroSessionOf(int session, int total);
+
+  /// No description provided for @pomodoroPausedValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused · {time}'**
+  String pomodoroPausedValue(String time);
+
+  /// No description provided for @pomodoroActionPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pomodoroActionPause;
+
+  /// No description provided for @pomodoroActionResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get pomodoroActionResume;
+
+  /// No description provided for @pomodoroActionSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get pomodoroActionSkip;
+
+  /// No description provided for @pomodoroActionDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get pomodoroActionDone;
+
+  /// No description provided for @pomodoroSwitchPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'A focus session is already running. Switch to this task?'**
+  String get pomodoroSwitchPrompt;
+
+  /// No description provided for @pomodoroSessionsDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus cycle complete — nice work!'**
+  String get pomodoroSessionsDone;
+
+  /// No description provided for @pomodoroFocusMinutesMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min focus'**
+  String pomodoroFocusMinutesMeta(int minutes);
+
+  /// No description provided for @pomodoroPromotedDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Live updates are off for Anjiz, so the focus timer can\'t appear as an ongoing notification. Turn them on in the app\'s notification settings.'**
+  String get pomodoroPromotedDisabled;
+
+  /// No description provided for @pomodoroUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'The focus timer needs Android 16 or newer for its Live Update notification.'**
+  String get pomodoroUnsupported;
+
+  /// No description provided for @pomodoroRunningFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Focusing on this task'**
+  String get pomodoroRunningFor;
+
+  /// No description provided for @pomodoroChannelLiveName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pomodoro timer'**
+  String get pomodoroChannelLiveName;
+
+  /// No description provided for @pomodoroChannelLiveDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'The ongoing focus timer with Live Update controls.'**
+  String get pomodoroChannelLiveDescription;
+
+  /// No description provided for @pomodoroChannelAlertName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pomodoro alerts'**
+  String get pomodoroChannelAlertName;
+
+  /// No description provided for @pomodoroChannelAlertDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Plays a sound when a focus or break phase ends.'**
+  String get pomodoroChannelAlertDescription;
 }
 
 class _AppLocalizationsDelegate

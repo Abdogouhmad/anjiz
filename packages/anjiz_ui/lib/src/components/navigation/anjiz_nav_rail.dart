@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import 'anjiz_destination.dart';
 
 /// The medium/expanded (rail) navigation for >=600dp layouts.
@@ -33,7 +34,10 @@ class AnjizNavRail extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavigationRail(
       selectedIndex: currentIndex,
-      onDestinationSelected: onDestinationSelected,
+      onDestinationSelected: (index) {
+        AnjizHaptics.selection();
+        onDestinationSelected(index);
+      },
       extended: extended,
       labelType: extended
           ? NavigationRailLabelType.none

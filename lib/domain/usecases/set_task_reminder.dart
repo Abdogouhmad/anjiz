@@ -57,5 +57,9 @@ class SetTaskReminder {
   }
 
   /// The stable notification id used for [task] (shared with deletion paths).
-  static int notificationIdFor(Task task) => task.id.hashCode & 0x7fffffff;
+  ///
+  /// Must be deterministic across app runs — `String.hashCode` is not, so it
+  /// would make cancels and reschedules miss the original alarm.
+  static int notificationIdFor(Task task) =>
+      IdGenerator.notificationIdFor(task.id);
 }

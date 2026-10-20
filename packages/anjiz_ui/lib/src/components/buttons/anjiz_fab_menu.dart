@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_motion.dart';
 import '../../tokens/anjiz_spacing.dart';
-import 'anjiz_fab_action_pill.dart';
+import 'anjiz_fab_menu_actions.dart';
 import 'anjiz_fab_primary_pill.dart';
 import 'anjiz_fab_toggle_button.dart';
 
@@ -56,10 +58,6 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
     duration: AnjizMotion.standard,
     reverseDuration: AnjizMotion.fast,
   );
-  late final Animation<double> _expansion = CurvedAnimation(
-    parent: _controller,
-    curve: AnjizMotion.standardCurve,
-  );
 
   bool _expanded = false;
 
@@ -70,12 +68,21 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
   }
 
   void _toggle() {
+    AnjizHaptics.tap();
     setState(() => _expanded = !_expanded);
-    if (_expanded) {
-      _controller.forward();
-    } else {
-      _controller.reverse();
+    final target = _expanded ? 1.0 : 0.0;
+    if (MediaQuery.disableAnimationsOf(context)) {
+      _controller.value = target;
+      return;
     }
+    _controller.animateWith(
+      SpringSimulation(
+        AnjizMotion.spatialStandard,
+        _controller.value,
+        target,
+        0,
+      ),
+    );
   }
 
   @override
@@ -86,29 +93,13 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         if (widget.actions.isNotEmpty)
-          SizeTransition(
-            sizeFactor: _expansion,
-            alignment: AlignmentDirectional.bottomEnd,
-            child: FadeTransition(
-              opacity: _expansion,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  for (final action in widget.actions)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: AnjizSpacing.sm),
-                      child: AnjizFabActionPill(
-                        action: action,
-                        onPressed: () {
-                          _toggle();
-                          action.onPressed();
-                        },
-                      ),
-                    ),
-                ],
-              ),
-            ),
+          AnjizFabMenuActions(
+            actions: widget.actions,
+            expansion: _controller,
+            onActionPressed: (action) {
+              _toggle();
+              action.onPressed();
+            },
           ),
         Row(
           mainAxisSize: MainAxisSize.min,
@@ -116,14 +107,17 @@ class _AnjizFabMenuState extends State<AnjizFabMenu>
             AnjizFabPrimaryPill(
               label: widget.label,
               icon: widget.icon,
-              onPressed: widget.onPressed,
+              onPressed: () {
+                AnjizHaptics.tap();
+                widget.onPressed();
+              },
               scheme: scheme,
             ),
             if (widget.actions.isNotEmpty) ...[
               const SizedBox(width: AnjizSpacing.sm),
               AnjizFabToggleButton(
                 expanded: _expanded,
-                rotation: _expansion,
+                rotation: _controller,
                 onPressed: _toggle,
                 tooltip: _expanded
                     ? widget.collapseTooltip

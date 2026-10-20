@@ -7,6 +7,7 @@ import '../../domain/usecases/add_task.dart';
 import '../../domain/usecases/create_task_list.dart';
 import '../../domain/usecases/delete_subtask.dart';
 import '../../domain/usecases/delete_task.dart';
+import '../../domain/usecases/log_focus_time.dart';
 import '../../domain/usecases/reorder_tasks.dart';
 import '../../domain/usecases/set_task_reminder.dart';
 import '../../domain/usecases/toggle_subtask.dart';
@@ -26,6 +27,7 @@ part 'use_case_providers.g.dart';
 AddTask addTask(Ref ref) => AddTask(
   tasks: ref.watch(taskRepositoryProvider),
   widgetSync: ref.watch(widgetSyncServiceProvider),
+  reminder: ref.watch(setTaskReminderProvider),
 );
 
 /// Provides the [UpdateTask] use case.
@@ -51,6 +53,7 @@ ToggleTaskDone toggleTaskDone(Ref ref) => ToggleTaskDone(
   tasks: ref.watch(taskRepositoryProvider),
   widgetSync: ref.watch(widgetSyncServiceProvider),
   reminders: ref.watch(notificationServiceProvider),
+  reminderRows: ref.watch(reminderRepositoryProvider),
 );
 
 /// Provides the [ToggleTaskStar] use case.
@@ -119,4 +122,11 @@ CreateTaskList createTaskList(Ref ref) =>
 SetTaskReminder setTaskReminder(Ref ref) => SetTaskReminder(
   reminders: ref.watch(reminderRepositoryProvider),
   scheduler: ref.watch(notificationServiceProvider),
+);
+
+/// Provides the [LogFocusTime] use case.
+@riverpod
+LogFocusTime logFocusTime(Ref ref) => LogFocusTime(
+  tasks: ref.watch(taskRepositoryProvider),
+  widgetSync: ref.watch(widgetSyncServiceProvider),
 );

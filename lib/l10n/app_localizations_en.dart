@@ -1259,4 +1259,113 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notifChannelUpdatesDescription =>
       'Tells you when a newer version of Anjiz is available.';
+
+  @override
+  String get settingsFocusTitle => 'Focus timer';
+
+  @override
+  String get settingsFocusSubtitle => 'Pomodoro lengths and rhythm';
+
+  @override
+  String get pomodoroFocusLength => 'Focus length';
+
+  @override
+  String get pomodoroBreakLength => 'Break length';
+
+  @override
+  String get pomodoroLongBreakLength => 'Long break length';
+
+  @override
+  String get pomodoroLongBreakInterval => 'Long break interval';
+
+  @override
+  String get pomodoroAutoStartNext => 'Auto-start next phase';
+
+  @override
+  String get pomodoroAutoStartNextSubtitle =>
+      'Move straight from focus into the break';
+
+  @override
+  String pomodoroMinutesValue(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String pomodoroSessionsValue(int count) {
+    return '$count sessions';
+  }
+
+  @override
+  String get pomodoroStartFocus => 'Start focus';
+
+  @override
+  String get pomodoroTitle => 'Focus timer';
+
+  @override
+  String get pomodoroPhaseFocus => 'Focus';
+
+  @override
+  String get pomodoroPhaseBreak => 'Break';
+
+  @override
+  String get pomodoroPhaseLongBreak => 'Long break';
+
+  @override
+  String pomodoroSessionOf(int session, int total) {
+    return 'Session $session of $total';
+  }
+
+  @override
+  String pomodoroPausedValue(String time) {
+    return 'Paused · $time';
+  }
+
+  @override
+  String get pomodoroActionPause => 'Pause';
+
+  @override
+  String get pomodoroActionResume => 'Resume';
+
+  @override
+  String get pomodoroActionSkip => 'Skip';
+
+  @override
+  String get pomodoroActionDone => 'Done';
+
+  @override
+  String get pomodoroSwitchPrompt =>
+      'A focus session is already running. Switch to this task?';
+
+  @override
+  String get pomodoroSessionsDone => 'Focus cycle complete — nice work!';
+
+  @override
+  String pomodoroFocusMinutesMeta(int minutes) {
+    return '$minutes min focus';
+  }
+
+  @override
+  String get pomodoroPromotedDisabled =>
+      'Live updates are off for Anjiz, so the focus timer can\'t appear as an ongoing notification. Turn them on in the app\'s notification settings.';
+
+  @override
+  String get pomodoroUnsupported =>
+      'The focus timer needs Android 16 or newer for its Live Update notification.';
+
+  @override
+  String get pomodoroRunningFor => 'Focusing on this task';
+
+  @override
+  String get pomodoroChannelLiveName => 'Pomodoro timer';
+
+  @override
+  String get pomodoroChannelLiveDescription =>
+      'The ongoing focus timer with Live Update controls.';
+
+  @override
+  String get pomodoroChannelAlertName => 'Pomodoro alerts';
+
+  @override
+  String get pomodoroChannelAlertDescription =>
+      'Plays a sound when a focus or break phase ends.';
 }

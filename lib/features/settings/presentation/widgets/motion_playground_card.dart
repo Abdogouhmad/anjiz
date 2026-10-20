@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:anjiz_ui/anjiz_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/motion/springs.dart';
 import '../../../../core/services/haptic_service.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../providers/settings_controller.dart';
@@ -24,7 +26,6 @@ class _MotionPlaygroundCardState extends ConsumerState<MotionPlaygroundCard>
   bool _completed = false;
   late final AnimationController _burstController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 650),
   );
 
   @override
@@ -33,17 +34,21 @@ class _MotionPlaygroundCardState extends ConsumerState<MotionPlaygroundCard>
     super.dispose();
   }
 
-  Future<void> _handleToggle(bool value) async {
+  void _handleToggle(bool value) {
     final settings = ref.read(settingsControllerProvider);
+    final haptics = ref.read(hapticServiceProvider);
     setState(() => _completed = value);
 
     if (value) {
-      await AnjizHaptics.burst(settings.hapticLevel);
+      haptics.success();
       if (settings.burstAnimations) {
-        _burstController.forward(from: 0);
+        _burstController.value = 0;
+        unawaited(
+          Springs.run(_burstController, 1, spring: AnjizMotion.expressive),
+        );
       }
     } else {
-      await AnjizHaptics.selection(settings.hapticLevel);
+      haptics.selection();
     }
   }
 
@@ -165,7 +170,7 @@ class _MotionPlaygroundCardState extends ConsumerState<MotionPlaygroundCard>
             label: l10n.motionTestHaptics,
             icon: Icons.vibration_rounded,
             variant: AnjizButtonVariant.tonal,
-            onPressed: () => AnjizHaptics.burst(settings.hapticLevel),
+            onPressed: () => ref.read(hapticServiceProvider).success(),
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import '../entities/task.dart';
 import '../repositories/task_repository.dart';
 import '../services/reminder_scheduler.dart';
 import '../services/widget_syncer.dart';
+import 'set_task_reminder.dart';
 
 /// Deletes a task, cancels its reminder and refreshes the widgets.
 class DeleteTask {
@@ -20,7 +21,7 @@ class DeleteTask {
 
   /// Deletes the task identified by [task].
   Future<void> call(Task task) async {
-    await _reminders.cancel(task.id.hashCode & 0x7fffffff);
+    await _reminders.cancel(SetTaskReminder.notificationIdFor(task));
     await _tasks.delete(task.id);
     await _widgetSync.sync();
   }

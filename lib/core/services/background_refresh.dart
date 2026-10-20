@@ -4,13 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
 
 import '../../data/repositories/repository_providers.dart';
-import '../../domain/usecases/set_task_reminder.dart';
-import '../../l10n/app_localizations.dart';
 import '../constants/app_constants.dart';
 import '../utils/platform_support.dart';
 import 'daily_briefing.dart';
 import 'preferences_provider.dart';
-import 'service_providers.dart';
+import 'reminder_resync.dart';
 import 'widget_sync_service.dart';
 
 /// Registers the WorkManager job that keeps widgets and reminders fresh.
@@ -55,7 +53,7 @@ Future<void> runBackgroundRefresh() async {
     overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
   );
   try {
-    await _rescheduleReminders(container);
+    await reschedulePendingReminders(container);
     await reconcileDailyBriefing(container);
     await WidgetSyncService(
       container.read(taskRepositoryProvider),
@@ -66,27 +64,5 @@ Future<void> runBackgroundRefresh() async {
     // Best-effort: a failed background pass must not fail the worker.
   } finally {
     container.dispose();
-  }
-}
-
-Future<void> _rescheduleReminders(ProviderContainer container) async {
-  final reminders = await container.read(reminderRepositoryProvider).findAll();
-  if (reminders.isEmpty) return;
-  final notifications = container.read(notificationServiceProvider);
-  final l10n = await AppLocalizations.delegate.load(const Locale('en'));
-  await notifications.init(l10n);
-  final schedule = SetTaskReminder(
-    reminders: container.read(reminderRepositoryProvider),
-    scheduler: notifications,
-  );
-  final tasks = container.read(taskRepositoryProvider);
-  for (final reminder in reminders) {
-    final task = await tasks.findById(reminder.taskId);
-    if (task == null || task.isDone || task.dueAt == null) continue;
-    await schedule.schedule(
-      task,
-      title: task.title,
-      body: task.notes.isEmpty ? task.title : task.notes,
-    );
   }
 }

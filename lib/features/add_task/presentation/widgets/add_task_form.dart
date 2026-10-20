@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/providers/use_case_providers.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';
+import '../../../../core/services/service_providers.dart';
 import '../../../../domain/entities/priority.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../app/widgets/task_pickers.dart';
@@ -59,6 +60,10 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
     }
     setState(() => _saving = true);
     try {
+      // Reminders are scheduled from the save flow, so the notification
+      // permission has to be in place before the task is stored.
+      final scheduleReminder =
+          _due == null || await _ensureNotificationPermission(l10n);
       await ref
           .read(addTaskProvider)
           .call(
@@ -68,6 +73,7 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
             dueAt: _due,
             hasTime: _hasTime,
             priority: _priority,
+            scheduleReminder: scheduleReminder,
           );
       if (!mounted) return;
       if (addAnother) {
@@ -84,6 +90,20 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
     } finally {
       if (mounted) setState(() => _saving = false);
     }
+  }
+
+  /// Requests the notification permission once, reporting whether reminders
+  /// may be scheduled. A denied request surfaces a snackbar but still lets
+  /// the task be saved (without reminders).
+  Future<bool> _ensureNotificationPermission(AppLocalizations l10n) async {
+    final notifications = ref.read(notificationServiceProvider);
+    final granted =
+        await notifications.areNotificationsEnabled() ||
+        await notifications.requestPermission();
+    if (!granted && mounted) {
+      AnjizSnackBar.show(context, message: l10n.errorNotificationMessage);
+    }
+    return granted;
   }
 
   Future<void> _pickDate() async {

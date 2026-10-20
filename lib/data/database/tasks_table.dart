@@ -17,6 +17,8 @@ class Tasks extends Table {
   BoolColumn get hasTime => boolean().withDefault(const Constant(false))();
   TextColumn get repeatRule => text().nullable()();
   IntColumn get sortOrder => integer().withDefault(const Constant(0))();
+  IntColumn get focusSessions => integer().withDefault(const Constant(0))();
+  IntColumn get focusMinutes => integer().withDefault(const Constant(0))();
   DateTimeColumn get completedAt => dateTime().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();

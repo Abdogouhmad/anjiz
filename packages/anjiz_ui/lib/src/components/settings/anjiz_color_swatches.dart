@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
+import '../task/animated_check.dart';
 
 /// A selectable accent colour: an ARGB value with a localised label.
 typedef AnjizSwatch = ({int color, String label});
@@ -92,7 +93,11 @@ class _SwatchButton extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: selected
-                      ? Icon(Icons.check, size: 20, color: scheme.onPrimary)
+                      ? AnimatedCheck(
+                          checked: true,
+                          size: 20,
+                          color: scheme.onPrimary,
+                        )
                       : null,
                 ),
               ),

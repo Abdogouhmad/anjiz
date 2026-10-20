@@ -19,6 +19,8 @@ _Task _$TaskFromJson(Map<String, dynamic> json) => _Task(
   hasTime: json['hasTime'] as bool? ?? false,
   repeatRule: json['repeatRule'] as String?,
   sortOrder: (json['sortOrder'] as num?)?.toInt() ?? 0,
+  focusSessions: (json['focusSessions'] as num?)?.toInt() ?? 0,
+  focusMinutes: (json['focusMinutes'] as num?)?.toInt() ?? 0,
   completedAt: json['completedAt'] == null
       ? null
       : DateTime.parse(json['completedAt'] as String),
@@ -38,6 +40,8 @@ Map<String, dynamic> _$TaskToJson(_Task instance) => <String, dynamic>{
   'hasTime': instance.hasTime,
   'repeatRule': instance.repeatRule,
   'sortOrder': instance.sortOrder,
+  'focusSessions': instance.focusSessions,
+  'focusMinutes': instance.focusMinutes,
   'completedAt': instance.completedAt?.toIso8601String(),
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': instance.updatedAt.toIso8601String(),

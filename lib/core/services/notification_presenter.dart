@@ -2,6 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../constants/app_constants.dart';
 import '../utils/platform_support.dart';
+import 'reminder_scheduler.dart';
 
 /// Immediate (non-scheduled) notification display helpers.
 ///
@@ -56,7 +57,7 @@ class NotificationPresenter {
           actions: channelId == AppConstants.reminderChannelId
               ? <AndroidNotificationAction>[
                   const AndroidNotificationAction(
-                    'snooze_10min',
+                    ReminderNotificationScheduler.snoozeActionId,
                     'Snooze 10 min',
                     showsUserInterface: true,
                     allowGeneratedReplies: false,

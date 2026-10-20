@@ -37,6 +37,13 @@ class GeneralSettingsScreen extends ConsumerWidget {
               subtitle: hapticSummary(l10n, settings),
               onTap: () => context.go(AppRoutes.settingsMotion),
             ),
+            AnjizSettingsNavEntry(
+              icon: Icons.timer_outlined,
+              tone: AnjizTone.tertiary,
+              title: l10n.settingsFocusTitle,
+              subtitle: focusSummary(l10n, settings),
+              onTap: () => context.go(AppRoutes.settingsFocus),
+            ),
           ],
         ),
       ],

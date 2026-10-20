@@ -1,26 +1,27 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:timezone/data/latest_all.dart' as tz_data;
-import 'package:timezone/timezone.dart' as tz;
 
 import '../../domain/services/reminder_scheduler.dart';
 import '../../l10n/app_localizations.dart';
-import '../constants/app_constants.dart';
 import '../utils/platform_support.dart';
 import 'notification_channels.dart';
 import 'notification_permissions.dart';
 import 'notification_presenter.dart';
+import 'reminder_scheduler.dart';
 
 /// Thin wrapper over `flutter_local_notifications` that owns channel setup,
-/// permission requests and timezone-aware scheduling.
+/// permission requests and delegates all scheduling to
+/// [ReminderNotificationScheduler].
 ///
 /// The plugin is Android/iOS-only; on other platforms every method is a no-op.
 class NotificationService implements ReminderScheduler {
   /// Creates a notification service.
   NotificationService({FlutterLocalNotificationsPlugin? plugin})
-    : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
+    : _plugin = plugin ?? FlutterLocalNotificationsPlugin() {
+    _scheduler = ReminderNotificationScheduler(_plugin);
+  }
 
   final FlutterLocalNotificationsPlugin _plugin;
+  late final ReminderNotificationScheduler _scheduler;
   bool _initialized = false;
 
   NotificationPresenter get _presenter => NotificationPresenter(_plugin);
@@ -32,8 +33,7 @@ class NotificationService implements ReminderScheduler {
   /// name at creation time.
   Future<void> init(AppLocalizations l10n) async {
     if (_initialized || !PlatformSupport.notifications) return;
-    tz_data.initializeTimeZones();
-    await _configureLocalTimezone();
+    await _scheduler.ensureTimezone();
     const settings = InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
@@ -44,15 +44,6 @@ class NotificationService implements ReminderScheduler {
     );
     await createNotificationChannels(_android, l10n);
     _initialized = true;
-  }
-
-  Future<void> _configureLocalTimezone() async {
-    try {
-      final name = await FlutterTimezone.getLocalTimezone();
-      tz.setLocalLocation(tz.getLocation(name));
-    } on Object {
-      // Fall back to the UTC default when the platform name is unavailable.
-    }
   }
 
   AndroidFlutterLocalNotificationsPlugin? get _android {
@@ -113,131 +104,39 @@ class NotificationService implements ReminderScheduler {
     required String body,
   }) => _presenter.showTest(title: title, body: body);
 
-  /// Schedules a one-off notification at [at], preferring exact delivery and
-  /// degrading to inexact when the exact-alarm permission is missing.
+  /// Schedules a one-off reminder notification (see [ReminderNotificationScheduler]).
   @override
   Future<void> schedule({
     required int id,
     required String title,
     required String body,
     required DateTime at,
-    String channelId = AppConstants.reminderChannelId,
-  }) async {
-    if (!PlatformSupport.notifications) return;
-    final scheduled = tz.TZDateTime.from(at, tz.local);
-    if (!scheduled.isAfter(tz.TZDateTime.now(tz.local))) return;
-    await _plugin.zonedSchedule(
-      id,
-      title,
-      body,
-      scheduled,
-      _details(channelId, Importance.high),
-      androidScheduleMode: await _scheduleMode(),
-      payload: title,
-    );
-  }
+  }) => _scheduler.schedule(id: id, title: title, body: body, at: at);
 
   /// Schedules a repeating daily notification at [hour]:[minute] local time.
   Future<void> scheduleDaily({
     required int id,
     required String title,
     required String body,
-    int hour = AppConstants.dailyBriefingHour,
-    int minute = 0,
-  }) async {
-    if (!PlatformSupport.notifications) return;
-    await _plugin.zonedSchedule(
-      id,
-      title,
-      body,
-      _nextDailyRun(hour, minute),
-      _details(AppConstants.briefingChannelId, Importance.defaultImportance),
-      androidScheduleMode: await _scheduleMode(),
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
-  }
+  }) => _scheduler.scheduleDaily(id: id, title: title, body: body);
 
   /// Cancels a pending notification.
   @override
-  Future<void> cancel(int id) async {
-    if (!PlatformSupport.notifications) return;
-    await _plugin.cancel(id);
-  }
+  Future<void> cancel(int id) => _scheduler.cancel(id);
 
   /// Cancels every pending notification.
-  Future<void> cancelAll() async {
-    if (!PlatformSupport.notifications) return;
-    await _plugin.cancelAll();
-  }
-
-  Future<AndroidScheduleMode> _scheduleMode() async {
-    final allowed = await canScheduleExactAlarms();
-    return allowed
-        ? AndroidScheduleMode.exactAllowWhileIdle
-        : AndroidScheduleMode.inexactAllowWhileIdle;
-  }
-
-  static const String _snoozeActionId = 'snooze_10min';
+  Future<void> cancelAll() => _scheduler.cancelAll();
 
   /// Reschedules a reminder 10 minutes later when its snooze action is tapped.
   ///
   /// The notification is re-posted under the same id so repeated snoozes keep
   /// stacking on the original reminder.
   Future<void> _onNotificationResponse(NotificationResponse response) async {
-    if (!PlatformSupport.notifications) return;
-    if (response.actionId != _snoozeActionId) return;
+    if (response.actionId != ReminderNotificationScheduler.snoozeActionId) {
+      return;
+    }
     final id = response.id;
     if (id == null) return;
-    final at = tz.TZDateTime.now(tz.local).add(_snoozeDelay);
-    if (!_initialized) {
-      tz_data.initializeTimeZones();
-      await _configureLocalTimezone();
-    }
-    await _plugin.zonedSchedule(
-      id,
-      response.payload ?? 'Reminder',
-      'Snoozed for 10 minutes',
-      at,
-      _details(AppConstants.reminderChannelId, Importance.high),
-      androidScheduleMode: await _scheduleMode(),
-    );
+    await _scheduler.resnooze(id: id, title: response.payload ?? 'Reminder');
   }
-
-  static const Duration _snoozeDelay = Duration(minutes: 10);
-
-  tz.TZDateTime _nextDailyRun(int hour, int minute) {
-    final now = tz.TZDateTime.now(tz.local);
-    var next = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      hour,
-      minute,
-    );
-    if (!next.isAfter(now)) next = next.add(const Duration(days: 1));
-    return next;
-  }
-
-  NotificationDetails _details(String channelId, Importance importance) =>
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channelId,
-          'Anjiz',
-          importance: importance,
-          priority: importance == Importance.high
-              ? Priority.high
-              : Priority.defaultPriority,
-          actions: channelId == AppConstants.reminderChannelId
-              ? <AndroidNotificationAction>[
-                  const AndroidNotificationAction(
-                    _snoozeActionId,
-                    'Snooze 10 min',
-                    showsUserInterface: true,
-                    allowGeneratedReplies: false,
-                  ),
-                ]
-              : null,
-        ),
-      );
 }

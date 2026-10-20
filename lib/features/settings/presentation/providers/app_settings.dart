@@ -16,5 +16,10 @@ abstract class AppSettings with _$AppSettings {
     @Default(2) int hapticLevel,
     @Default(false) bool dailyBriefing,
     @Default(false) bool onboardingComplete,
+    @Default(25) int focusMinutes,
+    @Default(5) int breakMinutes,
+    @Default(15) int longBreakMinutes,
+    @Default(4) int longBreakInterval,
+    @Default(false) bool pomodoroAutoStart,
   }) = _AppSettings;
 }

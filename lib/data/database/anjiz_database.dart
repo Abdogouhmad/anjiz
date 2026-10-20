@@ -29,7 +29,20 @@ class AnjizDatabase extends _$AnjizDatabase {
   AnjizDatabase.forTesting(super.executor);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+    onCreate: (m) => m.createAll(),
+    onUpgrade: (m, from, to) async {
+      // v2: Pomodoro focus tracking. `ADD COLUMN` with defaults keeps every
+      // existing task readable (focusSessions/focusMinutes start at 0).
+      if (from < 2) {
+        await m.addColumn(tasks, tasks.focusSessions);
+        await m.addColumn(tasks, tasks.focusMinutes);
+      }
+    },
+  );
 }
 
 LazyDatabase _openConnection() {

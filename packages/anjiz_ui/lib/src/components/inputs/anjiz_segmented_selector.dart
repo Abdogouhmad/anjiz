@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../services/anjiz_haptics.dart';
 import '../../tokens/anjiz_shapes.dart';
 import '../../tokens/anjiz_spacing.dart';
 
@@ -43,7 +44,10 @@ class AnjizSegmentedSelector<T> extends StatelessWidget {
                 label: segment.label,
                 icon: segment.icon,
                 selected: segment.value == selected,
-                onTap: () => onChanged(segment.value),
+                onTap: () {
+                  AnjizHaptics.selection();
+                  onChanged(segment.value);
+                },
               ),
             ),
         ],

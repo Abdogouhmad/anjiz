@@ -107,6 +107,42 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - The accent-tone swatch row keeps equal-width slots and ellipsizes its labels,
   so a long localised name (or 2× text scale) no longer overflows the row.
 
+## [0.2.0] - 2026-10-19
+
+### Added
+
+- **Pomodoro focus timer with Live Updates (Android 16+).** Start a focus
+  session from a task's detail card; a foreground service keeps the countdown
+  running with an exact-alarm phase clock and surfaces it as an Android 16
+  Live Update notification (chronometer + progress segments) with Pause,
+  Resume, Skip and Done actions. Focus/break/long-break lengths, the long-break
+  interval and auto-start are configurable under Settings → Focus; each finished
+  focus phase adds its minutes to the task (`focusMinutes`/`focusSessions`,
+  drift migration v2) and the notification's Done action completes the task.
+  Below API 36 the feature reports itself unavailable instead of failing.
+- **Motion playground** in Settings → Motion & haptics: complete a demo task to
+  see the scalloped checkbox morph, the completion burst and the haptic levels.
+- Focus-time metadata on task rows and a focus card on the task-detail screen.
+
+### Fixed
+
+- **Scheduled reminders never fired from a save.** The task save path never
+  called `zonedSchedule`; scheduling now lives in `ReminderScheduler`
+  (deterministic notification ids, `flutter_timezone` init, exact alarms with an
+  inexact fallback) and runs from the add-task flow, on toggle-back, after
+  reboots and at every app start.
+- **Haptics ignored the settings and were scattered across widgets.** All
+  feedback now goes through a single `HapticService` (tap/selection/success/
+  warning/heavy), configured before the first frame and honoured by every shared
+  component.
+
+### Changed
+
+- M3 Expressive motion is now tokenised end to end: `AnjizMotion` springs and
+  durations resolve to critically-damped/instant values when the Motion setting
+  is off or the system animator scale asks for stillness; page transitions use
+  the theme-level `PageTransitionsTheme` with predictive back.
+
 ## [0.1.1] - 2026-10-18
 
 ### Fixed

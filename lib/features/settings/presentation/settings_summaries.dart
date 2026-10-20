@@ -32,6 +32,11 @@ String hapticSummary(AppLocalizations l10n, AppSettings settings) {
   };
 }
 
+/// The current Pomodoro rhythm, e.g. "25 min · 4 sessions".
+String focusSummary(AppLocalizations l10n, AppSettings settings) =>
+    '${l10n.pomodoroMinutesValue(settings.focusMinutes)} · '
+    '${l10n.pomodoroSessionsValue(settings.longBreakInterval)}';
+
 /// The current update state, e.g. "Version 1.0.1 is ready".
 String updateSummary(AppLocalizations l10n, UpdateStatus status) {
   return switch (status) {

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 
 import 'presentation/screens/about_screen.dart';
 import 'presentation/screens/data_settings_screen.dart';
+import 'presentation/screens/focus_settings_screen.dart';
 import 'presentation/screens/general_settings_screen.dart';
 import 'presentation/screens/motion_settings_screen.dart';
 import 'presentation/screens/notifications_settings_screen.dart';
@@ -27,6 +28,10 @@ List<RouteBase> settingsRoutes() => [
       GoRoute(
         path: 'motion',
         builder: (context, state) => const MotionSettingsScreen(),
+      ),
+      GoRoute(
+        path: 'focus',
+        builder: (context, state) => const FocusSettingsScreen(),
       ),
     ],
   ),
